@@ -164,77 +164,76 @@ PROGRAM det_compress
  ! Main program
 
  ! Print title and license info
- call wout('Multi-determinant compressor')
- call wout('============================')
- call wout()
- call wout('This program uses the LP_SOLVE library, licensed under the LGPL.')
- call wout('Refer to the README files that accompany the source for details.')
- call wout()
+ write(6,*)'Multi-determinant compressor'
+ write(6,*)'============================'
+ write(6,*)
+ write(6,*)'This program uses the LP_SOLVE library, licensed under the LGPL.'
+ write(6,*)'Refer to the README files that accompany the source for details.'
+ write(6,*)
 
  ! Load data and report
  call read_mdet_casl(orig)
- call wout('System:')
- call wout(' Title: '//trim(adjustl(title)))
+ write(6,*)'System:'
+ write(6,*)' Title: '//trim(adjustl(title))
  if(nspin==1)then
-  call wout(' Number of electrons   : '//trim(i2s(netot))//' (same-spin)')
+  write(6,*)' Number of electrons   : '//trim(i2s(netot))//' (same-spin)'
  elseif(nspin==2)then
-  call wout(' Number of electrons   : '//trim(i2s(netot))//' ('//&
-   &trim(i2s(nele(1)))//' up, '//trim(i2s(nele(2)))//' down)')
+  write(6,*)' Number of electrons   : '//trim(i2s(netot))//' ('//&
+   &trim(i2s(nele(1)))//' up, '//trim(i2s(nele(2)))//' down)'
  else
-  call wout(' Number of electrons   : '//trim(i2s(netot))//' (of '//&
-   &trim(i2s(nspin))//' different spins)')
+  write(6,*)' Number of electrons   : '//trim(i2s(netot))//' (of '//&
+   &trim(i2s(nspin))//' different spins)'
  endif
- call wout(' Number of determinants: '//trim(i2s(orig%ndet)))
- call wout(' Number of CSFs        : '//trim(i2s(maxval(orig%detcoef_label))))
- call wout(' Number of orbitals    : '//trim(i2s(orig%norb)))
- call wout()
+ write(6,*)' Number of determinants: '//trim(i2s(orig%ndet))
+ write(6,*)' Number of CSFs        : '//trim(i2s(maxval(orig%detcoef_label)))
+ write(6,*)' Number of orbitals    : '//trim(i2s(orig%norb))
 
  ! User interaction: pick operational level.
- call wout('Select operational level:')
- call wout('(a) de-duplicate')
- call wout('(b) quick (de-duplicate + greedy + simple iterative method)')
- call wout('(c) good (de-duplicate + LPSOLVE + simple iterative method)')
- call wout('(d) best (de-duplicate + LPSOLVE + unified iteration method)')
- call wout()
- call wout('** TYPE A, B, C, OR D, THEN PRESS ENTER **')
+ write(6,*)'Select operational level:'
+ write(6,*)'(a) de-duplicate'
+ write(6,*)'(b) quick (de-duplicate + greedy + simple iterative method)'
+ write(6,*)'(c) good (de-duplicate + LPSOLVE + simple iterative method)'
+ write(6,*)'(d) best (de-duplicate + LPSOLVE + unified iteration method)'
+ write(6,*)
+ write(6,*)'** TYPE A, B, C, OR D, THEN PRESS ENTER **'
  do
   read(5,*,iostat=ierr)char_80
-  call wout()
+  write(6,*)
   if(ierr/=0)then
-   call wout('Quitting.')
+   write(6,*)'Quitting.'
    stop
   endif
   select case(trim(adjustl(char_80)))
   case('a','A')
    DO_COMPRESS=.false. ; USE_LPSOLVE=.false. ; UNIFIED_ITERATION=.false.
-   call wout('Using (a) de-duplication')
+   write(6,*)'Using (a) de-duplication'
   case('b','B')
    USE_LPSOLVE=.false. ; UNIFIED_ITERATION=.false.
-   call wout('Using (b) quick')
+   write(6,*)'Using (b) quick'
   case('c','C')
    UNIFIED_ITERATION=.false.
-   call wout('Using (c) good')
+   write(6,*)'Using (c) good'
   case('d','D')
-   call wout('Using (d) best')
+   write(6,*)'Using (d) best'
   case default
-   call wout('Wrong option, try again.')
+   write(6,*)'Wrong option, try again.'
    cycle
   end select
-  call wout()
+  write(6,*)
   exit
  enddo
 
  ! De-duplication
- call wout('De-duplicating expansion:')
+ write(6,*)'De-duplicating expansion:'
  call deduplication(orig,dedup,comp,orbpool)
- call wout(' After de-duplication: '//trim(i2s(comp%ndet))//&
-  &' determinants')
- call wout()
+ write(6,*)' After de-duplication: '//trim(i2s(comp%ndet))//&
+  &' determinants'
+ write(6,*)
 
  ! Compression
  if(DO_COMPRESS)then
 
-  call wout('Compressing expansion:')
+  write(6,*)'Compressing expansion:'
 
   if(UNIFIED_ITERATION)then ! no need to loop
 
@@ -242,9 +241,9 @@ PROGRAM det_compress
    ! Compress
    call compress(orig,dedup,comp,orbpool)
    ! Report successful iteration
-   if(comp%ndet<prev_ndet)call wout(' After compression: '//&
+   if(comp%ndet<prev_ndet)write(6,*)' After compression: '//&
     &trim(i2s(comp%ndet))//' determinants, '//trim(i2s(orbpool%norb))//&
-    &' orbitals')
+    &' orbitals'
 
   else ! .not.UNIFIED_ITERATION -> need to loop
 
@@ -259,12 +258,12 @@ PROGRAM det_compress
     if(comp%ndet==prev_ndet)exit
     ! Report successful iteration
     if(iter==1)then
-     call wout(' After 1 compression iteration: '//trim(i2s(comp%ndet))//&
-      &' determinants, '//trim(i2s(orbpool%norb))//' orbitals')
+     write(6,*)' After 1 compression iteration: '//trim(i2s(comp%ndet))//&
+      &' determinants, '//trim(i2s(orbpool%norb))//' orbitals'
     else ! iter>1
-     call wout(' After '//trim(i2s(iter))//' compression iterations: '//&
+     write(6,*)' After '//trim(i2s(iter))//' compression iterations: '//&
       &trim(i2s(comp%ndet))//' determinants, '//trim(i2s(orbpool%norb))//&
-      &' orbitals')
+      &' orbitals'
     endif ! iter==1 or not
    enddo ! iter
 
@@ -272,18 +271,18 @@ PROGRAM det_compress
 
  else ! .not.DO_COMPRESS
 
-  call wout('Skipping compression.')
+  write(6,*)'Skipping compression.'
 
  endif ! DO_COMPRESS or not
 
- call wout()
+ write(6,*)
 
  ! Test that the compressed expansion expands to the original expansion.
- call wout('Testing compressed expansion:')
+ write(6,*)'Testing compressed expansion:'
  select case(test_compression(orig,dedup,comp,orbpool))
  case(0,1)
-  call wout(' Success: compressed expansion expands back to de-duplicated &
-   &expansion.')
+  write(6,*)' Success: compressed expansion expands back to de-duplicated &
+   &expansion.'
  case(2)
   call errstop('DET_COMPRESS','Compression failed: coefficient value &
    &mismatch.')
@@ -304,15 +303,15 @@ PROGRAM det_compress
  case default
   call errstop('DET_COMPRESS','Compression failed: unknown error code')
  end select
- call wout()
+ write(6,*)
 
  ! Test that proportionality constraints are obeyed.
  if(.not.IGNORE_COEFF_LABELS.and.maxval(orig%detcoef_label)>1)then
-  call wout('Testing coefficient proportionality:')
+  write(6,*)'Testing coefficient proportionality:'
   call test_coeff_proportionality(orig,dedup,comp,orbpool)
-  call wout(' Success: compressed expansion respects coefficient &
-   &proportionality.')
-  call wout()
+  write(6,*)' Success: compressed expansion respects coefficient &
+   &proportionality.'
+  write(6,*)
  endif
 
  ! Write compressed expansion
@@ -339,8 +338,7 @@ CONTAINS
  call query_casl_item('mdet.casl:MDET',exists=exists)
  if(.not.exists)call errstop('READ_MDET_CASL','File mdet.casl not found or &
   &does not contain MDET block.')
- if(.not.push_casl_context('mdet.casl:MDET'))&
-  &call errstop('READ_MDET_CASL','Could not push MDET onto the CASL stack.')
+ call push_casl_context('mdet.casl:MDET')
 
  ! Get title and basic system parameters
  call get_casl_item('Title',title,ierr=ierr)
@@ -354,8 +352,7 @@ CONTAINS
   &nchildren=orig%ndet)
  if(.not.exists.or..not.is_block)call errstop('READ_MDET_CASL',&
   &'Could not find "Expansion" block.')
- if(.not.push_casl_context('Expansion'))call errstop('READ_MDET_CASL',&
-  &'Could not push Expansion onto the CASL stack.')
+ call push_casl_context('Expansion')
 
  ! Get system size from first term
  nspin=0
@@ -386,8 +383,7 @@ CONTAINS
 
  ! Read expansion coefficients and orbmap
  do idet=1,orig%ndet
-  if(.not.push_casl_context('Term '//trim(i2s(idet))))call errstop&
-   &('READ_MDET_CASL','Could not push Term <idet> onto the CASL stack.')
+  call push_casl_context('Term '//trim(i2s(idet)))
   call get_casl_item('Coefficient:%u1',orig%detcoef(idet),ierr=ierr)
   if(ierr/=0)call errstop('READ_MDET_CASL','Could not read detcoef(<idet>).')
   call get_casl_item('Coefficient:Group',orig%detcoef_label(idet),ierr=ierr)
@@ -395,25 +391,19 @@ CONTAINS
    &detcoef_label(<idet>).')
   do ispin=1,nspin
    if(nele(ispin)==0)cycle
-   if(.not.push_casl_context('Spin '//trim(i2s(ispin))))call errstop&
-    &('READ_MDET_CASL','Could not push Spin <ispin> onto the CASL stack.')
+   call push_casl_context('Spin '//trim(i2s(ispin)))
    do iorb=1,nele(ispin)
     call get_casl_item('%u'//trim(i2s(iorb)),orig%orbmap(iorb,ispin,idet),&
      &ierr=ierr)
     if(ierr/=0)call errstop('READ_MDET_CASL','Could not read orbmap(...).')
    enddo ! iorb
-   if(.not.pop_casl_context())call errstop('READ_MDET_CASL',&
-    &'Could not pop out of Spin <ispin> in the CASL stack.')
+   call pop_casl_context()
   enddo ! ispin
-  if(.not.pop_casl_context())call errstop('READ_MDET_CASL',&
-   &'Could not pop out of Term <idet> in the CASL stack.')
+  call pop_casl_context()
  enddo ! idet
- if(.not.pop_casl_context())call errstop('READ_MDET_CASL',&
-  &'Could not pop out of Expansion in the CASL stack.')
- if(.not.pop_casl_context())call errstop('READ_MDET_CASL',&
-  &'Could not pop out of MDET in the CASL stack.')
- if(pop_casl_context())call errstop('READ_MDET_CASL',&
-  &'Got lost in CASL context changes.')
+ call pop_casl_context()
+ call pop_casl_context()
+ call pop_casl_context()
 
  ! Get number of orbitals
  orig%norb=maxval(orig%orbmap)
@@ -775,14 +765,6 @@ CONTAINS
    if(ipart>0)ndet_in_partition(ipart)=ndet_in_partition(ipart)+1
   endif
  enddo ! idet
-
- ! Report maximum partition size.
- if(npart==1)then
-  call wout(' 1 partition of size '//trim(i2s(ndet_in_partition(1))))
- else
-  call wout(' '//trim(i2s(npart))//' partitions of maximum size '//&
-   &trim(i2s(maxval(ndet_in_partition(1:npart)))))
- endif
 
  ! Flag all determinants in COMP as active (we use this at the end to
  ! re-add uncompressible determinants to the final expansion).
@@ -2523,8 +2505,8 @@ CONTAINS
  ! Error out if the number of determinants does not match.
  if(jdet<dedup%ndet)then
   test_compression=6
-  if(.not.be_quiet)call wout('Reconstruction has '//trim(i2s(jdet))//' terms, &
-   &deduplicated has '//trim(i2s(dedup%ndet))//'terms.')
+  if(.not.be_quiet)write(6,*)'Reconstruction has '//trim(i2s(jdet))//' terms, &
+   &deduplicated has '//trim(i2s(dedup%ndet))//'terms.'
   return
  endif
 
@@ -2544,20 +2526,20 @@ CONTAINS
      test_compression=max(test_compression,1)
     elseif(temp_Inf(jdet))then
      test_compression=max(test_compression,4)
-     if(.not.be_quiet)call wout(' Warning: reconstruction of coeff #'//&
-      &trim(i2s(idet))//' diverges.')
+     if(.not.be_quiet)write(6,*)' Warning: reconstruction of coeff #'//&
+      &trim(i2s(idet))//' diverges.'
      any_bad=.true.
     elseif(.not.same)then
      write(tmpr1,*)t1
      if(compare_numbers(t1,-t2))then
       test_compression=max(test_compression,3)
-      if(.not.be_quiet)call wout(' Coeff #'//trim(i2s(idet))//' is '//&
-       &trim(adjustl(tmpr1))//' but we got the sign wrong')
+      if(.not.be_quiet)write(6,*)' Coeff #'//trim(i2s(idet))//' is '//&
+       &trim(adjustl(tmpr1))//' but we got the sign wrong'
      else
       test_compression=max(test_compression,2)
       write(tmpr2,*)t2
-      if(.not.be_quiet)call wout(' Coeff #'//trim(i2s(idet))//' is '//&
-       &trim(adjustl(tmpr1))//' but we get '//trim(adjustl(tmpr2)))
+      if(.not.be_quiet)write(6,*)' Coeff #'//trim(i2s(idet))//' is '//&
+       &trim(adjustl(tmpr1))//' but we get '//trim(adjustl(tmpr2))
      endif
      any_bad=.true.
     endif
@@ -2569,11 +2551,11 @@ CONTAINS
   ! report.
   test_compression=max(test_compression,7)
   if(.not.be_quiet)then
-   call wout(' Det #'//trim(i2s(idet))//' in deduplicated expansion not &
-    &found in reconstruction.')
+   write(6,*)' Det #'//trim(i2s(idet))//' in deduplicated expansion not &
+    &found in reconstruction.'
    do ispin=1,nspin
-    call wout('   Spin '//trim(i2s(ispin))//': ',&
-     &dedup%orbmap(1:nele(ispin),ispin,idet))
+    write(6,*)'   Spin '//trim(i2s(ispin))//': ',&
+     &dedup%orbmap(1:nele(ispin),ispin,idet)
    enddo ! ispin
   endif ! .not.be_quiet
  enddo ! idet
@@ -2582,16 +2564,16 @@ CONTAINS
  ! deduplicated expansion.
  do idet=1,dedup%ndet
   if(found(idet))cycle
-  call wout(' Det #'//trim(i2s(idet))//' in reconstruction not present in &
-   &deduplicated expansion.')
+  write(6,*)' Det #'//trim(i2s(idet))//' in reconstruction not present in &
+   &deduplicated expansion.'
   do ispin=1,nspin
-   call wout('   Spin '//trim(i2s(ispin))//': ',&
-    &temp_orbmap(1:nele(ispin),ispin,idet))
+   write(6,*)'   Spin '//trim(i2s(ispin))//': ',&
+    &temp_orbmap(1:nele(ispin),ispin,idet)
   enddo ! ispin
  enddo ! idet
  if(count(found)/=dedup%ndet)then
-  call wout(trim(i2s(count(found)))//' terms in the reconstruction match, '//&
-   &trim(i2s(dedup%ndet-count(found)))//' do not.')
+  write(6,*)trim(i2s(count(found)))//' terms in the reconstruction match, '//&
+   &trim(i2s(dedup%ndet-count(found)))//' do not.'
   test_compression=7
   return
  endif ! mismatch
@@ -2599,10 +2581,10 @@ CONTAINS
  ! Flag NaNs and report
  if(any(temp_NaN))then
   if(.not.be_quiet)then
-   call wout(' Note: could not check coefficient values for the following &
-    &determinants')
-   call wout(' in the de-duplicated expansion because re-expanded coefficients &
-    &were 0/0:')
+   write(6,*)' Note: could not check coefficient values for the following &
+    &determinants'
+   write(6,*)' in the de-duplicated expansion because re-expanded coefficients &
+    &were 0/0:'
    n_NaN=0
    do idet=1,dedup%ndet
     if(temp_NaN(idet))then
@@ -2610,7 +2592,7 @@ CONTAINS
      list_NaN(n_NaN)=idet
     endif
    enddo
-   call wout('',list_NaN(1:n_NaN),rfmt='(i8)',rsep='')
+   write(6,'(8(1x,i8))')list_NaN(1:n_NaN)
   endif ! .not.be_quiet
   return
  endif ! any NaNs
@@ -2751,11 +2733,8 @@ CONTAINS
  LOGICAL ignore_pop
 
  ! Create CASL structure.
- call wout('Writing cmdet.casl.')
- call wout()
- do while(pop_casl_context())
-  continue
- enddo
+ write(6,*)'Writing cmdet.casl.'
+ write(6,*)
  call set_casl_block('cmdet.casl:CMDET',errmsg,push=.true.)
  if(len_trim(errmsg)>0)call errstop('WRITE_CMDET_CASL',trim(errmsg))
 
@@ -2787,7 +2766,7 @@ CONTAINS
    enddo ! iorb
   enddo ! ispin
  enddo ! idet
- ignore_pop=pop_casl_context() ! Original expansion
+ call pop_casl_context() ! Original expansion
 
  ! Write deduplicated expansion
  call set_casl_block('Deduplicated coefficients',errmsg,push=.true.)
@@ -2801,7 +2780,7 @@ CONTAINS
    if(len_trim(errmsg)>0)call errstop('WRITE_CMDET_CASL',trim(errmsg))
   enddo ! i
  enddo ! idet
- ignore_pop=pop_casl_context() ! Deduplicated coefficients
+ call pop_casl_context() ! Deduplicated coefficients
 
  ! Write compressed expansion
  call set_casl_block('Compressed expansion',errmsg,push=.true.)
@@ -2827,11 +2806,11 @@ CONTAINS
      &orbpool%imixcoeff_den(j,i,iorb),errmsg)
     if(len_trim(errmsg)>0)call errstop('WRITE_CMDET_CASL',trim(errmsg))
    enddo ! j
-   ignore_pop=pop_casl_context() ! Component <i>
+   call pop_casl_context() ! Component <i>
   enddo ! i
-  ignore_pop=pop_casl_context() ! Orbital <iorb>
+  call pop_casl_context() ! Orbital <iorb>
  enddo ! iorb
- ignore_pop=pop_casl_context() ! Orbital pool
+ call pop_casl_context() ! Orbital pool
 
  ! Compressed determinants.
  call set_casl_block('Expansion',errmsg,push=.true.)
@@ -2865,11 +2844,11 @@ CONTAINS
    enddo ! iorb
   enddo ! ispin
  enddo ! idet
- ignore_pop=pop_casl_context() ! Expansion
- ignore_pop=pop_casl_context() ! Compressed expansion
+ call pop_casl_context() ! Expansion
+ call pop_casl_context() ! Compressed expansion
 
  ! Finish
- ignore_pop=pop_casl_context() ! cmdet.casl:CMDET
+ call pop_casl_context() ! cmdet.casl:CMDET
 
  ! Write the file to disk.
  call write_casl('cmdet.casl','cmdet.casl',errmsg)

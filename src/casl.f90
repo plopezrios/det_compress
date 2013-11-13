@@ -252,12 +252,7 @@ CONTAINS
  nullify(kill_list)
 
 ! Set context for labeling items.
- if(.not.push_casl_context(':'//trim(filename)))then
-  errmsg='Failed to push just-created node "'//trim(filename)//'" on the CASL &
-   &context stack.'
-  call clean_for_abort
-  return
- endif
+ call push_casl_context(':'//trim(filename))
 
 ! Pass 2: parse data.
  nkill=0
@@ -471,10 +466,7 @@ CONTAINS
  call clean_vline_storage
 
 ! Pop casl context stack.
- if(.not.pop_casl_context())then
-  errmsg='Could not pop the CASL context stack.'
-  return
- endif
+ call pop_casl_context()
 
 
  CONTAINS
@@ -1068,7 +1060,7 @@ CONTAINS
  END FUNCTION unique_casl_string
 
 
- LOGICAL FUNCTION push_casl_context(label,respect_spelling)
+ SUBROUTINE push_casl_context(label,respect_spelling)
 !---------------------------------------------------------------!
 ! Add LABEL at the top of the context stack and move the stack  !
 ! pointer to it. The function returns .false. if LABEL does not !
@@ -1078,7 +1070,7 @@ CONTAINS
  IMPLICIT NONE
  LOGICAL,INTENT(in),OPTIONAL :: respect_spelling
  CHARACTER(*),INTENT(in) :: label
- LOGICAL keep_name
+ LOGICAL keep_name,valid
  CHARACTER(len(label)) crumb
  TYPE(casl_item),POINTER :: item
 
@@ -1090,10 +1082,10 @@ CONTAINS
 
 ! Locate item to push, must be a block.
  call find_avltree_item(label,item)
- push_casl_context=associated(item)
- if(push_casl_context)push_casl_context=item%is_block
+ valid=associated(item)
+ if(valid)valid=item%is_block
 
- if(push_casl_context)then
+ if(valid)then
 ! Found and is a block: create a new stack level and switch to it.
   allocate(context_stack%next)
   context_stack%next%prev=>context_stack
@@ -1106,10 +1098,10 @@ CONTAINS
   endif
  endif
 
- END FUNCTION push_casl_context
+ END SUBROUTINE push_casl_context
 
 
- LOGICAL FUNCTION pop_casl_context()
+ SUBROUTINE pop_casl_context()
 !-----------------------------------------------------------------!
 ! Remove the top item in the context stack and move the stack     !
 ! pointer one item down. The function returns .false. if there is !
@@ -1119,15 +1111,12 @@ CONTAINS
 ! Make sure we have a CASL structure.
  call initialize_casl
 ! Is this the bottom of the stack?
- if(.not.associated(context_stack%prev))then
-  pop_casl_context=.false.
- else
-  pop_casl_context=.true.
+ if(associated(context_stack%prev))then
   context_stack=>context_stack%prev
   deallocate(context_stack%next)
   nullify(context_stack%next)
  endif
- END FUNCTION pop_casl_context
+ END SUBROUTINE pop_casl_context
 
 
  SUBROUTINE split_first_crumb_metachar(label,crumb)

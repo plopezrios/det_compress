@@ -4,25 +4,16 @@ MODULE tools
  !-----------------------------------------!
  IMPLICIT NONE
  PRIVATE
- PUBLIC wout,i2s,errstop,check_alloc,resize_pointer,iterate_indices_multi,&
+ PUBLIC i2s,errstop,check_alloc,resize_pointer,iterate_indices_multi,&
   &qsort3_int_partial_preinit,iswap1
 
  ! Data types.
  INTEGER,PARAMETER :: dp=kind(1.d0)
 
- ! Output unit (standard output).
- INTEGER,PARAMETER :: o=6
-
  ! Dummy type for safe overloading of WOUT routines.
  TYPE arg_separator
   LOGICAL,POINTER :: dummy=>null()
  END TYPE arg_separator
-
- ! Interface for WOUT routine.
- INTERFACE wout
-  MODULE PROCEDURE &
-   &wout_NULL,wout_C,wout_C_II,wout_C_D
- END INTERFACE wout
 
  ! Interface for RESIZE_POINTER routine.
  INTERFACE resize_pointer
@@ -34,101 +25,6 @@ MODULE tools
 
 
 CONTAINS
-
-
- ! Write-out (WOUT) routines for different argument types.
-
-
- SUBROUTINE wout_NULL(unused_arg_separator,fmt)
- CHARACTER(*),INTENT(in),OPTIONAL :: fmt
- TYPE(arg_separator),INTENT(in),OPTIONAL :: unused_arg_separator
- if(present(fmt))then
-  write(o,fmt)
- else
-  write(o,'(a)')'' ! force empty line, unlike write(o,*) with some compilers
- endif
- END SUBROUTINE wout_NULL
-
-
- SUBROUTINE wout_C(c,unused_arg_separator,fmt)
- CHARACTER(*),INTENT(in) :: c
- CHARACTER(*),INTENT(in),OPTIONAL :: fmt
- TYPE(arg_separator),INTENT(in),OPTIONAL :: unused_arg_separator
- if(present(fmt))then
-  write(o,fmt)trim(c)
- else
-  write(o,'(1x,a)')trim(c)
- endif
- END SUBROUTINE wout_C
-
-
- SUBROUTINE wout_C_II(c,ii,unused_arg_separator,fmt,rfmt,adjust,rsep)
- INTEGER,INTENT(in) :: ii(:)
- LOGICAL,INTENT(in),OPTIONAL :: adjust
- CHARACTER(*),INTENT(in) :: c
- CHARACTER(*),INTENT(in),OPTIONAL :: rfmt,fmt,rsep
- TYPE(arg_separator),INTENT(in),OPTIONAL :: unused_arg_separator
- INTEGER dsize,isize,jsize
- INTEGER,PARAMETER :: n_per_line=8
- LOGICAL adjust_nums
- CHARACTER(128) tmpr,tmpr2
- adjust_nums=.false. ; if(present(adjust))adjust_nums=adjust
- if(present(fmt))then
-  write(o,fmt)c,ii
- else
-  dsize=size(ii,1)
-  do isize=1,dsize,n_per_line
-   if(present(rfmt))then
-    write(tmpr,rfmt)ii(isize)
-    do jsize=1,min(n_per_line-1,dsize-isize)
-     write(tmpr2,rfmt)ii(isize+jsize)
-     if(adjust_nums)tmpr2=adjustl(tmpr2)
-     if(present(rsep))then
-      tmpr=trim(tmpr)//rsep//trim(tmpr2)
-     else
-      if(adjust_nums)then
-       tmpr=trim(tmpr)//' '//trim(tmpr2)
-      else
-       tmpr=trim(tmpr)//trim(tmpr2)
-      endif
-     endif
-    enddo
-   else
-    write(tmpr,*)ii(isize:min(dsize,isize+n_per_line-1))
-    tmpr=adjustl(tmpr)
-   endif
-   if(isize==1)then
-    write(o,'(1x,a)')c//trim(tmpr)
-   else
-    write(o,'(1x,a)')trim(tmpr)
-   endif
-  enddo
- endif
- END SUBROUTINE wout_C_II
-
-
- SUBROUTINE wout_C_D(c,d,unused_arg_separator,fmt,rfmt,adjust)
- REAL(dp),INTENT(in) :: d
- LOGICAL,INTENT(in),OPTIONAL :: adjust
- CHARACTER(*),INTENT(in) :: c
- CHARACTER(*),INTENT(in),OPTIONAL :: rfmt,fmt
- TYPE(arg_separator),INTENT(in),OPTIONAL :: unused_arg_separator
- LOGICAL adjust_nums
- CHARACTER(128) tmpr
- adjust_nums=.false. ; if(present(adjust))adjust_nums=adjust
- if(present(fmt))then
-  write(o,fmt)c,d
- else
-  if(present(rfmt))then
-   write(tmpr,rfmt)d
-   if(adjust_nums)tmpr=adjustl(tmpr)
-  else
-   write(tmpr,*)d
-   tmpr=adjustl(tmpr)
-  endif
-  write(o,'(1x,a)')c//trim(tmpr)
- endif
- END SUBROUTINE wout_C_D
 
 
  ! Integer-to-character function
@@ -173,10 +69,10 @@ CONTAINS
  !-----------------------------!
  IMPLICIT NONE
  CHARACTER(*),INTENT(in) :: routine,error
- call wout()
- call wout('ERROR : '//trim(routine))
- call wout(trim(error))
- call wout()
+ write(6,*)
+ write(6,*)'ERROR : '//trim(routine)
+ write(6,*)trim(error)
+ write(6,*)
  stop
  END SUBROUTINE errstop
 
@@ -189,14 +85,14 @@ CONTAINS
  INTEGER,INTENT(in) :: ialloc
  CHARACTER(*),INTENT(in) :: routine,symbol
  if(ialloc==0)return
- call wout()
+ write(6,*)
  if(len_trim(symbol)==0)then
-  call wout('ERROR : Allocation problem in '//trim(routine)//'.')
+  write(6,*)'ERROR : Allocation problem in '//trim(routine)//'.'
  else
-  call wout('ERROR : Allocation problem in '//trim(routine)//' ('//&
-   &trim(symbol)//').')
+  write(6,*)'ERROR : Allocation problem in '//trim(routine)//' ('//&
+   &trim(symbol)//').'
  endif
- call wout()
+ write(6,*)
  stop
  END SUBROUTINE check_alloc
 
