@@ -1,0 +1,4 @@
+bin
+src/obj
+lib/lpsolve/obj
+lib/*.a

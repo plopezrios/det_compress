@@ -1,0 +1,64 @@
+CMDET:
+  Title: Made-up test for two recursion levels
+  Original expansion:
+    Term 1:
+      Coefficient: [ 1.0000000000000000, Group: 1 ]
+      Spin 1: [ 1, 3, 5 ]
+      Spin 2: [ 1, 2 ]
+    Term 2:
+      Coefficient: [ 1.0000000000000000, Group: 1 ]
+      Spin 1: [ 1, 3, 6 ]
+      Spin 2: [ 1, 2 ]
+    Term 3:
+      Coefficient: [ 1.0000000000000000, Group: 1 ]
+      Spin 1: [ 1, 4, 5 ]
+      Spin 2: [ 1, 2 ]
+    Term 4:
+      Coefficient: [ 1.0000000000000000, Group: 1 ]
+      Spin 1: [ 1, 4, 6 ]
+      Spin 2: [ 1, 2 ]
+    Term 5:
+      Coefficient: [ 1.0000000000000000, Group: 1 ]
+      Spin 1: [ 2, 3, 5 ]
+      Spin 2: [ 1, 2 ]
+    Term 6:
+      Coefficient: [ 1.0000000000000000, Group: 1 ]
+      Spin 1: [ 2, 3, 6 ]
+      Spin 2: [ 1, 2 ]
+    Term 7:
+      Coefficient: [ 1.0000000000000000, Group: 1 ]
+      Spin 1: [ 2, 4, 5 ]
+      Spin 2: [ 1, 2 ]
+    Term 8:
+      Coefficient: [ 1.0000000000000000, Group: 1 ]
+      Spin 1: [ 2, 4, 6 ]
+      Spin 2: [ 1, 2 ]
+  Deduplicated coefficients:
+    c_1: [ 1 ]
+    c_2: [ 2 ]
+    c_3: [ 3 ]
+    c_4: [ 4 ]
+    c_5: [ 5 ]
+    c_6: [ 6 ]
+    c_7: [ 7 ]
+    c_8: [ 8 ]
+  Compressed expansion:
+    Orbital pool:
+      Orbital 1:
+        Component 1: [ 1 ]
+      Orbital 2:
+        Component 1: [ 2 ]
+      Orbital 3:
+        Component 1: [ 5 ]
+        Component 2: [ 6, Num: [ 2 ], Den: [ 1 ] ]
+      Orbital 4:
+        Component 1: [ 3 ]
+        Component 2: [ 4, Num: [ 3 ], Den: [ 1 ] ]
+      Orbital 5:
+        Component 1: [ 1 ]
+        Component 2: [ 2, Num: [ 5 ], Den: [ 1 ] ]
+    Expansion:
+      Term 1:
+        Coefficient: [ Num: [ -1 ] ]
+        Spin 1: [ 3, 4, 5 ]
+        Spin 2: [ 1, 2 ]

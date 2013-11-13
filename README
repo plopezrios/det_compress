@@ -1,0 +1,152 @@
+============
+DET_COMPRESS
+============
+This utility compresses multideterminant expansions using algebraic
+properties of determinants to combine them and produce a shorter
+expansion.  The resulting expansion contains orbitals which are
+linear combinations of orbitals as matrix elements.
+
+
+===========
+Compilation
+===========
+
+* By default the utility is configured to work with gcc and gfortran.
+  If you have gcc, gfortran and GNU make installed you simply need to
+  type 'make' under the root directory.  The utility binary will
+  appear as bin/det_compress .
+
+
+* To use other compilers and/or compiler options, override the FC,
+  FFLAGS, CC, and CFLAGS variables when running make with, e.g.,
+
+    make FC="ifort" FFLAGS="-O3" CC="icc" CFLAGS="-O3"
+
+  Bear in mind that the Fortran compiler must support the Fortran 95
+  standard and the ETIME extension.
+
+* Some C compilers represent function names differently from others,
+  and this affects how Fortran code should interface with C.  If you
+  get compilation errors, you may want to try passing one of these to
+  'make':
+
+    # IBM compilers typically need:
+    CFLAGS_FC_INTERFACE="-DF90_NO_UNDERSCORE"
+
+    # PathScale compiler typically needs:
+    CFLAGS_FC_INTERFACE="-DF90_DOUBLE_UNDERSCORE"
+
+    # Some old, rare compilers have been known to need:
+    CFLAGS_FC_INTERFACE="-DF90_NO_UNDERSCORE -DF90_CAPITALS"
+
+* We distribute the source of the LP_SOLVE library along with
+  DET_COMPRESS to simplify the compilation process.  However if you
+  wish to use a system-wide installation of LP_SOLVE you can do so by
+  passing the following variables to 'make':
+
+    # Location of liblpsolve*.a:
+    LPSOLVE_LIBDIR="/usr/lib"
+
+    # Name of liblpsolve*.a (without the 'lib' prefix and the '.a'
+    # suffix):
+    LPSOLVE_LIBNAME="lpsolve55"
+
+    # Location of LPSOLVE's headers:
+    LPSOLVE_INCDIR="/usr/include/lpsolve"
+
+    # Linker flags required to link dependencies of LPSOLVE:
+    LDLPSOLVE_DEPS="-lcolamd -ldl"
+
+  For example, the following works under Ubuntu 13.10, having
+  installed the package liblpsolve55-dev:
+
+    make LPSOLVE_LIBNAME=lpsolve55 LPSOLVE_LIBDIR=/usr/lib
+      LPSOLVE_INCDIR=/usr/include/lpsolve
+      LDLPSOLVE_DEPS="-lcolamd -ldl"
+
+* Test the compilation by running an example, e.g.,
+
+    cd examples/li_50csf
+    ../../bin/det_compress
+
+  and press 'd' followed by [Enter] to compress the expansion.
+
+
+=====
+Usage
+=====
+
+* DET_COMPRESS must be run in a directory that contains an mdet.casl
+  file describing a multi-determinant expansion, and it will produce a
+  cmdet.casl file describing the compressed multi-determinant
+  expansion.
+
+* The CASL file format is used by DET_COMPRESS for data exchange.  See
+  the interface/ directory for sample code that uses the casl.f90
+  module to write/read the input/output files of DET_COMPRESS.
+
+* DET_COMPRESS requires an option to be passed on the standard input
+  to determine the operational level of the compression:
+
+  - 'a' for deduplication only
+
+  - 'b' for deduplication and compression using the greedy algorithm
+    and the simple iterative method
+
+  - 'c' for deduplication and compression using LP_SOLVE and the
+    simple iterative algorithm
+
+  - 'd' for deduplication and compression using LP_SOLVE and the
+    unified iteration algorithm
+
+  The different levels yield increasingly shorter compressed
+  expansions and take increasingly more CPU time.
+
+  Levels 'a' and 'b' scale quadratically with initial expansion size.
+  Levels 'c' and 'd' use LP_SOLVE, which is in principle non-
+  polynomial.  Level 'd' use the unified iteration algorithm, which is
+  also non-polynomial.
+
+  In practice neither LP_SOLVE nor the unified iteration algorithm
+  seem to make the computation intractable, even on modest CPUs.  We
+  recommend that the 'd' mode be used, resorting to cheaper modes only
+  if the compression takes too long.
+
+
+=======
+License
+=======
+This version of DET_COMPRESS is dual-licensed:
+
+* DET_COMPRESSED is licensed under the CASINO license when distributed
+  as part of the CASINO quantum Monte Carlo package.  See
+  http://www.tcm.phy.cam.ac.uk/~mdt26/academic_consent_form.pdf
+  for the license terms.
+
+* DET_COMPRESSED is licensed under the GPLv3 when distributed
+  directly on its own.  See http://www.gnu.org/licenses/gpl-3.0.html
+  for the license terms.
+
+Subsequent versions of DET_COMPRESS may be licensed differently
+at the authors' discretion.  This version of DET_COMPRESS will in any
+case remain licensed as stated above.
+
+
+================
+LP_SOLVE license
+================
+We use and distribute the unmodified upstream source code of the
+LP_SOLVE library with DET_COMPRESS.  LP_SOLVE as distributed with
+DET_COMPRESS is licensed under the LGPLv2.1.  See
+http://www.gnu.org/licenses/lgpl-2.1.html for the license terms.
+
+The stand-alone GPLv3 distribution of DET_COMPRESS complies with the
+licensing terms for using and distributing LP_SOLVE.
+
+When distributed under the CASINO license, DET_COMPRESS classifies as
+a "work that uses the library" in the terms of the LGPLv2.1.  While
+DET_COMPRESS itself is covered by the propietary CASINO license terms,
+it can be compiled against a modified version of the LP_SOLVE library,
+satisfying the requirements of the LGPLv2.1.  We believe in good
+faith that our use and distribution of the LP_SOLVE library in CASINO
+complies with the terms of the LGPLv2.1.

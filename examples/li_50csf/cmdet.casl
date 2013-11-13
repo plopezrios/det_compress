@@ -1,0 +1,1703 @@
+CMDET:
+  Title: Li atom (numerical orbitals)
+  Original expansion:
+    Term 1:
+      Coefficient: [ -0.99822210000000000, Group: 1 ]
+      Spin 1: [ 1, 2 ]
+      Spin 2: [ 1 ]
+    Term 2:
+      Coefficient: [ 3.5678270878032920E-003, Group: 2 ]
+      Spin 1: [ 1, 3 ]
+      Spin 2: [ 1 ]
+    Term 3:
+      Coefficient: [ -5.4184551957488661E-005, Group: 3 ]
+      Spin 1: [ 1, 4 ]
+      Spin 2: [ 1 ]
+    Term 4:
+      Coefficient: [ 1.1074751386166769E-002, Group: 4 ]
+      Spin 1: [ 1, 2 ]
+      Spin 2: [ 2 ]
+    Term 5:
+      Coefficient: [ -1.9673602889492200E-002, Group: 5 ]
+      Spin 1: [ 1, 3 ]
+      Spin 2: [ 2 ]
+    Term 6:
+      Coefficient: [ -1.9673602889492200E-002, Group: 5 ]
+      Spin 1: [ 2, 3 ]
+      Spin 2: [ 1 ]
+    Term 7:
+      Coefficient: [ 3.9282092628380810E-002, Group: 6 ]
+      Spin 1: [ 1, 2 ]
+      Spin 2: [ 3 ]
+    Term 8:
+      Coefficient: [ 1.9641046314190450E-002, Group: 6 ]
+      Spin 1: [ 1, 3 ]
+      Spin 2: [ 2 ]
+    Term 9:
+      Coefficient: [ -1.9641046314190450E-002, Group: 6 ]
+      Spin 1: [ 2, 3 ]
+      Spin 2: [ 1 ]
+    Term 10:
+      Coefficient: [ -2.8790057744685141E-003, Group: 7 ]
+      Spin 1: [ 1, 5 ]
+      Spin 2: [ 5 ]
+    Term 11:
+      Coefficient: [ -2.8790057744685141E-003, Group: 7 ]
+      Spin 1: [ 1, 6 ]
+      Spin 2: [ 6 ]
+    Term 12:
+      Coefficient: [ -2.8790057744685141E-003, Group: 7 ]
+      Spin 1: [ 1, 7 ]
+      Spin 2: [ 7 ]
+    Term 13:
+      Coefficient: [ 1.4823548563400650E-003, Group: 8 ]
+      Spin 1: [ 1, 8 ]
+      Spin 2: [ 7 ]
+    Term 14:
+      Coefficient: [ 1.4823548563400650E-003, Group: 8 ]
+      Spin 1: [ 1, 9 ]
+      Spin 2: [ 6 ]
+    Term 15:
+      Coefficient: [ 1.4823548563400650E-003, Group: 8 ]
+      Spin 1: [ 7, 8 ]
+      Spin 2: [ 1 ]
+    Term 16:
+      Coefficient: [ 1.4823548563400650E-003, Group: 8 ]
+      Spin 1: [ 6, 9 ]
+      Spin 2: [ 1 ]
+    Term 17:
+      Coefficient: [ 1.4823548563400650E-003, Group: 8 ]
+      Spin 1: [ 1, 10 ]
+      Spin 2: [ 5 ]
+    Term 18:
+      Coefficient: [ 1.4823548563400650E-003, Group: 8 ]
+      Spin 1: [ 5, 10 ]
+      Spin 2: [ 1 ]
+    Term 19:
+      Coefficient: [ 2.9345069531803660E-004, Group: 9 ]
+      Spin 1: [ 1, 7 ]
+      Spin 2: [ 8 ]
+    Term 20:
+      Coefficient: [ 2.9345069531803660E-004, Group: 9 ]
+      Spin 1: [ 1, 6 ]
+      Spin 2: [ 9 ]
+    Term 21:
+      Coefficient: [ 1.4672534765901811E-004, Group: 9 ]
+      Spin 1: [ 1, 8 ]
+      Spin 2: [ 7 ]
+    Term 22:
+      Coefficient: [ 1.4672534765901811E-004, Group: 9 ]
+      Spin 1: [ 1, 9 ]
+      Spin 2: [ 6 ]
+    Term 23:
+      Coefficient: [ -1.4672534765901811E-004, Group: 9 ]
+      Spin 1: [ 7, 8 ]
+      Spin 2: [ 1 ]
+    Term 24:
+      Coefficient: [ -1.4672534765901811E-004, Group: 9 ]
+      Spin 1: [ 6, 9 ]
+      Spin 2: [ 1 ]
+    Term 25:
+      Coefficient: [ 2.9345069531803660E-004, Group: 9 ]
+      Spin 1: [ 1, 5 ]
+      Spin 2: [ 10 ]
+    Term 26:
+      Coefficient: [ 1.4672534765901811E-004, Group: 9 ]
+      Spin 1: [ 1, 10 ]
+      Spin 2: [ 5 ]
+    Term 27:
+      Coefficient: [ -1.4672534765901811E-004, Group: 9 ]
+      Spin 1: [ 5, 10 ]
+      Spin 2: [ 1 ]
+    Term 28:
+      Coefficient: [ -7.0171026965837172E-004, Group: 10 ]
+      Spin 1: [ 1, 11 ]
+      Spin 2: [ 7 ]
+    Term 29:
+      Coefficient: [ -7.0171026965837172E-004, Group: 10 ]
+      Spin 1: [ 1, 12 ]
+      Spin 2: [ 6 ]
+    Term 30:
+      Coefficient: [ -7.0171026965837172E-004, Group: 10 ]
+      Spin 1: [ 7, 11 ]
+      Spin 2: [ 1 ]
+    Term 31:
+      Coefficient: [ -7.0171026965837172E-004, Group: 10 ]
+      Spin 1: [ 6, 12 ]
+      Spin 2: [ 1 ]
+    Term 32:
+      Coefficient: [ -7.0171026965837172E-004, Group: 10 ]
+      Spin 1: [ 1, 13 ]
+      Spin 2: [ 5 ]
+    Term 33:
+      Coefficient: [ -7.0171026965837172E-004, Group: 10 ]
+      Spin 1: [ 5, 13 ]
+      Spin 2: [ 1 ]
+    Term 34:
+      Coefficient: [ -3.2191107339495159E-005, Group: 11 ]
+      Spin 1: [ 1, 7 ]
+      Spin 2: [ 11 ]
+    Term 35:
+      Coefficient: [ -3.2191107339495159E-005, Group: 11 ]
+      Spin 1: [ 1, 6 ]
+      Spin 2: [ 12 ]
+    Term 36:
+      Coefficient: [ -1.6095553669747610E-005, Group: 11 ]
+      Spin 1: [ 1, 11 ]
+      Spin 2: [ 7 ]
+    Term 37:
+      Coefficient: [ -1.6095553669747610E-005, Group: 11 ]
+      Spin 1: [ 1, 12 ]
+      Spin 2: [ 6 ]
+    Term 38:
+      Coefficient: [ 1.6095553669747610E-005, Group: 11 ]
+      Spin 1: [ 7, 11 ]
+      Spin 2: [ 1 ]
+    Term 39:
+      Coefficient: [ 1.6095553669747610E-005, Group: 11 ]
+      Spin 1: [ 6, 12 ]
+      Spin 2: [ 1 ]
+    Term 40:
+      Coefficient: [ -3.2191107339495159E-005, Group: 11 ]
+      Spin 1: [ 1, 5 ]
+      Spin 2: [ 13 ]
+    Term 41:
+      Coefficient: [ -1.6095553669747610E-005, Group: 11 ]
+      Spin 1: [ 1, 13 ]
+      Spin 2: [ 5 ]
+    Term 42:
+      Coefficient: [ 1.6095553669747610E-005, Group: 11 ]
+      Spin 1: [ 5, 13 ]
+      Spin 2: [ 1 ]
+    Term 43:
+      Coefficient: [ -1.8489184824779709E-003, Group: 12 ]
+      Spin 1: [ 1, 14 ]
+      Spin 2: [ 7 ]
+    Term 44:
+      Coefficient: [ -1.8489184824779709E-003, Group: 12 ]
+      Spin 1: [ 1, 15 ]
+      Spin 2: [ 6 ]
+    Term 45:
+      Coefficient: [ -1.8489184824779709E-003, Group: 12 ]
+      Spin 1: [ 7, 14 ]
+      Spin 2: [ 1 ]
+    Term 46:
+      Coefficient: [ -1.8489184824779709E-003, Group: 12 ]
+      Spin 1: [ 6, 15 ]
+      Spin 2: [ 1 ]
+    Term 47:
+      Coefficient: [ -1.8489184824779709E-003, Group: 12 ]
+      Spin 1: [ 1, 16 ]
+      Spin 2: [ 5 ]
+    Term 48:
+      Coefficient: [ -1.8489184824779709E-003, Group: 12 ]
+      Spin 1: [ 5, 16 ]
+      Spin 2: [ 1 ]
+    Term 49:
+      Coefficient: [ 2.6238847020197041E-004, Group: 13 ]
+      Spin 1: [ 1, 7 ]
+      Spin 2: [ 14 ]
+    Term 50:
+      Coefficient: [ 2.6238847020197041E-004, Group: 13 ]
+      Spin 1: [ 1, 6 ]
+      Spin 2: [ 15 ]
+    Term 51:
+      Coefficient: [ 1.3119423510098569E-004, Group: 13 ]
+      Spin 1: [ 1, 14 ]
+      Spin 2: [ 7 ]
+    Term 52:
+      Coefficient: [ 1.3119423510098569E-004, Group: 13 ]
+      Spin 1: [ 1, 15 ]
+      Spin 2: [ 6 ]
+    Term 53:
+      Coefficient: [ -1.3119423510098569E-004, Group: 13 ]
+      Spin 1: [ 7, 14 ]
+      Spin 2: [ 1 ]
+    Term 54:
+      Coefficient: [ -1.3119423510098569E-004, Group: 13 ]
+      Spin 1: [ 6, 15 ]
+      Spin 2: [ 1 ]
+    Term 55:
+      Coefficient: [ 2.6238847020197041E-004, Group: 13 ]
+      Spin 1: [ 1, 5 ]
+      Spin 2: [ 16 ]
+    Term 56:
+      Coefficient: [ 1.3119423510098569E-004, Group: 13 ]
+      Spin 1: [ 1, 16 ]
+      Spin 2: [ 5 ]
+    Term 57:
+      Coefficient: [ -1.3119423510098569E-004, Group: 13 ]
+      Spin 1: [ 5, 16 ]
+      Spin 2: [ 1 ]
+    Term 58:
+      Coefficient: [ 2.7597457459343300E-003, Group: 14 ]
+      Spin 1: [ 1, 17 ]
+      Spin 2: [ 7 ]
+    Term 59:
+      Coefficient: [ 2.7597457459343300E-003, Group: 14 ]
+      Spin 1: [ 1, 18 ]
+      Spin 2: [ 6 ]
+    Term 60:
+      Coefficient: [ 2.7597457459343300E-003, Group: 14 ]
+      Spin 1: [ 7, 17 ]
+      Spin 2: [ 1 ]
+    Term 61:
+      Coefficient: [ 2.7597457459343300E-003, Group: 14 ]
+      Spin 1: [ 6, 18 ]
+      Spin 2: [ 1 ]
+    Term 62:
+      Coefficient: [ 2.7597457459343300E-003, Group: 14 ]
+      Spin 1: [ 1, 19 ]
+      Spin 2: [ 5 ]
+    Term 63:
+      Coefficient: [ 2.7597457459343300E-003, Group: 14 ]
+      Spin 1: [ 5, 19 ]
+      Spin 2: [ 1 ]
+    Term 64:
+      Coefficient: [ -1.4974848589386651E-003, Group: 15 ]
+      Spin 1: [ 1, 20 ]
+      Spin 2: [ 7 ]
+    Term 65:
+      Coefficient: [ -1.4974848589386651E-003, Group: 15 ]
+      Spin 1: [ 1, 21 ]
+      Spin 2: [ 6 ]
+    Term 66:
+      Coefficient: [ -1.4974848589386651E-003, Group: 15 ]
+      Spin 1: [ 7, 20 ]
+      Spin 2: [ 1 ]
+    Term 67:
+      Coefficient: [ -1.4974848589386651E-003, Group: 15 ]
+      Spin 1: [ 6, 21 ]
+      Spin 2: [ 1 ]
+    Term 68:
+      Coefficient: [ -1.4974848589386651E-003, Group: 15 ]
+      Spin 1: [ 1, 22 ]
+      Spin 2: [ 5 ]
+    Term 69:
+      Coefficient: [ -1.4974848589386651E-003, Group: 15 ]
+      Spin 1: [ 5, 22 ]
+      Spin 2: [ 1 ]
+    Term 70:
+      Coefficient: [ 1.4964689673476229E-003, Group: 16 ]
+      Spin 1: [ 1, 3 ]
+      Spin 2: [ 3 ]
+    Term 71:
+      Coefficient: [ 8.2840661595566837E-004, Group: 17 ]
+      Spin 1: [ 1, 10 ]
+      Spin 2: [ 10 ]
+    Term 72:
+      Coefficient: [ 8.2840661595566837E-004, Group: 17 ]
+      Spin 1: [ 1, 9 ]
+      Spin 2: [ 9 ]
+    Term 73:
+      Coefficient: [ 8.2840661595566837E-004, Group: 17 ]
+      Spin 1: [ 1, 8 ]
+      Spin 2: [ 8 ]
+    Term 74:
+      Coefficient: [ -1.1409763756768200E-004, Group: 18 ]
+      Spin 1: [ 1, 23 ]
+      Spin 2: [ 23 ]
+    Term 75:
+      Coefficient: [ -1.1409763756768200E-004, Group: 18 ]
+      Spin 1: [ 1, 24 ]
+      Spin 2: [ 24 ]
+    Term 76:
+      Coefficient: [ -1.1409763756768200E-004, Group: 18 ]
+      Spin 1: [ 1, 25 ]
+      Spin 2: [ 25 ]
+    Term 77:
+      Coefficient: [ -1.1409763756768200E-004, Group: 18 ]
+      Spin 1: [ 1, 26 ]
+      Spin 2: [ 26 ]
+    Term 78:
+      Coefficient: [ -1.1409763756768200E-004, Group: 18 ]
+      Spin 1: [ 1, 27 ]
+      Spin 2: [ 27 ]
+    Term 79:
+      Coefficient: [ 9.7765019983441317E-005, Group: 19 ]
+      Spin 1: [ 1, 27 ]
+      Spin 2: [ 28 ]
+    Term 80:
+      Coefficient: [ 9.7765019983441317E-005, Group: 19 ]
+      Spin 1: [ 1, 26 ]
+      Spin 2: [ 29 ]
+    Term 81:
+      Coefficient: [ 4.8882509991720733E-005, Group: 19 ]
+      Spin 1: [ 1, 28 ]
+      Spin 2: [ 27 ]
+    Term 82:
+      Coefficient: [ 4.8882509991720733E-005, Group: 19 ]
+      Spin 1: [ 1, 29 ]
+      Spin 2: [ 26 ]
+    Term 83:
+      Coefficient: [ -4.8882509991720733E-005, Group: 19 ]
+      Spin 1: [ 27, 28 ]
+      Spin 2: [ 1 ]
+    Term 84:
+      Coefficient: [ -4.8882509991720733E-005, Group: 19 ]
+      Spin 1: [ 26, 29 ]
+      Spin 2: [ 1 ]
+    Term 85:
+      Coefficient: [ 9.7765019983441317E-005, Group: 19 ]
+      Spin 1: [ 1, 25 ]
+      Spin 2: [ 30 ]
+    Term 86:
+      Coefficient: [ 9.7765019983441317E-005, Group: 19 ]
+      Spin 1: [ 1, 24 ]
+      Spin 2: [ 31 ]
+    Term 87:
+      Coefficient: [ 4.8882509991720733E-005, Group: 19 ]
+      Spin 1: [ 1, 30 ]
+      Spin 2: [ 25 ]
+    Term 88:
+      Coefficient: [ 4.8882509991720733E-005, Group: 19 ]
+      Spin 1: [ 1, 31 ]
+      Spin 2: [ 24 ]
+    Term 89:
+      Coefficient: [ -4.8882509991720733E-005, Group: 19 ]
+      Spin 1: [ 25, 30 ]
+      Spin 2: [ 1 ]
+    Term 90:
+      Coefficient: [ -4.8882509991720733E-005, Group: 19 ]
+      Spin 1: [ 24, 31 ]
+      Spin 2: [ 1 ]
+    Term 91:
+      Coefficient: [ 9.7765019983441317E-005, Group: 19 ]
+      Spin 1: [ 1, 23 ]
+      Spin 2: [ 32 ]
+    Term 92:
+      Coefficient: [ 4.8882509991720733E-005, Group: 19 ]
+      Spin 1: [ 1, 32 ]
+      Spin 2: [ 23 ]
+    Term 93:
+      Coefficient: [ -4.8882509991720733E-005, Group: 19 ]
+      Spin 1: [ 23, 32 ]
+      Spin 2: [ 1 ]
+    Term 94:
+      Coefficient: [ -4.2396018084070843E-003, Group: 20 ]
+      Spin 1: [ 2, 3 ]
+      Spin 2: [ 2 ]
+    Term 95:
+      Coefficient: [ 1.2860421147049259E-003, Group: 21 ]
+      Spin 1: [ 2, 4 ]
+      Spin 2: [ 2 ]
+    Term 96:
+      Coefficient: [ 3.7161432925454928E-004, Group: 22 ]
+      Spin 1: [ 2, 33 ]
+      Spin 2: [ 2 ]
+    Term 97:
+      Coefficient: [ -2.9249017182766579E-003, Group: 23 ]
+      Spin 1: [ 2, 5 ]
+      Spin 2: [ 5 ]
+    Term 98:
+      Coefficient: [ -2.9249017182766579E-003, Group: 23 ]
+      Spin 1: [ 2, 6 ]
+      Spin 2: [ 6 ]
+    Term 99:
+      Coefficient: [ -2.9249017182766579E-003, Group: 23 ]
+      Spin 1: [ 2, 7 ]
+      Spin 2: [ 7 ]
+    Term 100:
+      Coefficient: [ -1.9679061762759090E-003, Group: 24 ]
+      Spin 1: [ 2, 8 ]
+      Spin 2: [ 7 ]
+    Term 101:
+      Coefficient: [ -1.9679061762759090E-003, Group: 24 ]
+      Spin 1: [ 2, 9 ]
+      Spin 2: [ 6 ]
+    Term 102:
+      Coefficient: [ -1.9679061762759090E-003, Group: 24 ]
+      Spin 1: [ 7, 8 ]
+      Spin 2: [ 2 ]
+    Term 103:
+      Coefficient: [ -1.9679061762759090E-003, Group: 24 ]
+      Spin 1: [ 6, 9 ]
+      Spin 2: [ 2 ]
+    Term 104:
+      Coefficient: [ -1.9679061762759090E-003, Group: 24 ]
+      Spin 1: [ 2, 10 ]
+      Spin 2: [ 5 ]
+    Term 105:
+      Coefficient: [ -1.9679061762759090E-003, Group: 24 ]
+      Spin 1: [ 5, 10 ]
+      Spin 2: [ 2 ]
+    Term 106:
+      Coefficient: [ -4.0068886794112626E-003, Group: 25 ]
+      Spin 1: [ 2, 7 ]
+      Spin 2: [ 8 ]
+    Term 107:
+      Coefficient: [ -4.0068886794112626E-003, Group: 25 ]
+      Spin 1: [ 2, 6 ]
+      Spin 2: [ 9 ]
+    Term 108:
+      Coefficient: [ -2.0034443397056330E-003, Group: 25 ]
+      Spin 1: [ 2, 8 ]
+      Spin 2: [ 7 ]
+    Term 109:
+      Coefficient: [ -2.0034443397056330E-003, Group: 25 ]
+      Spin 1: [ 2, 9 ]
+      Spin 2: [ 6 ]
+    Term 110:
+      Coefficient: [ 2.0034443397056330E-003, Group: 25 ]
+      Spin 1: [ 7, 8 ]
+      Spin 2: [ 2 ]
+    Term 111:
+      Coefficient: [ 2.0034443397056330E-003, Group: 25 ]
+      Spin 1: [ 6, 9 ]
+      Spin 2: [ 2 ]
+    Term 112:
+      Coefficient: [ -4.0068886794112626E-003, Group: 25 ]
+      Spin 1: [ 2, 5 ]
+      Spin 2: [ 10 ]
+    Term 113:
+      Coefficient: [ -2.0034443397056330E-003, Group: 25 ]
+      Spin 1: [ 2, 10 ]
+      Spin 2: [ 5 ]
+    Term 114:
+      Coefficient: [ 2.0034443397056330E-003, Group: 25 ]
+      Spin 1: [ 5, 10 ]
+      Spin 2: [ 2 ]
+    Term 115:
+      Coefficient: [ -1.2841891107116661E-004, Group: 26 ]
+      Spin 1: [ 2, 11 ]
+      Spin 2: [ 7 ]
+    Term 116:
+      Coefficient: [ -1.2841891107116661E-004, Group: 26 ]
+      Spin 1: [ 2, 12 ]
+      Spin 2: [ 6 ]
+    Term 117:
+      Coefficient: [ -1.2841891107116661E-004, Group: 26 ]
+      Spin 1: [ 7, 11 ]
+      Spin 2: [ 2 ]
+    Term 118:
+      Coefficient: [ -1.2841891107116661E-004, Group: 26 ]
+      Spin 1: [ 6, 12 ]
+      Spin 2: [ 2 ]
+    Term 119:
+      Coefficient: [ -1.2841891107116661E-004, Group: 26 ]
+      Spin 1: [ 2, 13 ]
+      Spin 2: [ 5 ]
+    Term 120:
+      Coefficient: [ -1.2841891107116661E-004, Group: 26 ]
+      Spin 1: [ 5, 13 ]
+      Spin 2: [ 2 ]
+    Term 121:
+      Coefficient: [ -1.7469635167839941E-004, Group: 27 ]
+      Spin 1: [ 2, 7 ]
+      Spin 2: [ 11 ]
+    Term 122:
+      Coefficient: [ -1.7469635167839941E-004, Group: 27 ]
+      Spin 1: [ 2, 6 ]
+      Spin 2: [ 12 ]
+    Term 123:
+      Coefficient: [ -8.7348175839200166E-005, Group: 27 ]
+      Spin 1: [ 2, 11 ]
+      Spin 2: [ 7 ]
+    Term 124:
+      Coefficient: [ -8.7348175839200166E-005, Group: 27 ]
+      Spin 1: [ 2, 12 ]
+      Spin 2: [ 6 ]
+    Term 125:
+      Coefficient: [ 8.7348175839200166E-005, Group: 27 ]
+      Spin 1: [ 7, 11 ]
+      Spin 2: [ 2 ]
+    Term 126:
+      Coefficient: [ 8.7348175839200166E-005, Group: 27 ]
+      Spin 1: [ 6, 12 ]
+      Spin 2: [ 2 ]
+    Term 127:
+      Coefficient: [ -1.7469635167839941E-004, Group: 27 ]
+      Spin 1: [ 2, 5 ]
+      Spin 2: [ 13 ]
+    Term 128:
+      Coefficient: [ -8.7348175839200166E-005, Group: 27 ]
+      Spin 1: [ 2, 13 ]
+      Spin 2: [ 5 ]
+    Term 129:
+      Coefficient: [ 8.7348175839200166E-005, Group: 27 ]
+      Spin 1: [ 5, 13 ]
+      Spin 2: [ 2 ]
+    Term 130:
+      Coefficient: [ -1.9394461349122239E-006, Group: 28 ]
+      Spin 1: [ 2, 14 ]
+      Spin 2: [ 7 ]
+    Term 131:
+      Coefficient: [ -1.9394461349122239E-006, Group: 28 ]
+      Spin 1: [ 2, 15 ]
+      Spin 2: [ 6 ]
+    Term 132:
+      Coefficient: [ -1.9394461349122239E-006, Group: 28 ]
+      Spin 1: [ 7, 14 ]
+      Spin 2: [ 2 ]
+    Term 133:
+      Coefficient: [ -1.9394461349122239E-006, Group: 28 ]
+      Spin 1: [ 6, 15 ]
+      Spin 2: [ 2 ]
+    Term 134:
+      Coefficient: [ -1.9394461349122239E-006, Group: 28 ]
+      Spin 1: [ 2, 16 ]
+      Spin 2: [ 5 ]
+    Term 135:
+      Coefficient: [ -1.9394461349122239E-006, Group: 28 ]
+      Spin 1: [ 5, 16 ]
+      Spin 2: [ 2 ]
+    Term 136:
+      Coefficient: [ 1.0869922457885550E-004, Group: 29 ]
+      Spin 1: [ 2, 7 ]
+      Spin 2: [ 14 ]
+    Term 137:
+      Coefficient: [ 1.0869922457885550E-004, Group: 29 ]
+      Spin 1: [ 2, 6 ]
+      Spin 2: [ 15 ]
+    Term 138:
+      Coefficient: [ 5.4349612289427728E-005, Group: 29 ]
+      Spin 1: [ 2, 14 ]
+      Spin 2: [ 7 ]
+    Term 139:
+      Coefficient: [ 5.4349612289427728E-005, Group: 29 ]
+      Spin 1: [ 2, 15 ]
+      Spin 2: [ 6 ]
+    Term 140:
+      Coefficient: [ -5.4349612289427728E-005, Group: 29 ]
+      Spin 1: [ 7, 14 ]
+      Spin 2: [ 2 ]
+    Term 141:
+      Coefficient: [ -5.4349612289427728E-005, Group: 29 ]
+      Spin 1: [ 6, 15 ]
+      Spin 2: [ 2 ]
+    Term 142:
+      Coefficient: [ 1.0869922457885560E-004, Group: 29 ]
+      Spin 1: [ 2, 5 ]
+      Spin 2: [ 16 ]
+    Term 143:
+      Coefficient: [ 5.4349612289427728E-005, Group: 29 ]
+      Spin 1: [ 2, 16 ]
+      Spin 2: [ 5 ]
+    Term 144:
+      Coefficient: [ -5.4349612289427728E-005, Group: 29 ]
+      Spin 1: [ 5, 16 ]
+      Spin 2: [ 2 ]
+    Term 145:
+      Coefficient: [ 9.5837680283289415E-005, Group: 30 ]
+      Spin 1: [ 2, 17 ]
+      Spin 2: [ 7 ]
+    Term 146:
+      Coefficient: [ 9.5837680283289415E-005, Group: 30 ]
+      Spin 1: [ 2, 18 ]
+      Spin 2: [ 6 ]
+    Term 147:
+      Coefficient: [ 9.5837680283289415E-005, Group: 30 ]
+      Spin 1: [ 7, 17 ]
+      Spin 2: [ 2 ]
+    Term 148:
+      Coefficient: [ 9.5837680283289415E-005, Group: 30 ]
+      Spin 1: [ 6, 18 ]
+      Spin 2: [ 2 ]
+    Term 149:
+      Coefficient: [ 9.5837680283289415E-005, Group: 30 ]
+      Spin 1: [ 2, 19 ]
+      Spin 2: [ 5 ]
+    Term 150:
+      Coefficient: [ 9.5837680283289415E-005, Group: 30 ]
+      Spin 1: [ 5, 19 ]
+      Spin 2: [ 2 ]
+    Term 151:
+      Coefficient: [ -1.7854800731301440E-005, Group: 31 ]
+      Spin 1: [ 2, 7 ]
+      Spin 2: [ 17 ]
+    Term 152:
+      Coefficient: [ -1.7854800731301440E-005, Group: 31 ]
+      Spin 1: [ 2, 6 ]
+      Spin 2: [ 18 ]
+    Term 153:
+      Coefficient: [ -8.9274003656507185E-006, Group: 31 ]
+      Spin 1: [ 2, 17 ]
+      Spin 2: [ 7 ]
+    Term 154:
+      Coefficient: [ -8.9274003656507185E-006, Group: 31 ]
+      Spin 1: [ 2, 18 ]
+      Spin 2: [ 6 ]
+    Term 155:
+      Coefficient: [ 8.9274003656507185E-006, Group: 31 ]
+      Spin 1: [ 7, 17 ]
+      Spin 2: [ 2 ]
+    Term 156:
+      Coefficient: [ 8.9274003656507185E-006, Group: 31 ]
+      Spin 1: [ 6, 18 ]
+      Spin 2: [ 2 ]
+    Term 157:
+      Coefficient: [ -1.7854800731301440E-005, Group: 31 ]
+      Spin 1: [ 2, 5 ]
+      Spin 2: [ 19 ]
+    Term 158:
+      Coefficient: [ -8.9274003656507185E-006, Group: 31 ]
+      Spin 1: [ 2, 19 ]
+      Spin 2: [ 5 ]
+    Term 159:
+      Coefficient: [ 8.9274003656507185E-006, Group: 31 ]
+      Spin 1: [ 5, 19 ]
+      Spin 2: [ 2 ]
+    Term 160:
+      Coefficient: [ -5.9281316582485803E-005, Group: 32 ]
+      Spin 1: [ 2, 20 ]
+      Spin 2: [ 7 ]
+    Term 161:
+      Coefficient: [ -5.9281316582485803E-005, Group: 32 ]
+      Spin 1: [ 2, 21 ]
+      Spin 2: [ 6 ]
+    Term 162:
+      Coefficient: [ -5.9281316582485803E-005, Group: 32 ]
+      Spin 1: [ 7, 20 ]
+      Spin 2: [ 2 ]
+    Term 163:
+      Coefficient: [ -5.9281316582485803E-005, Group: 32 ]
+      Spin 1: [ 6, 21 ]
+      Spin 2: [ 2 ]
+    Term 164:
+      Coefficient: [ -5.9281316582485803E-005, Group: 32 ]
+      Spin 1: [ 2, 22 ]
+      Spin 2: [ 5 ]
+    Term 165:
+      Coefficient: [ -5.9281316582485803E-005, Group: 32 ]
+      Spin 1: [ 5, 22 ]
+      Spin 2: [ 2 ]
+    Term 166:
+      Coefficient: [ -5.1778566377811246E-006, Group: 33 ]
+      Spin 1: [ 2, 7 ]
+      Spin 2: [ 20 ]
+    Term 167:
+      Coefficient: [ -5.1778566377811246E-006, Group: 33 ]
+      Spin 1: [ 2, 6 ]
+      Spin 2: [ 21 ]
+    Term 168:
+      Coefficient: [ -2.5889283188905568E-006, Group: 33 ]
+      Spin 1: [ 2, 20 ]
+      Spin 2: [ 7 ]
+    Term 169:
+      Coefficient: [ -2.5889283188905568E-006, Group: 33 ]
+      Spin 1: [ 2, 21 ]
+      Spin 2: [ 6 ]
+    Term 170:
+      Coefficient: [ 2.5889283188905568E-006, Group: 33 ]
+      Spin 1: [ 7, 20 ]
+      Spin 2: [ 2 ]
+    Term 171:
+      Coefficient: [ 2.5889283188905568E-006, Group: 33 ]
+      Spin 1: [ 6, 21 ]
+      Spin 2: [ 2 ]
+    Term 172:
+      Coefficient: [ -5.1778566377811246E-006, Group: 33 ]
+      Spin 1: [ 2, 5 ]
+      Spin 2: [ 22 ]
+    Term 173:
+      Coefficient: [ -2.5889283188905568E-006, Group: 33 ]
+      Spin 1: [ 2, 22 ]
+      Spin 2: [ 5 ]
+    Term 174:
+      Coefficient: [ 2.5889283188905568E-006, Group: 33 ]
+      Spin 1: [ 5, 22 ]
+      Spin 2: [ 2 ]
+    Term 175:
+      Coefficient: [ -1.2832474435223980E-002, Group: 34 ]
+      Spin 1: [ 2, 3 ]
+      Spin 2: [ 3 ]
+    Term 176:
+      Coefficient: [ 6.0590294677122735E-004, Group: 35 ]
+      Spin 1: [ 2, 4 ]
+      Spin 2: [ 3 ]
+    Term 177:
+      Coefficient: [ 6.0590294677122735E-004, Group: 35 ]
+      Spin 1: [ 3, 4 ]
+      Spin 2: [ 2 ]
+    Term 178:
+      Coefficient: [ 1.4569800295552490E-003, Group: 36 ]
+      Spin 1: [ 2, 3 ]
+      Spin 2: [ 4 ]
+    Term 179:
+      Coefficient: [ 7.2849001477762177E-004, Group: 36 ]
+      Spin 1: [ 2, 4 ]
+      Spin 2: [ 3 ]
+    Term 180:
+      Coefficient: [ -7.2849001477762177E-004, Group: 36 ]
+      Spin 1: [ 3, 4 ]
+      Spin 2: [ 2 ]
+    Term 181:
+      Coefficient: [ 6.6337581900461826E-004, Group: 37 ]
+      Spin 1: [ 2, 33 ]
+      Spin 2: [ 3 ]
+    Term 182:
+      Coefficient: [ 6.6337581900461826E-004, Group: 37 ]
+      Spin 1: [ 3, 33 ]
+      Spin 2: [ 2 ]
+    Term 183:
+      Coefficient: [ 1.5047212004718909E-003, Group: 38 ]
+      Spin 1: [ 2, 3 ]
+      Spin 2: [ 33 ]
+    Term 184:
+      Coefficient: [ 7.5236060023594752E-004, Group: 38 ]
+      Spin 1: [ 2, 33 ]
+      Spin 2: [ 3 ]
+    Term 185:
+      Coefficient: [ -7.5236060023594752E-004, Group: 38 ]
+      Spin 1: [ 3, 33 ]
+      Spin 2: [ 2 ]
+    Term 186:
+      Coefficient: [ 4.0444188908459792E-005, Group: 39 ]
+      Spin 1: [ 2, 34 ]
+      Spin 2: [ 3 ]
+    Term 187:
+      Coefficient: [ 4.0444188908459792E-005, Group: 39 ]
+      Spin 1: [ 3, 34 ]
+      Spin 2: [ 2 ]
+    Term 188:
+      Coefficient: [ -5.5837837508253782E-005, Group: 40 ]
+      Spin 1: [ 2, 3 ]
+      Spin 2: [ 34 ]
+    Term 189:
+      Coefficient: [ -2.7918918754126891E-005, Group: 40 ]
+      Spin 1: [ 2, 34 ]
+      Spin 2: [ 3 ]
+    Term 190:
+      Coefficient: [ 2.7918918754126891E-005, Group: 40 ]
+      Spin 1: [ 3, 34 ]
+      Spin 2: [ 2 ]
+    Term 191:
+      Coefficient: [ 4.8099510552389121E-006, Group: 41 ]
+      Spin 1: [ 2, 35 ]
+      Spin 2: [ 3 ]
+    Term 192:
+      Coefficient: [ 4.8099510552389121E-006, Group: 41 ]
+      Spin 1: [ 3, 35 ]
+      Spin 2: [ 2 ]
+    Term 193:
+      Coefficient: [ -2.7346162927405408E-005, Group: 42 ]
+      Spin 1: [ 2, 3 ]
+      Spin 2: [ 35 ]
+    Term 194:
+      Coefficient: [ -1.3673081463702709E-005, Group: 42 ]
+      Spin 1: [ 2, 35 ]
+      Spin 2: [ 3 ]
+    Term 195:
+      Coefficient: [ 1.3673081463702709E-005, Group: 42 ]
+      Spin 1: [ 3, 35 ]
+      Spin 2: [ 2 ]
+    Term 196:
+      Coefficient: [ -4.8792710305278798E-003, Group: 43 ]
+      Spin 1: [ 2, 10 ]
+      Spin 2: [ 10 ]
+    Term 197:
+      Coefficient: [ -4.8792710305278798E-003, Group: 43 ]
+      Spin 1: [ 2, 9 ]
+      Spin 2: [ 9 ]
+    Term 198:
+      Coefficient: [ -4.8792710305278798E-003, Group: 43 ]
+      Spin 1: [ 2, 8 ]
+      Spin 2: [ 8 ]
+    Term 199:
+      Coefficient: [ -6.7401179722806841E-005, Group: 44 ]
+      Spin 1: [ 2, 11 ]
+      Spin 2: [ 8 ]
+    Term 200:
+      Coefficient: [ -6.7401179722806841E-005, Group: 44 ]
+      Spin 1: [ 2, 12 ]
+      Spin 2: [ 9 ]
+    Term 201:
+      Coefficient: [ -6.7401179722806841E-005, Group: 44 ]
+      Spin 1: [ 8, 11 ]
+      Spin 2: [ 2 ]
+    Term 202:
+      Coefficient: [ -6.7401179722806841E-005, Group: 44 ]
+      Spin 1: [ 9, 12 ]
+      Spin 2: [ 2 ]
+    Term 203:
+      Coefficient: [ -6.7401179722806841E-005, Group: 44 ]
+      Spin 1: [ 2, 13 ]
+      Spin 2: [ 10 ]
+    Term 204:
+      Coefficient: [ -6.7401179722806841E-005, Group: 44 ]
+      Spin 1: [ 10, 13 ]
+      Spin 2: [ 2 ]
+    Term 205:
+      Coefficient: [ -1.3751393032552419E-004, Group: 45 ]
+      Spin 1: [ 2, 8 ]
+      Spin 2: [ 11 ]
+    Term 206:
+      Coefficient: [ -1.3751393032552419E-004, Group: 45 ]
+      Spin 1: [ 2, 9 ]
+      Spin 2: [ 12 ]
+    Term 207:
+      Coefficient: [ -6.8756965162762148E-005, Group: 45 ]
+      Spin 1: [ 2, 11 ]
+      Spin 2: [ 8 ]
+    Term 208:
+      Coefficient: [ -6.8756965162762148E-005, Group: 45 ]
+      Spin 1: [ 2, 12 ]
+      Spin 2: [ 9 ]
+    Term 209:
+      Coefficient: [ 6.8756965162762148E-005, Group: 45 ]
+      Spin 1: [ 8, 11 ]
+      Spin 2: [ 2 ]
+    Term 210:
+      Coefficient: [ 6.8756965162762148E-005, Group: 45 ]
+      Spin 1: [ 9, 12 ]
+      Spin 2: [ 2 ]
+    Term 211:
+      Coefficient: [ -1.3751393032552419E-004, Group: 45 ]
+      Spin 1: [ 2, 10 ]
+      Spin 2: [ 13 ]
+    Term 212:
+      Coefficient: [ -6.8756965162762148E-005, Group: 45 ]
+      Spin 1: [ 2, 13 ]
+      Spin 2: [ 10 ]
+    Term 213:
+      Coefficient: [ 6.8756965162762148E-005, Group: 45 ]
+      Spin 1: [ 10, 13 ]
+      Spin 2: [ 2 ]
+    Term 214:
+      Coefficient: [ 2.3982571470669972E-005, Group: 46 ]
+      Spin 1: [ 2, 8 ]
+      Spin 2: [ 14 ]
+    Term 215:
+      Coefficient: [ 2.3982571470669972E-005, Group: 46 ]
+      Spin 1: [ 2, 9 ]
+      Spin 2: [ 15 ]
+    Term 216:
+      Coefficient: [ 1.1991285735334981E-005, Group: 46 ]
+      Spin 1: [ 2, 14 ]
+      Spin 2: [ 8 ]
+    Term 217:
+      Coefficient: [ 1.1991285735334981E-005, Group: 46 ]
+      Spin 1: [ 2, 15 ]
+      Spin 2: [ 9 ]
+    Term 218:
+      Coefficient: [ -1.1991285735334981E-005, Group: 46 ]
+      Spin 1: [ 8, 14 ]
+      Spin 2: [ 2 ]
+    Term 219:
+      Coefficient: [ -1.1991285735334981E-005, Group: 46 ]
+      Spin 1: [ 9, 15 ]
+      Spin 2: [ 2 ]
+    Term 220:
+      Coefficient: [ 2.3982571470669972E-005, Group: 46 ]
+      Spin 1: [ 2, 10 ]
+      Spin 2: [ 16 ]
+    Term 221:
+      Coefficient: [ 1.1991285735334981E-005, Group: 46 ]
+      Spin 1: [ 2, 16 ]
+      Spin 2: [ 10 ]
+    Term 222:
+      Coefficient: [ -1.1991285735334981E-005, Group: 46 ]
+      Spin 1: [ 10, 16 ]
+      Spin 2: [ 2 ]
+    Term 223:
+      Coefficient: [ 1.6135871157022198E-005, Group: 47 ]
+      Spin 1: [ 2, 8 ]
+      Spin 2: [ 17 ]
+    Term 224:
+      Coefficient: [ 1.6135871157022198E-005, Group: 47 ]
+      Spin 1: [ 2, 9 ]
+      Spin 2: [ 18 ]
+    Term 225:
+      Coefficient: [ 8.0679355785110755E-006, Group: 47 ]
+      Spin 1: [ 2, 17 ]
+      Spin 2: [ 8 ]
+    Term 226:
+      Coefficient: [ 8.0679355785110755E-006, Group: 47 ]
+      Spin 1: [ 2, 18 ]
+      Spin 2: [ 9 ]
+    Term 227:
+      Coefficient: [ -8.0679355785110755E-006, Group: 47 ]
+      Spin 1: [ 8, 17 ]
+      Spin 2: [ 2 ]
+    Term 228:
+      Coefficient: [ -8.0679355785110755E-006, Group: 47 ]
+      Spin 1: [ 9, 18 ]
+      Spin 2: [ 2 ]
+    Term 229:
+      Coefficient: [ 1.6135871157022198E-005, Group: 47 ]
+      Spin 1: [ 2, 10 ]
+      Spin 2: [ 19 ]
+    Term 230:
+      Coefficient: [ 8.0679355785110755E-006, Group: 47 ]
+      Spin 1: [ 2, 19 ]
+      Spin 2: [ 10 ]
+    Term 231:
+      Coefficient: [ -8.0679355785110755E-006, Group: 47 ]
+      Spin 1: [ 10, 19 ]
+      Spin 2: [ 2 ]
+    Term 232:
+      Coefficient: [ -5.5941403156925723E-005, Group: 48 ]
+      Spin 1: [ 2, 8 ]
+      Spin 2: [ 20 ]
+    Term 233:
+      Coefficient: [ -5.5941403156925723E-005, Group: 48 ]
+      Spin 1: [ 2, 9 ]
+      Spin 2: [ 21 ]
+    Term 234:
+      Coefficient: [ -2.7970701578462800E-005, Group: 48 ]
+      Spin 1: [ 2, 20 ]
+      Spin 2: [ 8 ]
+    Term 235:
+      Coefficient: [ -2.7970701578462800E-005, Group: 48 ]
+      Spin 1: [ 2, 21 ]
+      Spin 2: [ 9 ]
+    Term 236:
+      Coefficient: [ 2.7970701578462800E-005, Group: 48 ]
+      Spin 1: [ 8, 20 ]
+      Spin 2: [ 2 ]
+    Term 237:
+      Coefficient: [ 2.7970701578462800E-005, Group: 48 ]
+      Spin 1: [ 9, 21 ]
+      Spin 2: [ 2 ]
+    Term 238:
+      Coefficient: [ -5.5941403156925723E-005, Group: 48 ]
+      Spin 1: [ 2, 10 ]
+      Spin 2: [ 22 ]
+    Term 239:
+      Coefficient: [ -2.7970701578462800E-005, Group: 48 ]
+      Spin 1: [ 2, 22 ]
+      Spin 2: [ 10 ]
+    Term 240:
+      Coefficient: [ 2.7970701578462800E-005, Group: 48 ]
+      Spin 1: [ 10, 22 ]
+      Spin 2: [ 2 ]
+    Term 241:
+      Coefficient: [ 2.7395959229198629E-005, Group: 49 ]
+      Spin 1: [ 2, 13 ]
+      Spin 2: [ 13 ]
+    Term 242:
+      Coefficient: [ 2.7395959229198629E-005, Group: 49 ]
+      Spin 1: [ 2, 12 ]
+      Spin 2: [ 12 ]
+    Term 243:
+      Coefficient: [ 2.7395959229198629E-005, Group: 49 ]
+      Spin 1: [ 2, 11 ]
+      Spin 2: [ 11 ]
+    Term 244:
+      Coefficient: [ -1.6548310127713791E-005, Group: 50 ]
+      Spin 1: [ 2, 11 ]
+      Spin 2: [ 14 ]
+    Term 245:
+      Coefficient: [ -1.6548310127713791E-005, Group: 50 ]
+      Spin 1: [ 2, 12 ]
+      Spin 2: [ 15 ]
+    Term 246:
+      Coefficient: [ -8.2741550638569022E-006, Group: 50 ]
+      Spin 1: [ 2, 14 ]
+      Spin 2: [ 11 ]
+    Term 247:
+      Coefficient: [ -8.2741550638569022E-006, Group: 50 ]
+      Spin 1: [ 2, 15 ]
+      Spin 2: [ 12 ]
+    Term 248:
+      Coefficient: [ 8.2741550638569022E-006, Group: 50 ]
+      Spin 1: [ 11, 14 ]
+      Spin 2: [ 2 ]
+    Term 249:
+      Coefficient: [ 8.2741550638569022E-006, Group: 50 ]
+      Spin 1: [ 12, 15 ]
+      Spin 2: [ 2 ]
+    Term 250:
+      Coefficient: [ -1.6548310127713791E-005, Group: 50 ]
+      Spin 1: [ 2, 13 ]
+      Spin 2: [ 16 ]
+    Term 251:
+      Coefficient: [ -8.2741550638569022E-006, Group: 50 ]
+      Spin 1: [ 2, 16 ]
+      Spin 2: [ 13 ]
+    Term 252:
+      Coefficient: [ 8.2741550638569022E-006, Group: 50 ]
+      Spin 1: [ 13, 16 ]
+      Spin 2: [ 2 ]
+  Deduplicated coefficients:
+    c_1: [ 1 ]
+    c_2: [ 2 ]
+    c_3: [ 3 ]
+    c_4: [ 4 ]
+    c_5: [ 5, 8 ]
+    c_6: [ 6, 9 ]
+    c_7: [ 7 ]
+    c_8: [ 10 ]
+    c_9: [ 11 ]
+    c_10: [ 12 ]
+    c_11: [ 13, 21 ]
+    c_12: [ 14, 22 ]
+    c_13: [ 15, 23 ]
+    c_14: [ 16, 24 ]
+    c_15: [ 17, 26 ]
+    c_16: [ 18, 27 ]
+    c_17: [ 19 ]
+    c_18: [ 20 ]
+    c_19: [ 25 ]
+    c_20: [ 28, 36 ]
+    c_21: [ 29, 37 ]
+    c_22: [ 30, 38 ]
+    c_23: [ 31, 39 ]
+    c_24: [ 32, 41 ]
+    c_25: [ 33, 42 ]
+    c_26: [ 34 ]
+    c_27: [ 35 ]
+    c_28: [ 40 ]
+    c_29: [ 43, 51 ]
+    c_30: [ 44, 52 ]
+    c_31: [ 45, 53 ]
+    c_32: [ 46, 54 ]
+    c_33: [ 47, 56 ]
+    c_34: [ 48, 57 ]
+    c_35: [ 49 ]
+    c_36: [ 50 ]
+    c_37: [ 55 ]
+    c_38: [ 58 ]
+    c_39: [ 59 ]
+    c_40: [ 60 ]
+    c_41: [ 61 ]
+    c_42: [ 62 ]
+    c_43: [ 63 ]
+    c_44: [ 64 ]
+    c_45: [ 65 ]
+    c_46: [ 66 ]
+    c_47: [ 67 ]
+    c_48: [ 68 ]
+    c_49: [ 69 ]
+    c_50: [ 70 ]
+    c_51: [ 71 ]
+    c_52: [ 72 ]
+    c_53: [ 73 ]
+    c_54: [ 74 ]
+    c_55: [ 75 ]
+    c_56: [ 76 ]
+    c_57: [ 77 ]
+    c_58: [ 78 ]
+    c_59: [ 79 ]
+    c_60: [ 80 ]
+    c_61: [ 81 ]
+    c_62: [ 82 ]
+    c_63: [ 83 ]
+    c_64: [ 84 ]
+    c_65: [ 85 ]
+    c_66: [ 86 ]
+    c_67: [ 87 ]
+    c_68: [ 88 ]
+    c_69: [ 89 ]
+    c_70: [ 90 ]
+    c_71: [ 91 ]
+    c_72: [ 92 ]
+    c_73: [ 93 ]
+    c_74: [ 94 ]
+    c_75: [ 95 ]
+    c_76: [ 96 ]
+    c_77: [ 97 ]
+    c_78: [ 98 ]
+    c_79: [ 99 ]
+    c_80: [ 100, 108 ]
+    c_81: [ 101, 109 ]
+    c_82: [ 102, 110 ]
+    c_83: [ 103, 111 ]
+    c_84: [ 104, 113 ]
+    c_85: [ 105, 114 ]
+    c_86: [ 106 ]
+    c_87: [ 107 ]
+    c_88: [ 112 ]
+    c_89: [ 115, 123 ]
+    c_90: [ 116, 124 ]
+    c_91: [ 117, 125 ]
+    c_92: [ 118, 126 ]
+    c_93: [ 119, 128 ]
+    c_94: [ 120, 129 ]
+    c_95: [ 121 ]
+    c_96: [ 122 ]
+    c_97: [ 127 ]
+    c_98: [ 130, 138 ]
+    c_99: [ 131, 139 ]
+    c_100: [ 132, 140 ]
+    c_101: [ 133, 141 ]
+    c_102: [ 134, 143 ]
+    c_103: [ 135, 144 ]
+    c_104: [ 136 ]
+    c_105: [ 137 ]
+    c_106: [ 142 ]
+    c_107: [ 145, 153 ]
+    c_108: [ 146, 154 ]
+    c_109: [ 147, 155 ]
+    c_110: [ 148, 156 ]
+    c_111: [ 149, 158 ]
+    c_112: [ 150, 159 ]
+    c_113: [ 151 ]
+    c_114: [ 152 ]
+    c_115: [ 157 ]
+    c_116: [ 160, 168 ]
+    c_117: [ 161, 169 ]
+    c_118: [ 162, 170 ]
+    c_119: [ 163, 171 ]
+    c_120: [ 164, 173 ]
+    c_121: [ 165, 174 ]
+    c_122: [ 166 ]
+    c_123: [ 167 ]
+    c_124: [ 172 ]
+    c_125: [ 175 ]
+    c_126: [ 176, 179 ]
+    c_127: [ 177, 180 ]
+    c_128: [ 178 ]
+    c_129: [ 181, 184 ]
+    c_130: [ 182, 185 ]
+    c_131: [ 183 ]
+    c_132: [ 186, 189 ]
+    c_133: [ 187, 190 ]
+    c_134: [ 188 ]
+    c_135: [ 191, 194 ]
+    c_136: [ 192, 195 ]
+    c_137: [ 193 ]
+    c_138: [ 196 ]
+    c_139: [ 197 ]
+    c_140: [ 198 ]
+    c_141: [ 199, 207 ]
+    c_142: [ 200, 208 ]
+    c_143: [ 201, 209 ]
+    c_144: [ 202, 210 ]
+    c_145: [ 203, 212 ]
+    c_146: [ 204, 213 ]
+    c_147: [ 205 ]
+    c_148: [ 206 ]
+    c_149: [ 211 ]
+    c_150: [ 214 ]
+    c_151: [ 215 ]
+    c_152: [ 216 ]
+    c_153: [ 217 ]
+    c_154: [ 218 ]
+    c_155: [ 219 ]
+    c_156: [ 220 ]
+    c_157: [ 221 ]
+    c_158: [ 222 ]
+    c_159: [ 223 ]
+    c_160: [ 224 ]
+    c_161: [ 225 ]
+    c_162: [ 226 ]
+    c_163: [ 227 ]
+    c_164: [ 228 ]
+    c_165: [ 229 ]
+    c_166: [ 230 ]
+    c_167: [ 231 ]
+    c_168: [ 232 ]
+    c_169: [ 233 ]
+    c_170: [ 234 ]
+    c_171: [ 235 ]
+    c_172: [ 236 ]
+    c_173: [ 237 ]
+    c_174: [ 238 ]
+    c_175: [ 239 ]
+    c_176: [ 240 ]
+    c_177: [ 241 ]
+    c_178: [ 242 ]
+    c_179: [ 243 ]
+    c_180: [ 244 ]
+    c_181: [ 245 ]
+    c_182: [ 246 ]
+    c_183: [ 247 ]
+    c_184: [ 248 ]
+    c_185: [ 249 ]
+    c_186: [ 250 ]
+    c_187: [ 251 ]
+    c_188: [ 252 ]
+  Compressed expansion:
+    Orbital pool:
+      Orbital 1:
+        Component 1: [ 1 ]
+      Orbital 2:
+        Component 1: [ 2 ]
+      Orbital 3:
+        Component 1: [ 3 ]
+      Orbital 4:
+        Component 1: [ 5 ]
+      Orbital 5:
+        Component 1: [ 6 ]
+      Orbital 6:
+        Component 1: [ 7 ]
+      Orbital 7:
+        Component 1: [ 8 ]
+      Orbital 8:
+        Component 1: [ 9 ]
+      Orbital 9:
+        Component 1: [ 10 ]
+      Orbital 10:
+        Component 1: [ 11 ]
+      Orbital 11:
+        Component 1: [ 12 ]
+      Orbital 12:
+        Component 1: [ 13 ]
+      Orbital 13:
+        Component 1: [ 14 ]
+      Orbital 14:
+        Component 1: [ 15 ]
+      Orbital 15:
+        Component 1: [ 16 ]
+      Orbital 16:
+        Component 1: [ 23 ]
+      Orbital 17:
+        Component 1: [ 24 ]
+      Orbital 18:
+        Component 1: [ 25 ]
+      Orbital 19:
+        Component 1: [ 26 ]
+      Orbital 20:
+        Component 1: [ 27 ]
+      Orbital 21:
+        Component 1: [ 28 ]
+      Orbital 22:
+        Component 1: [ 29 ]
+      Orbital 23:
+        Component 1: [ 30 ]
+      Orbital 24:
+        Component 1: [ 31 ]
+      Orbital 25:
+        Component 1: [ 32 ]
+      Orbital 26:
+        Component 1: [ 2 ]
+        Component 2: [ 3, Num: [ 2 ], Den: [ 1 ] ]
+        Component 3: [ 4, Num: [ 3 ], Den: [ 1 ] ]
+      Orbital 27:
+        Component 1: [ 2, Num: [ 5 ], Den: [ 50 ] ]
+        Component 2: [ 3 ]
+      Orbital 28:
+        Component 1: [ 1 ]
+        Component 2: [ -3, Num: [ 74 ], Den: [ 4 ] ]
+        Component 3: [ -4, Num: [ 75 ], Den: [ 4 ] ]
+        Component 4: [ -33, Num: [ 76 ], Den: [ 4 ] ]
+      Orbital 29:
+        Component 1: [ -4, Num: [ 127 ], Den: [ 136 ] ]
+        Component 2: [ -33, Num: [ 130 ], Den: [ 136 ] ]
+        Component 3: [ -34, Num: [ 133 ], Den: [ 136 ] ]
+        Component 4: [ -35 ]
+      Orbital 30:
+        Component 1: [ 1 ]
+        Component 2: [ 3, Num: [ 125 ], Den: [ 6 ] ]
+        Component 3: [ 4, Num: [ 128 ], Den: [ 6 ] ]
+        Component 4: [ 33, Num: [ 131 ], Den: [ 6 ] ]
+        Component 5: [ 34, Num: [ 134 ], Den: [ 6 ] ]
+        Component 6: [ 35, Num: [ 137 ], Den: [ 6 ] ]
+      Orbital 31:
+        Component 1: [ 1 ]
+        Component 2: [ -4, Num: [ 126 ], Den: [ 7 ] ]
+        Component 3: [ -33, Num: [ 129 ], Den: [ 7 ] ]
+        Component 4: [ -34, Num: [ 132 ], Den: [ 7 ] ]
+        Component 5: [ -35, Num: [ 135 ], Den: [ 7 ] ]
+      Orbital 32:
+        Component 1: [ 5 ]
+        Component 2: [ 10, Num: [ 15 ], Den: [ 8 ] ]
+        Component 3: [ 13, Num: [ 24 ], Den: [ 8 ] ]
+        Component 4: [ 16, Num: [ 33 ], Den: [ 8 ] ]
+        Component 5: [ 19, Num: [ 42 ], Den: [ 8 ] ]
+        Component 6: [ 22, Num: [ 48 ], Den: [ 8 ] ]
+      Orbital 33:
+        Component 1: [ 10, Num: [ 19 ], Den: [ 37 ] ]
+        Component 2: [ 13, Num: [ 28 ], Den: [ 37 ] ]
+        Component 3: [ 16 ]
+      Orbital 34:
+        Component 1: [ 5 ]
+        Component 2: [ 10, Num: [ 84 ], Den: [ 77 ] ]
+        Component 3: [ 13, Num: [ 93 ], Den: [ 77 ] ]
+        Component 4: [ 16, Num: [ 102 ], Den: [ 77 ] ]
+        Component 5: [ 19, Num: [ 111 ], Den: [ 77 ] ]
+        Component 6: [ 22, Num: [ 120 ], Den: [ 77 ] ]
+      Orbital 35:
+        Component 1: [ 10, Num: [ 88 ], Den: [ 124 ] ]
+        Component 2: [ 13, Num: [ 97 ], Den: [ 124 ] ]
+        Component 3: [ 16, Num: [ 106 ], Den: [ 124 ] ]
+        Component 4: [ 19, Num: [ 115 ], Den: [ 124 ] ]
+        Component 5: [ 22 ]
+      Orbital 36:
+        Component 1: [ 10, Num: [ 138 ], Den: [ 174 ] ]
+        Component 2: [ 13, Num: [ 149 ], Den: [ 174 ] ]
+        Component 3: [ 16, Num: [ 156 ], Den: [ 174 ] ]
+        Component 4: [ 19, Num: [ 165 ], Den: [ 174 ] ]
+        Component 5: [ 22 ]
+      Orbital 37:
+        Component 1: [ 13, Num: [ 145 ], Den: [ 175 ] ]
+        Component 2: [ 16, Num: [ 157 ], Den: [ 175 ] ]
+        Component 3: [ 19, Num: [ 166 ], Den: [ 175 ] ]
+        Component 4: [ 22 ]
+      Orbital 38:
+        Component 1: [ 13, Num: [ 177 ], Den: [ 186 ] ]
+        Component 2: [ 16 ]
+      Orbital 39:
+        Component 1: [ 6 ]
+        Component 2: [ 9, Num: [ 12 ], Den: [ 9 ] ]
+        Component 3: [ 12, Num: [ 21 ], Den: [ 9 ] ]
+        Component 4: [ 15, Num: [ 30 ], Den: [ 9 ] ]
+        Component 5: [ 18, Num: [ 39 ], Den: [ 9 ] ]
+        Component 6: [ 21, Num: [ 45 ], Den: [ 9 ] ]
+      Orbital 40:
+        Component 1: [ 9, Num: [ 18 ], Den: [ 36 ] ]
+        Component 2: [ 12, Num: [ 27 ], Den: [ 36 ] ]
+        Component 3: [ 15 ]
+      Orbital 41:
+        Component 1: [ 6 ]
+        Component 2: [ 9, Num: [ 81 ], Den: [ 78 ] ]
+        Component 3: [ 12, Num: [ 90 ], Den: [ 78 ] ]
+        Component 4: [ 15, Num: [ 99 ], Den: [ 78 ] ]
+        Component 5: [ 18, Num: [ 108 ], Den: [ 78 ] ]
+        Component 6: [ 21, Num: [ 117 ], Den: [ 78 ] ]
+      Orbital 42:
+        Component 1: [ 9, Num: [ 87 ], Den: [ 123 ] ]
+        Component 2: [ 12, Num: [ 96 ], Den: [ 123 ] ]
+        Component 3: [ 15, Num: [ 105 ], Den: [ 123 ] ]
+        Component 4: [ 18, Num: [ 114 ], Den: [ 123 ] ]
+        Component 5: [ 21 ]
+      Orbital 43:
+        Component 1: [ 9, Num: [ 139 ], Den: [ 169 ] ]
+        Component 2: [ 12, Num: [ 148 ], Den: [ 169 ] ]
+        Component 3: [ 15, Num: [ 151 ], Den: [ 169 ] ]
+        Component 4: [ 18, Num: [ 160 ], Den: [ 169 ] ]
+        Component 5: [ 21 ]
+      Orbital 44:
+        Component 1: [ 12, Num: [ 142 ], Den: [ 171 ] ]
+        Component 2: [ 15, Num: [ 153 ], Den: [ 171 ] ]
+        Component 3: [ 18, Num: [ 162 ], Den: [ 171 ] ]
+        Component 4: [ 21 ]
+      Orbital 45:
+        Component 1: [ 12, Num: [ 178 ], Den: [ 181 ] ]
+        Component 2: [ 15 ]
+      Orbital 46:
+        Component 1: [ 7 ]
+        Component 2: [ 8, Num: [ 11 ], Den: [ 10 ] ]
+        Component 3: [ 11, Num: [ 20 ], Den: [ 10 ] ]
+        Component 4: [ 14, Num: [ 29 ], Den: [ 10 ] ]
+        Component 5: [ 17, Num: [ 38 ], Den: [ 10 ] ]
+        Component 6: [ 20, Num: [ 44 ], Den: [ 10 ] ]
+      Orbital 47:
+        Component 1: [ 8, Num: [ 17 ], Den: [ 35 ] ]
+        Component 2: [ 11, Num: [ 26 ], Den: [ 35 ] ]
+        Component 3: [ 14 ]
+      Orbital 48:
+        Component 1: [ 7 ]
+        Component 2: [ 8, Num: [ 80 ], Den: [ 79 ] ]
+        Component 3: [ 11, Num: [ 89 ], Den: [ 79 ] ]
+        Component 4: [ 14, Num: [ 98 ], Den: [ 79 ] ]
+        Component 5: [ 17, Num: [ 107 ], Den: [ 79 ] ]
+        Component 6: [ 20, Num: [ 116 ], Den: [ 79 ] ]
+      Orbital 49:
+        Component 1: [ 8, Num: [ 86 ], Den: [ 122 ] ]
+        Component 2: [ 11, Num: [ 95 ], Den: [ 122 ] ]
+        Component 3: [ 14, Num: [ 104 ], Den: [ 122 ] ]
+        Component 4: [ 17, Num: [ 113 ], Den: [ 122 ] ]
+        Component 5: [ 20 ]
+      Orbital 50:
+        Component 1: [ 8, Num: [ 140 ], Den: [ 168 ] ]
+        Component 2: [ 11, Num: [ 147 ], Den: [ 168 ] ]
+        Component 3: [ 14, Num: [ 150 ], Den: [ 168 ] ]
+        Component 4: [ 17, Num: [ 159 ], Den: [ 168 ] ]
+        Component 5: [ 20 ]
+      Orbital 51:
+        Component 1: [ 11, Num: [ 141 ], Den: [ 170 ] ]
+        Component 2: [ 14, Num: [ 152 ], Den: [ 170 ] ]
+        Component 3: [ 17, Num: [ 161 ], Den: [ 170 ] ]
+        Component 4: [ 20 ]
+      Orbital 52:
+        Component 1: [ 11, Num: [ 179 ], Den: [ 180 ] ]
+        Component 2: [ 14 ]
+      Orbital 53:
+        Component 1: [ 8 ]
+        Component 2: [ 11, Num: [ 22 ], Den: [ 13 ] ]
+        Component 3: [ 14, Num: [ 31 ], Den: [ 13 ] ]
+        Component 4: [ 17, Num: [ 40 ], Den: [ 13 ] ]
+        Component 5: [ 20, Num: [ 46 ], Den: [ 13 ] ]
+      Orbital 54:
+        Component 1: [ 8 ]
+        Component 2: [ 11, Num: [ 91 ], Den: [ 82 ] ]
+        Component 3: [ 14, Num: [ 100 ], Den: [ 82 ] ]
+        Component 4: [ 17, Num: [ 109 ], Den: [ 82 ] ]
+        Component 5: [ 20, Num: [ 118 ], Den: [ 82 ] ]
+      Orbital 55:
+        Component 1: [ -11, Num: [ 143 ], Den: [ 172 ] ]
+        Component 2: [ -14, Num: [ 154 ], Den: [ 172 ] ]
+        Component 3: [ -17, Num: [ 163 ], Den: [ 172 ] ]
+        Component 4: [ -20 ]
+      Orbital 56:
+        Component 1: [ 9 ]
+        Component 2: [ 12, Num: [ 23 ], Den: [ 14 ] ]
+        Component 3: [ 15, Num: [ 32 ], Den: [ 14 ] ]
+        Component 4: [ 18, Num: [ 41 ], Den: [ 14 ] ]
+        Component 5: [ 21, Num: [ 47 ], Den: [ 14 ] ]
+      Orbital 57:
+        Component 1: [ 9 ]
+        Component 2: [ 12, Num: [ 92 ], Den: [ 83 ] ]
+        Component 3: [ 15, Num: [ 101 ], Den: [ 83 ] ]
+        Component 4: [ 18, Num: [ 110 ], Den: [ 83 ] ]
+        Component 5: [ 21, Num: [ 119 ], Den: [ 83 ] ]
+      Orbital 58:
+        Component 1: [ -12, Num: [ 144 ], Den: [ 173 ] ]
+        Component 2: [ -15, Num: [ 155 ], Den: [ 173 ] ]
+        Component 3: [ -18, Num: [ 164 ], Den: [ 173 ] ]
+        Component 4: [ -21 ]
+      Orbital 59:
+        Component 1: [ 10 ]
+        Component 2: [ 13, Num: [ 25 ], Den: [ 16 ] ]
+        Component 3: [ 16, Num: [ 34 ], Den: [ 16 ] ]
+        Component 4: [ 19, Num: [ 43 ], Den: [ 16 ] ]
+        Component 5: [ 22, Num: [ 49 ], Den: [ 16 ] ]
+      Orbital 60:
+        Component 1: [ 10 ]
+        Component 2: [ 13, Num: [ 94 ], Den: [ 85 ] ]
+        Component 3: [ 16, Num: [ 103 ], Den: [ 85 ] ]
+        Component 4: [ 19, Num: [ 112 ], Den: [ 85 ] ]
+        Component 5: [ 22, Num: [ 121 ], Den: [ 85 ] ]
+      Orbital 61:
+        Component 1: [ -13, Num: [ 146 ], Den: [ 176 ] ]
+        Component 2: [ -16, Num: [ 158 ], Den: [ 176 ] ]
+        Component 3: [ -19, Num: [ 167 ], Den: [ 176 ] ]
+        Component 4: [ -22 ]
+      Orbital 62:
+        Component 1: [ 23 ]
+        Component 2: [ 32, Num: [ 71 ], Den: [ 54 ] ]
+      Orbital 63:
+        Component 1: [ 24 ]
+        Component 2: [ 31, Num: [ 66 ], Den: [ 55 ] ]
+      Orbital 64:
+        Component 1: [ 25 ]
+        Component 2: [ 30, Num: [ 65 ], Den: [ 56 ] ]
+      Orbital 65:
+        Component 1: [ 26 ]
+        Component 2: [ 29, Num: [ 60 ], Den: [ 57 ] ]
+      Orbital 66:
+        Component 1: [ 27 ]
+        Component 2: [ 28, Num: [ 59 ], Den: [ 58 ] ]
+    Expansion:
+      Term 1:
+        Coefficient: [ Num: [ 1 ] ]
+        Spin 1: [ 1, 26 ]
+        Spin 2: [ 1 ]
+      Term 2:
+        Coefficient: [ Num: [ 50 ] ]
+        Spin 1: [ 1, 3 ]
+        Spin 2: [ 27 ]
+      Term 3:
+        Coefficient: [ Num: [ -4 ] ]
+        Spin 1: [ 2, 28 ]
+        Spin 2: [ 2 ]
+      Term 4:
+        Coefficient: [ Num: [ -136 ] ]
+        Spin 1: [ 3, 29 ]
+        Spin 2: [ 2 ]
+      Term 5:
+        Coefficient: [ Num: [ 6 ] ]
+        Spin 1: [ 2, 3 ]
+        Spin 2: [ 30 ]
+      Term 6:
+        Coefficient: [ Num: [ -7 ] ]
+        Spin 1: [ 2, 31 ]
+        Spin 2: [ 3 ]
+      Term 7:
+        Coefficient: [ Num: [ 8 ] ]
+        Spin 1: [ 1, 32 ]
+        Spin 2: [ 4 ]
+      Term 8:
+        Coefficient: [ Num: [ 37 ] ]
+        Spin 1: [ 1, 4 ]
+        Spin 2: [ 33 ]
+      Term 9:
+        Coefficient: [ Num: [ 77 ] ]
+        Spin 1: [ 2, 34 ]
+        Spin 2: [ 4 ]
+      Term 10:
+        Coefficient: [ Num: [ 124 ] ]
+        Spin 1: [ 2, 4 ]
+        Spin 2: [ 35 ]
+      Term 11:
+        Coefficient: [ Num: [ 174 ] ]
+        Spin 1: [ 2, 9 ]
+        Spin 2: [ 36 ]
+      Term 12:
+        Coefficient: [ Num: [ 175 ] ]
+        Spin 1: [ 2, 37 ]
+        Spin 2: [ 9 ]
+      Term 13:
+        Coefficient: [ Num: [ 186 ] ]
+        Spin 1: [ 2, 12 ]
+        Spin 2: [ 38 ]
+      Term 14:
+        Coefficient: [ Num: [ 9 ] ]
+        Spin 1: [ 1, 39 ]
+        Spin 2: [ 5 ]
+      Term 15:
+        Coefficient: [ Num: [ 36 ] ]
+        Spin 1: [ 1, 5 ]
+        Spin 2: [ 40 ]
+      Term 16:
+        Coefficient: [ Num: [ 78 ] ]
+        Spin 1: [ 2, 41 ]
+        Spin 2: [ 5 ]
+      Term 17:
+        Coefficient: [ Num: [ 123 ] ]
+        Spin 1: [ 2, 5 ]
+        Spin 2: [ 42 ]
+      Term 18:
+        Coefficient: [ Num: [ 169 ] ]
+        Spin 1: [ 2, 8 ]
+        Spin 2: [ 43 ]
+      Term 19:
+        Coefficient: [ Num: [ 171 ] ]
+        Spin 1: [ 2, 44 ]
+        Spin 2: [ 8 ]
+      Term 20:
+        Coefficient: [ Num: [ 181 ] ]
+        Spin 1: [ 2, 11 ]
+        Spin 2: [ 45 ]
+      Term 21:
+        Coefficient: [ Num: [ 10 ] ]
+        Spin 1: [ 1, 46 ]
+        Spin 2: [ 6 ]
+      Term 22:
+        Coefficient: [ Num: [ 35 ] ]
+        Spin 1: [ 1, 6 ]
+        Spin 2: [ 47 ]
+      Term 23:
+        Coefficient: [ Num: [ 79 ] ]
+        Spin 1: [ 2, 48 ]
+        Spin 2: [ 6 ]
+      Term 24:
+        Coefficient: [ Num: [ 122 ] ]
+        Spin 1: [ 2, 6 ]
+        Spin 2: [ 49 ]
+      Term 25:
+        Coefficient: [ Num: [ 168 ] ]
+        Spin 1: [ 2, 7 ]
+        Spin 2: [ 50 ]
+      Term 26:
+        Coefficient: [ Num: [ 170 ] ]
+        Spin 1: [ 2, 51 ]
+        Spin 2: [ 7 ]
+      Term 27:
+        Coefficient: [ Num: [ 180 ] ]
+        Spin 1: [ 2, 10 ]
+        Spin 2: [ 52 ]
+      Term 28:
+        Coefficient: [ Num: [ 13 ] ]
+        Spin 1: [ 6, 53 ]
+        Spin 2: [ 1 ]
+      Term 29:
+        Coefficient: [ Num: [ 82 ] ]
+        Spin 1: [ 6, 54 ]
+        Spin 2: [ 2 ]
+      Term 30:
+        Coefficient: [ Num: [ -172 ] ]
+        Spin 1: [ 7, 55 ]
+        Spin 2: [ 2 ]
+      Term 31:
+        Coefficient: [ Num: [ 14 ] ]
+        Spin 1: [ 5, 56 ]
+        Spin 2: [ 1 ]
+      Term 32:
+        Coefficient: [ Num: [ 83 ] ]
+        Spin 1: [ 5, 57 ]
+        Spin 2: [ 2 ]
+      Term 33:
+        Coefficient: [ Num: [ -173 ] ]
+        Spin 1: [ 8, 58 ]
+        Spin 2: [ 2 ]
+      Term 34:
+        Coefficient: [ Num: [ 16 ] ]
+        Spin 1: [ 4, 59 ]
+        Spin 2: [ 1 ]
+      Term 35:
+        Coefficient: [ Num: [ 85 ] ]
+        Spin 1: [ 4, 60 ]
+        Spin 2: [ 2 ]
+      Term 36:
+        Coefficient: [ Num: [ -176 ] ]
+        Spin 1: [ 9, 61 ]
+        Spin 2: [ 2 ]
+      Term 37:
+        Coefficient: [ Num: [ 54 ] ]
+        Spin 1: [ 1, 16 ]
+        Spin 2: [ 62 ]
+      Term 38:
+        Coefficient: [ Num: [ 55 ] ]
+        Spin 1: [ 1, 17 ]
+        Spin 2: [ 63 ]
+      Term 39:
+        Coefficient: [ Num: [ 56 ] ]
+        Spin 1: [ 1, 18 ]
+        Spin 2: [ 64 ]
+      Term 40:
+        Coefficient: [ Num: [ 57 ] ]
+        Spin 1: [ 1, 19 ]
+        Spin 2: [ 65 ]
+      Term 41:
+        Coefficient: [ Num: [ 58 ] ]
+        Spin 1: [ 1, 20 ]
+        Spin 2: [ 66 ]
+      Term 42:
+        Coefficient: [ Num: [ 51 ] ]
+        Spin 1: [ 1, 9 ]
+        Spin 2: [ 9 ]
+      Term 43:
+        Coefficient: [ Num: [ 52 ] ]
+        Spin 1: [ 1, 8 ]
+        Spin 2: [ 8 ]
+      Term 44:
+        Coefficient: [ Num: [ 53 ] ]
+        Spin 1: [ 1, 7 ]
+        Spin 2: [ 7 ]
+      Term 45:
+        Coefficient: [ Num: [ 61 ] ]
+        Spin 1: [ 1, 21 ]
+        Spin 2: [ 20 ]
+      Term 46:
+        Coefficient: [ Num: [ 62 ] ]
+        Spin 1: [ 1, 22 ]
+        Spin 2: [ 19 ]
+      Term 47:
+        Coefficient: [ Num: [ 63 ] ]
+        Spin 1: [ 20, 21 ]
+        Spin 2: [ 1 ]
+      Term 48:
+        Coefficient: [ Num: [ 64 ] ]
+        Spin 1: [ 19, 22 ]
+        Spin 2: [ 1 ]
+      Term 49:
+        Coefficient: [ Num: [ 67 ] ]
+        Spin 1: [ 1, 23 ]
+        Spin 2: [ 18 ]
+      Term 50:
+        Coefficient: [ Num: [ 68 ] ]
+        Spin 1: [ 1, 24 ]
+        Spin 2: [ 17 ]
+      Term 51:
+        Coefficient: [ Num: [ 69 ] ]
+        Spin 1: [ 18, 23 ]
+        Spin 2: [ 1 ]
+      Term 52:
+        Coefficient: [ Num: [ 70 ] ]
+        Spin 1: [ 17, 24 ]
+        Spin 2: [ 1 ]
+      Term 53:
+        Coefficient: [ Num: [ 72 ] ]
+        Spin 1: [ 1, 25 ]
+        Spin 2: [ 16 ]
+      Term 54:
+        Coefficient: [ Num: [ 73 ] ]
+        Spin 1: [ 16, 25 ]
+        Spin 2: [ 1 ]
+      Term 55:
+        Coefficient: [ Num: [ 182 ] ]
+        Spin 1: [ 2, 13 ]
+        Spin 2: [ 10 ]
+      Term 56:
+        Coefficient: [ Num: [ 183 ] ]
+        Spin 1: [ 2, 14 ]
+        Spin 2: [ 11 ]
+      Term 57:
+        Coefficient: [ Num: [ 184 ] ]
+        Spin 1: [ 10, 13 ]
+        Spin 2: [ 2 ]
+      Term 58:
+        Coefficient: [ Num: [ 185 ] ]
+        Spin 1: [ 11, 14 ]
+        Spin 2: [ 2 ]
+      Term 59:
+        Coefficient: [ Num: [ 187 ] ]
+        Spin 1: [ 2, 15 ]
+        Spin 2: [ 12 ]
+      Term 60:
+        Coefficient: [ Num: [ 188 ] ]
+        Spin 1: [ 12, 15 ]
+        Spin 2: [ 2 ]
