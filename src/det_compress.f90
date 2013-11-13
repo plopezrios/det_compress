@@ -192,9 +192,9 @@ PROGRAM det_compress
  ! User interaction: pick operational level.
  call wout('Select operational level:')
  call wout('(a) de-duplicate')
- call wout('(b) quick (de-duplicate + greedy + simple iterative method')
- call wout('(c) good (de-duplicate + LPSOLVE + simple iterative method')
- call wout('(d) best (de-duplicate + LPSOLVE + unified iteration method')
+ call wout('(b) quick (de-duplicate + greedy + simple iterative method)')
+ call wout('(c) good (de-duplicate + LPSOLVE + simple iterative method)')
+ call wout('(d) best (de-duplicate + LPSOLVE + unified iteration method)')
  call wout()
  call wout('** TYPE A, B, C, OR D, THEN PRESS ENTER **')
  do
@@ -777,8 +777,12 @@ CONTAINS
  enddo ! idet
 
  ! Report maximum partition size.
- call wout(' '//trim(i2s(npart))//' partitions of maximum size '//&
-  &trim(i2s(maxval(ndet_in_partition(1:npart)))))
+ if(npart==1)then
+  call wout(' 1 partition of size '//trim(i2s(ndet_in_partition(1))))
+ else
+  call wout(' '//trim(i2s(npart))//' partitions of maximum size '//&
+   &trim(i2s(maxval(ndet_in_partition(1:npart)))))
+ endif
 
  ! Flag all determinants in COMP as active (we use this at the end to
  ! re-add uncompressible determinants to the final expansion).

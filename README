@@ -6,6 +6,10 @@ properties of determinants to combine them and produce a shorter
 expansion.  The resulting expansion contains orbitals which are
 linear combinations of orbitals as matrix elements.
 
+Note on licensing: different parts of this distribution are covered
+by different licenses.  See the bottom of this README file for
+licensing information.
+
 
 ===========
 Compilation
@@ -104,8 +108,8 @@ Usage
 
   Levels 'a' and 'b' scale quadratically with initial expansion size.
   Levels 'c' and 'd' use LP_SOLVE, which is in principle non-
-  polynomial.  Level 'd' use the unified iteration algorithm, which is
-  also non-polynomial.
+  polynomial.  Level 'd' uses the unified iteration algorithm, which
+  involves non-polynomial operations.
 
   In practice neither LP_SOLVE nor the unified iteration algorithm
   seem to make the computation intractable, even on modest CPUs.  We
@@ -113,13 +117,13 @@ Usage
   if the compression takes too long.
 
 
-=======
-License
-=======
+====================
+DET_COMPRESS license
+====================
 This version of DET_COMPRESS is dual-licensed:
 
-* DET_COMPRESSED is licensed under the CASINO license when distributed
-  as part of the CASINO quantum Monte Carlo package.  See
+* DET_COMPRESSED is licensed under the proprietary CASINO license when
+  distributed as part of the CASINO quantum Monte Carlo package.  See
   http://www.tcm.phy.cam.ac.uk/~mdt26/academic_consent_form.pdf
   for the license terms.
 
