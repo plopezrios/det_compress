@@ -25,3 +25,4 @@ STATIC MYBOOL verifyPricer(lprec *lp);
 #endif
 
 #endif /* HEADER_lp_pricePSE */
+

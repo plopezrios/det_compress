@@ -1072,3 +1072,4 @@ void undoscale(lprec *lp)
     set_action(&lp->spx_action, ACTION_REBASE | ACTION_REINVERT | ACTION_RECOMPUTE);
   }
 }
+

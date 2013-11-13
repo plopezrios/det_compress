@@ -24,3 +24,4 @@ STATIC MYBOOL crash_basis(lprec *lp);
 #endif
 
 #endif /* HEADER_lp_crash */
+

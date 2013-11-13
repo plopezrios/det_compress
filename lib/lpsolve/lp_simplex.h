@@ -31,3 +31,4 @@ STATIC int lin_solve(lprec *lp);
 #endif
 
 #endif /* HEADER_lp_simplex */
+

@@ -15,3 +15,4 @@ int __WINAPI getMDO(lprec *lp, MYBOOL *usedpos, int *colorder, int *size, MYBOOL
 #endif
 
 #endif /* HEADER_MDO */
+

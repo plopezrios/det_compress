@@ -30,3 +30,4 @@ MYBOOL MPS_writeBAS(lprec *lp, int typeMPS, char *filename);
 #endif
 
 #endif /* HEADER_lp_MPS */
+

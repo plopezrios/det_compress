@@ -235,3 +235,4 @@ STATIC int find_var(lprec *lp, char *name, MYBOOL verbose)
   }
   return(hp->index);
 }
+

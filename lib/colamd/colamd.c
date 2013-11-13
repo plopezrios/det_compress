@@ -4,12 +4,12 @@
 
 /*
     colamd:  an approximate minimum degree column ordering algorithm,
-	for LU factorization of symmetric or unsymmetric matrices,
+    	for LU factorization of symmetric or unsymmetric matrices,
 	QR factorization, least squares, interior point methods for
 	linear programming problems, and other related problems.
 
     symamd:  an approximate minimum degree ordering algorithm for Cholesky
-	factorization of symmetric matrices.
+    	factorization of symmetric matrices.
 
     Purpose:
 
@@ -27,12 +27,12 @@
 	or colamd) prior to LU factorization using sparse partial pivoting,
 	in the built-in Matlab lu(A) routine.
 
-	Symamd computes a permutation P of a symmetric matrix A such that the
+    	Symamd computes a permutation P of a symmetric matrix A such that the
 	Cholesky factorization of PAP' has less fill-in and requires fewer
 	floating point operations than A.  Symamd constructs a matrix M such
 	that M'M has the same nonzero pattern of A, and then orders the columns
 	of M using colmmd.  The column ordering of M is then returned as the
-	row and column ordering P of A.
+	row and column ordering P of A. 
 
     Authors:
 
@@ -86,7 +86,7 @@
 	No bugs were found in version 1.1.  These changes merely add new
 	functionality.
 
-	* added the COLAMD_RECOMMENDED (nnz, n_row, n_col) macro.
+    	* added the COLAMD_RECOMMENDED (nnz, n_row, n_col) macro.
 
 	* moved the output statistics, from A, to a separate output argument.
 		The arguments changed for the C-callable routines.
@@ -120,7 +120,7 @@
 
 	* TRUE and FALSE are predefined on some systems, so they are defined
 		here only if not already defined.
-
+	
 	* web site changed
 
 	* UNIX Makefile modified, to handle the case if "." is not in your path.
@@ -186,7 +186,7 @@
 		Colamd: rows with more than (knobs [COLAMD_DENSE_ROW] * n_col)
 		entries are removed prior to ordering.  Columns with more than
 		(knobs [COLAMD_DENSE_COL] * n_row) entries are removed prior to
-		ordering, and placed last in the output column ordering.
+		ordering, and placed last in the output column ordering. 
 
 		Symamd: uses only knobs [COLAMD_DENSE_ROW], which is knobs [0].
 		Rows and columns with more than (knobs [COLAMD_DENSE_ROW] * n)
@@ -211,7 +211,7 @@
 
 	    #include "colamd.h"
 	    int colamd (int n_row, int n_col, int Alen, int *A, int *p,
-		double knobs [COLAMD_KNOBS], int stats [COLAMD_STATS]) ;
+	    	double knobs [COLAMD_KNOBS], int stats [COLAMD_STATS]) ;
 
 	Purpose:
 
@@ -219,7 +219,7 @@
 	    (AQ)'AQ=LL' have less fill-in and require fewer floating point
 	    operations than factorizing the unpermuted matrix A or A'A,
 	    respectively.
-
+	    
 	Returns:
 
 	    TRUE (1) if successful, FALSE (0) otherwise.
@@ -249,8 +249,8 @@
 		We do, however, guarantee that
 
 			Alen >= colamd_recommended (nnz, n_row, n_col)
-
-		or equivalently as a C preprocessor macro:
+		
+		or equivalently as a C preprocessor macro: 
 
 			Alen >= COLAMD_RECOMMENDED (nnz, n_row, n_col)
 
@@ -388,14 +388,14 @@
 		Future versions may return more statistics in the stats array.
 
 	Example:
-
+	
 	    See http://www.cise.ufl.edu/research/sparse/colamd/example.c
 	    for a complete example.
 
 	    To order the columns of a 5-by-4 matrix with 11 nonzero entries in
 	    the following nonzero pattern
 
-		x 0 x 0
+	    	x 0 x 0
 		x 0 x x
 		0 x x 0
 		0 0 x x
@@ -420,12 +420,12 @@
 
 	    #include "colamd.h"
 	    int symamd (int n, int *A, int *p, int *perm,
-		int knobs [COLAMD_KNOBS], int stats [COLAMD_STATS],
+	    	int knobs [COLAMD_KNOBS], int stats [COLAMD_STATS],
 		void (*allocate) (size_t, size_t), void (*release) (void *)) ;
 
 	Purpose:
 
-	    The symamd routine computes an ordering P of a symmetric sparse
+    	    The symamd routine computes an ordering P of a symmetric sparse
 	    matrix A such that the Cholesky factorization PAP' = LL' remains
 	    sparse.  It is based on a column ordering of a matrix M constructed
 	    so that the nonzero pattern of M'M is the same as A.  The matrix A
@@ -442,19 +442,19 @@
 
 	    int n ;		Input argument.
 
-		Number of rows and columns in the symmetrix matrix A.
+	    	Number of rows and columns in the symmetrix matrix A.
 		Restriction:  n >= 0.
 		Symamd returns FALSE if n is negative.
 
 	    int A [nnz] ;	Input argument.
 
-		A is an integer array of size nnz, where nnz = p [n].
-
+	    	A is an integer array of size nnz, where nnz = p [n].
+		
 		The row indices of the entries in column c of the matrix are
 		held in A [(p [c]) ... (p [c+1]-1)].  The row indices in a
 		given column c need not be in ascending order, and duplicate
 		row indices may be present.  However, symamd will run faster
-		if the columns are in sorted order with no duplicate entries.
+		if the columns are in sorted order with no duplicate entries. 
 
 		The matrix is 0-based.  That is, rows are in the range 0 to
 		n-1, and columns are in the range 0 to n-1.  Symamd
@@ -496,7 +496,7 @@
 		Symamd returns FALSE if stats is not present.
 
 		stats [0]:  number of dense or empty row and columns ignored
-				(and ordered last in the output permutation
+				(and ordered last in the output permutation 
 				perm).  Note that a row/column can become
 				"empty" if it contains only "dense" and/or
 				"empty" columns/rows.
@@ -573,7 +573,7 @@
 
 	    void * (*allocate) (size_t, size_t)
 
-		A pointer to a function providing memory allocation.  The
+	    	A pointer to a function providing memory allocation.  The
 		allocated memory must be returned initialized to zero.  For a
 		C application, this argument should normally be a pointer to
 		calloc.  For a Matlab mexFunction, the routine mxCalloc is
@@ -581,7 +581,7 @@
 
 	    void (*release) (size_t, size_t)
 
-		A pointer to a function that frees memory allocated by the
+	    	A pointer to a function that frees memory allocated by the
 		memory allocation routine above.  For a C application, this
 		argument should normally be a pointer to free.  For a Matlab
 		mexFunction, the routine mxFree is passed instead.
@@ -662,7 +662,7 @@
     variable D to 0 (little), 1 (some), 2, 3, or 4 (lots).  When debugging,
     you should see the following message on the standard output:
 
-	colamd: debug version, D = 1 (THIS WILL BE SLOW!)
+    	colamd: debug version, D = 1 (THIS WILL BE SLOW!)
 
     or a similar message for symamd.  If you don't, then debugging has not
     been enabled.
@@ -703,7 +703,7 @@
 #define ONES_COMPLEMENT(r) (-(r)-1)
 
 /* -------------------------------------------------------------------------- */
-/* Change for version 2.1:  define TRUE and FALSE only if not yet defined */
+/* Change for version 2.1:  define TRUE and FALSE only if not yet defined */  
 /* -------------------------------------------------------------------------- */
 
 #ifndef TRUE
@@ -960,7 +960,7 @@ PUBLIC int colamd_recommended	/* returns recommended value of Alen. */
     int n_col			/* number of columns in A */
 )
 {
-    return (COLAMD_RECOMMENDED (nnz, n_row, n_col)) ;
+    return (COLAMD_RECOMMENDED (nnz, n_row, n_col)) ; 
 }
 
 
@@ -1024,11 +1024,11 @@ PUBLIC int symamd			/* return TRUE if OK, FALSE otherwise */
     double knobs [COLAMD_KNOBS],	/* parameters (uses defaults if NULL) */
     int stats [COLAMD_STATS],		/* output statistics and error codes */
     void * (*allocate) (size_t, size_t),
-					/* pointer to calloc (ANSI C) or */
+    					/* pointer to calloc (ANSI C) or */
 					/* mxCalloc (for Matlab mexFunction) */
     void (*release) (void *)
-					/* pointer to free (ANSI C) or */
-					/* mxFree (for Matlab mexFunction) */
+    					/* pointer to free (ANSI C) or */
+    					/* mxFree (for Matlab mexFunction) */
 )
 {
     /* === Local variables ================================================== */
@@ -1041,7 +1041,7 @@ PUBLIC int symamd			/* return TRUE if OK, FALSE otherwise */
     int nnz ;			/* number of entries in A */
     int i ;			/* row index of A */
     int j ;			/* column index of A */
-    int k ;			/* row index of M */
+    int k ;			/* row index of M */ 
     int mnz ;			/* number of nonzeros in M */
     int pp ;			/* index into a column of A */
     int last_row ;		/* last row seen in the current column */
@@ -1072,7 +1072,7 @@ PUBLIC int symamd			/* return TRUE if OK, FALSE otherwise */
 
     if (!A)
     {
-	stats [COLAMD_STATUS] = COLAMD_ERROR_A_not_present ;
+    	stats [COLAMD_STATUS] = COLAMD_ERROR_A_not_present ;
 	DEBUG0 (("symamd: A not present\n")) ;
 	return (FALSE) ;
     }
@@ -1081,7 +1081,7 @@ PUBLIC int symamd			/* return TRUE if OK, FALSE otherwise */
     {
 	stats [COLAMD_STATUS] = COLAMD_ERROR_p_not_present ;
 	DEBUG0 (("symamd: p not present\n")) ;
-	return (FALSE) ;
+    	return (FALSE) ;
     }
 
     if (n < 0)		/* n must be >= 0 */
@@ -1089,7 +1089,7 @@ PUBLIC int symamd			/* return TRUE if OK, FALSE otherwise */
 	stats [COLAMD_STATUS] = COLAMD_ERROR_ncol_negative ;
 	stats [COLAMD_INFO1] = n ;
 	DEBUG0 (("symamd: n negative %d\n", n)) ;
-	return (FALSE) ;
+    	return (FALSE) ;
     }
 
     nnz = p [n] ;
@@ -1142,7 +1142,7 @@ PUBLIC int symamd			/* return TRUE if OK, FALSE otherwise */
 
     for (i = 0 ; i < n ; i++)
     {
-	mark [i] = -1 ;
+    	mark [i] = -1 ;
     }
 
     for (j = 0 ; j < n ; j++)
@@ -1229,7 +1229,7 @@ PUBLIC int symamd			/* return TRUE if OK, FALSE otherwise */
     Mlen = colamd_recommended (mnz, n_row, n) ;
     M = (int *) ((*allocate) (Mlen, sizeof (int))) ;
     DEBUG0 (("symamd: M is %d-by-%d with %d entries, Mlen = %d\n",
-	n_row, n, mnz, Mlen)) ;
+    	n_row, n, mnz, Mlen)) ;
 
     if (!M)
     {
@@ -1308,12 +1308,12 @@ PUBLIC int symamd			/* return TRUE if OK, FALSE otherwise */
     {
 	/* On input, the knob is a fraction of 1..n, the number of rows of A. */
 	/* Convert it to a fraction of 1..n_row, of the number of rows of M. */
-	cknobs [COLAMD_DENSE_COL] = (knobs [COLAMD_DENSE_ROW] * n) / n_row ;
+    	cknobs [COLAMD_DENSE_COL] = (knobs [COLAMD_DENSE_ROW] * n) / n_row ;
     }
     else
     {
 	/* no dense columns in M */
-	cknobs [COLAMD_DENSE_COL] = 1.0 ;
+    	cknobs [COLAMD_DENSE_COL] = 1.0 ;
     }
 
     DEBUG0 (("symamd: dense col knob for M: %g\n", cknobs [COLAMD_DENSE_COL])) ;
@@ -1416,7 +1416,7 @@ PUBLIC int colamd		/* returns TRUE if successful, FALSE otherwise*/
     {
 	stats [COLAMD_STATUS] = COLAMD_ERROR_p_not_present ;
 	DEBUG0 (("colamd: p not present\n")) ;
-	return (FALSE) ;
+    	return (FALSE) ;
     }
 
     if (n_row < 0)	/* n_row must be >= 0 */
@@ -1424,7 +1424,7 @@ PUBLIC int colamd		/* returns TRUE if successful, FALSE otherwise*/
 	stats [COLAMD_STATUS] = COLAMD_ERROR_nrow_negative ;
 	stats [COLAMD_INFO1] = n_row ;
 	DEBUG0 (("colamd: nrow negative %d\n", n_row)) ;
-	return (FALSE) ;
+    	return (FALSE) ;
     }
 
     if (n_col < 0)	/* n_col must be >= 0 */
@@ -1432,7 +1432,7 @@ PUBLIC int colamd		/* returns TRUE if successful, FALSE otherwise*/
 	stats [COLAMD_STATUS] = COLAMD_ERROR_ncol_negative ;
 	stats [COLAMD_INFO1] = n_col ;
 	DEBUG0 (("colamd: ncol negative %d\n", n_col)) ;
-	return (FALSE) ;
+    	return (FALSE) ;
     }
 
     nnz = p [n_col] ;
@@ -1508,7 +1508,7 @@ PUBLIC int colamd		/* returns TRUE if successful, FALSE otherwise*/
     stats [COLAMD_DENSE_ROW] = n_row - n_row2 ;
     stats [COLAMD_DENSE_COL] = n_col - n_col2 ;
     stats [COLAMD_DEFRAG_COUNT] = ngarbage ;
-    DEBUG0 (("colamd: done.\n")) ;
+    DEBUG0 (("colamd: done.\n")) ; 
     return (TRUE) ;
 }
 
@@ -1570,7 +1570,7 @@ PRIVATE int init_rows_cols	/* returns TRUE if OK, or FALSE otherwise */
     Colamd_Col Col [],		/* of size n_col+1 */
     int A [],			/* row indices of A, of size Alen */
     int p [],			/* pointers to columns in A, of size n_col+1 */
-    int stats [COLAMD_STATS]	/* colamd statistics */
+    int stats [COLAMD_STATS]	/* colamd statistics */ 
 )
 {
     /* === Local variables ================================================== */
@@ -1729,7 +1729,7 @@ PRIVATE int init_rows_cols	/* returns TRUE if OK, or FALSE otherwise */
 
     if (stats [COLAMD_STATUS] == COLAMD_OK_BUT_JUMBLED)
     {
-	DEBUG0 (("colamd: reconstructing column form, matrix jumbled\n")) ;
+    	DEBUG0 (("colamd: reconstructing column form, matrix jumbled\n")) ;
 
 #ifndef NDEBUG
 	/* make sure column lengths are correct */
@@ -1962,7 +1962,7 @@ PRIVATE void init_scoring
 	}
     }
     DEBUG1 (("colamd: Dense, null, and newly-null columns killed: %d\n",
-	n_col-n_col2)) ;
+    	n_col-n_col2)) ;
 
     /* At this point, all empty rows and columns are dead.  All live columns */
     /* are "clean" (containing no dead rows) and simplicial (no supercolumns */
@@ -3049,7 +3049,7 @@ PRIVATE void print_report
 
     if (!stats)
     {
-	PRINTF ("%s: No statistics available.\n", method) ;
+    	PRINTF ("%s: No statistics available.\n", method) ;
 	return ;
     }
 
@@ -3059,11 +3059,11 @@ PRIVATE void print_report
 
     if (stats [COLAMD_STATUS] >= 0)
     {
-	PRINTF ("%s: OK.  ", method) ;
+    	PRINTF ("%s: OK.  ", method) ;
     }
     else
     {
-	PRINTF ("%s: ERROR.  ", method) ;
+    	PRINTF ("%s: ERROR.  ", method) ;
     }
 
     switch (stats [COLAMD_STATUS])
@@ -3088,7 +3088,7 @@ PRIVATE void print_report
 
 	    PRINTF ("\n") ;
 
-	    PRINTF ("%s: number of dense or empty rows ignored:           %d\n",
+ 	    PRINTF ("%s: number of dense or empty rows ignored:           %d\n",
 	    method, stats [COLAMD_DENSE_ROW]) ;
 
 	    PRINTF ("%s: number of dense or empty columns ignored:        %d\n",
@@ -3458,11 +3458,12 @@ PRIVATE void colamd_get_debug
     /* get "D" environment variable, which gives the debug printing level */
     if (getenv ("D"))
     {
-	colamd_debug = atoi (getenv ("D")) ;
+    	colamd_debug = atoi (getenv ("D")) ;
     }
 
     DEBUG0 (("%s: debug version, D = %d (THIS WILL BE SLOW!)\n",
-	method, colamd_debug)) ;
+    	method, colamd_debug)) ;
 }
 
 #endif /* NDEBUG */
+

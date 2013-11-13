@@ -79,3 +79,4 @@ void   __BFP_EXPORT_TYPE (BFP_CALLMODEL bfp_finishfactorization)(lprec *lp);
 LREAL  __BFP_EXPORT_TYPE (BFP_CALLMODEL bfp_prepareupdate)(lprec *lp, int row_nr, int col_nr, REAL *pcol);
 REAL   __BFP_EXPORT_TYPE (BFP_CALLMODEL bfp_pivotRHS)(lprec *lp, LREAL theta, REAL *pcol);
 void   __BFP_EXPORT_TYPE (BFP_CALLMODEL bfp_btran_double)(lprec *lp, REAL *prow, int *pnzidx, REAL *drow, int *dnzidx);
+

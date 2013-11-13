@@ -481,7 +481,7 @@ void hpsortex(void *attributes, int count, int offset, int recsize, MYBOOL desce
           tags[i] = tags[j];
           i = j;
           j <<= 1;
-	    }
+  	    }
         else
           break;
       }

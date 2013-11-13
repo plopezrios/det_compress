@@ -12,7 +12,7 @@ MYBOOL BFP_CALLMODEL bfp_init(lprec *lp, int size, int delta, char *options)
 
   lp->invB = (INVrec *) calloc(1, sizeof(*(lp->invB)));
   lu = lp->invB;
-  if((lu == NULL) ||
+  if((lu == NULL) || 
      !lp->bfp_resize(lp, size) ||
      !lp->bfp_restart(lp))
     return( FALSE );
@@ -174,3 +174,4 @@ void BFP_CALLMODEL bfp_btran_double(lprec *lp, REAL *prow, int *pnzidx, REAL *dr
   if(drow != NULL)
     lp->bfp_btran_normal(lp, drow, dnzidx);
 }
+

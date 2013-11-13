@@ -81,3 +81,4 @@ int idamaxVector(sparseVector *sparse, int is, REAL *maxValue);
 #ifdef __cplusplus
   }
 #endif
+

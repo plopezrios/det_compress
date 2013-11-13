@@ -76,7 +76,7 @@ $(LPSOLVE): $(COLAMD) $(OBJ)
         $(AR) $(LPSOLVE) $(OBJ)
 
 $(OBJ):
-	[ -d $(OBJDIR) ] || mkdir -p $(OBJDIR) ;\
+	@[ -d $(OBJDIR) ] || mkdir -p $(OBJDIR) ;\
         bash -c '\
         o=$(@F) ; b=$${o%.o} ; f=$$b.c ;\
         echo "CC $$f" ;\

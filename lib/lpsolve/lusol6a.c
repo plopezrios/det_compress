@@ -864,3 +864,4 @@ void LU6SOL(LUSOLrec *LUSOL, int MODE, REAL V[], REAL W[], int NZidx[], int *INF
     LU6LT(LUSOL, INFORM,V, NULL);
   }
 }
+

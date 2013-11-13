@@ -533,3 +533,4 @@ STATIC MYBOOL verifyPricer(lprec *lp)
 #endif
   return( ok );
 }
+

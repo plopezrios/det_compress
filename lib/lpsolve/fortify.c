@@ -177,7 +177,7 @@ static void st_DefaultOutput(char *String)
         }
 
         if (stdOutput==0) {
-		Nchars=Nlines=0;
+        	Nchars=Nlines=0;
                 if (gfile!=NULL) rewind(gfile);
         }
 
@@ -185,7 +185,7 @@ static void st_DefaultOutput(char *String)
         {
                 char *ptr;
 
-		file=stderr;
+        	file=stderr;
                 flag = 1;
                 if ((ptr=getenv("FORTIFY_OUTPUT"))!=NULL)
                 {
@@ -205,22 +205,22 @@ static void st_DefaultOutput(char *String)
                                 fprintf(stderr,"\r\nFortify: Unable to create logfile %s\r\n",ptr);
 				EndOfPgr(4);
 #else
-				{
-					char str[255];
+    				{
+    					char str[255];
 
-					sprintf(str,"Unable to create logfile\n \"%s\"",ptr);
-					MessageBox((HWND) NULL,(LPCSTR) str,(LPCSTR) "Fortify",(UINT) MB_ICONSTOP);
+    					sprintf(str,"Unable to create logfile\n \"%s\"",ptr);
+    					MessageBox((HWND) NULL,(LPCSTR) str,(LPCSTR) "Fortify",(UINT) MB_ICONSTOP);
 #if 0
 #if defined WIN32
 				        /* TerminateProcess(GetCurrentProcess(),65535); */
                                         ExitProcess(65535);
 #else
-					TerminateApp((HTASK) NULL,(WORD) NO_UAE_BOX);
+    					TerminateApp((HTASK) NULL,(WORD) NO_UAE_BOX);
 #endif
 #else
                                         EndOfPgr(1);
 #endif
-				}
+    				}
 #endif
                         }
 		}
@@ -240,40 +240,40 @@ static void st_DefaultOutput(char *String)
 #if defined _WINDOWS
                 if ((file==stdout) || (file==stderr)) {
 #if defined LINE_BY_LINE
-			if (MessageBox((HWND) NULL,(LPCSTR) String,(LPCSTR) "Fortify",(UINT) MB_OKCANCEL /* |MB_ICONINFORMATION */)==IDCANCEL)
+                	if (MessageBox((HWND) NULL,(LPCSTR) String,(LPCSTR) "Fortify",(UINT) MB_OKCANCEL /* |MB_ICONINFORMATION */)==IDCANCEL)
 #if 0
 #if defined WIN32
                          /* TerminateProcess(GetCurrentProcess(),65535); */
                          ExitProcess(65535);
 #else
-			 TerminateApp((HTASK) NULL,(WORD) NO_UAE_BOX);
+    			 TerminateApp((HTASK) NULL,(WORD) NO_UAE_BOX);
 #endif
 #else
                          EndOfPgr(1);
 #endif
 #else
 			{
-				char *ptr;
+                        	char *ptr;
 
-				ptr="fortify.tmp";
+                        	ptr="fortify.tmp";
 				if ((ptr==NULL) || ((file=gfile=fopen(ptr,"w+"))==NULL))
-				{
-					char str[255];
+                        	{
+    					char str[255];
 
-					sprintf(str,"Unable to create temporary file\n \"%s\"",(ptr==NULL) ? "(NULL)" : ptr);
-					MessageBox((HWND) NULL,(LPCSTR) str,(LPCSTR) "Fortify",(UINT) MB_ICONSTOP);
+    					sprintf(str,"Unable to create temporary file\n \"%s\"",(ptr==NULL) ? "(NULL)" : ptr);
+    					MessageBox((HWND) NULL,(LPCSTR) str,(LPCSTR) "Fortify",(UINT) MB_ICONSTOP);
 #if 0
 #if defined WIN32
                                         /* TerminateProcess(GetCurrentProcess(),65535); */
                                         ExitProcess(65535);
 #else
-					TerminateApp((HTASK) NULL,(WORD) NO_UAE_BOX);
+    					TerminateApp((HTASK) NULL,(WORD) NO_UAE_BOX);
 #endif
 #else
                                         EndOfPgr(1);
 #endif
-				}
-			}
+                        	}
+                    	}
 #endif
                 }
                 if ((file!=stdout) && (file!=stderr))
@@ -281,7 +281,7 @@ static void st_DefaultOutput(char *String)
                         {
                                 int i,ch=-1;
 
-				for (i=0;(String[i]) && (Nlines<30);i++)
+                        	for (i=0;(String[i]) && (Nlines<30);i++)
                                  if (String[i]=='\n') Nlines++;
 				if ((String[i]) && (String[i+1])) {
 					ch=String[i+1];
@@ -306,18 +306,18 @@ static void st_DefaultOutput(char *String)
                                 else Nchars+=fprintf(file,String);
 				if (ch>=0) String[i+1]=(char)ch;
 				if (Nlines>=30) {
-					WaitIfstdOutput();
-					Nchars=Nlines=0;
-					stdOutput = 0;
+                                	WaitIfstdOutput();
+                                    	Nchars=Nlines=0;
+                                    	stdOutput = 0;
                                         if ((String[i]) && (String[i+1])) {
                                                 if ((file==stderr) || (file==stdout) || ((gfile!=NULL) && (Nchars)))
-							stdOutput = 1;
-						st_DefaultOutput(String+i);
+                                                	stdOutput = 1;
+                                         	st_DefaultOutput(String+i);
                                         }
                                 }
                         }
                 if ((file==stderr) || (file==stdout) || ((gfile!=NULL) && (Nchars)))
-			stdOutput = 1;
+                	stdOutput = 1;
 	}
 }
 
@@ -349,17 +349,17 @@ static void WaitIfstdOutput()
                         if ((flag=ioctl(0,TCGETA,&tio))==0) /* handle 0 is stdin */
                         {
                                 tiobak=tio;
-				tio.c_lflag&=~ICANON;
+                        	tio.c_lflag&=~ICANON;
                                 tio.c_lflag&=~ECHO;
-				tio.c_cc[VMIN]=1;
-				ioctl(0,TCSETA,&tio);
+                        	tio.c_cc[VMIN]=1;
+                        	ioctl(0,TCSETA,&tio);
 	                }
 #endif /* !MSDOS */
 			c = (char)getch();
 
 #if !defined MSDOS && !defined WIN32
                         if (flag==0)
-				ioctl(0,TCSETA,&tiobak);
+                        	ioctl(0,TCSETA,&tiobak);
 #endif /* !MSDOS */
 
 			if ((c == 3) || (c == 0x1b)) EndOfPgr(3);
@@ -385,13 +385,13 @@ static void WaitIfstdOutput()
                                 n+=(int)strlen(ptr+n);
                                 l++;
                         }
-			if (MessageBox((HWND) NULL,(LPCSTR) ptr,(LPCSTR) "Fortify",(UINT) MB_OKCANCEL /* |MB_ICONINFORMATION */)==IDCANCEL)
+                	if (MessageBox((HWND) NULL,(LPCSTR) ptr,(LPCSTR) "Fortify",(UINT) MB_OKCANCEL /* |MB_ICONINFORMATION */)==IDCANCEL)
 #if 0
 #if defined WIN32
                          /* TerminateProcess(GetCurrentProcess(),65535); */
                          ExitProcess(65535);
 #else
-			 TerminateApp((HTASK) NULL,(WORD) NO_UAE_BOX);
+    			 TerminateApp((HTASK) NULL,(WORD) NO_UAE_BOX);
 #endif
 #else
                          EndOfPgr(1);
@@ -476,9 +476,9 @@ _Fortify_malloc(size_t size,char *file,unsigned long line)
 	if(size == 0)
 	{
 #ifdef WARN_ON_ZERO_MALLOC
-	sprintf(st_Buffer,
-		    "\nFortify: %s.%ld\n         malloc(0) attempted failed\n",
-		file, line);
+    	sprintf(st_Buffer,
+        	    "\nFortify: %s.%ld\n         malloc(0) attempted failed\n",
+            	file, line);
 		st_Output(st_Buffer);
 #endif
 
@@ -1115,27 +1115,27 @@ _Fortify_Disable(char *file,unsigned long line,int how)
 
         if (how <= 0)
         {
-	    stdOutput = 0;
+    	    stdOutput = 0;
 
-	    FORTIFY_LOCK();
+    	    FORTIFY_LOCK();
 
-	    if((st_Head) && (how == 0))
-	    {
-		    sprintf(st_Buffer, "Fortify: %s.%d\n", file, line);
-		    st_Output(st_Buffer);
-		    st_Output("         Fortify_Disable failed\n");
-		    st_Output("         (because there is memory on the Fortify memory list)\n");
+    	    if((st_Head) && (how == 0))
+    	    {
+    		    sprintf(st_Buffer, "Fortify: %s.%d\n", file, line);
+    		    st_Output(st_Buffer);
+    		    st_Output("         Fortify_Disable failed\n");
+    		    st_Output("         (because there is memory on the Fortify memory list)\n");
 
-		    _Fortify_OutputAllMemory(file, line);
-		    result = 0;
-	    }
-	    else
-	    {
-		    st_Disabled = (how >= -1 ? 1 : 0);
-		    result = 1;
-	    }
+    		    _Fortify_OutputAllMemory(file, line);
+    		    result = 0;
+    	    }
+    	    else
+    	    {
+    		    st_Disabled = (how >= -1 ? 1 : 0);
+    		    result = 1;
+    	    }
 
-	    FORTIFY_UNLOCK();
+    	    FORTIFY_UNLOCK();
             WaitIfstdOutput();
         }
         else
@@ -1604,7 +1604,7 @@ _Fortify_getcwd(char *buf,int size,char *file,unsigned long line)
         if(buf!=NULL)
                 ptr = buf;
 	else
-		ptr = (char *) _Fortify_malloc(size + 1, file, line);
+        	ptr = (char *) _Fortify_malloc(size + 1, file, line);
 
 	if(ptr)
 		ptr = getcwd(ptr, size);

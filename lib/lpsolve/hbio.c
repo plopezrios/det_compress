@@ -45,7 +45,7 @@
   FUNCTION:
 
   int  readHB_header(FILE* in_file, char* Title, char* Key, char* Type,
-                    int* Nrow, int* Ncol, int* Nnzero, int* Nrhs, int* Nrhsix,
+                    int* Nrow, int* Ncol, int* Nnzero, int* Nrhs, int* Nrhsix, 
                     char* Ptrfmt, char* Indfmt, char* Valfmt, char* Rhsfmt,
                     int* Ptrcrd, int* Indcrd, int* Valcrd, int* Rhscrd,
                     char *Rhstype)
@@ -255,7 +255,7 @@ int readHB_info(const char* filename, int* M, int* N, int* nz, char** Type,
        return 0;
     }
 
-    readHB_header(in_file, Title, Key, mat_type, &Nrow, &Ncol, &Nnzero,
+    readHB_header(in_file, Title, Key, mat_type, &Nrow, &Ncol, &Nnzero, 
                   Nrhs,  &Nrhsix,
                   Ptrfmt, Indfmt, Valfmt, Rhsfmt,
                   &Ptrcrd, &Indcrd, &Valcrd, &Rhscrd, Rhstype);
@@ -397,7 +397,7 @@ int readHB_mat_double(const char* filename, int colptr[], int rowind[],
        return 0;
     }
 
-    readHB_header(in_file, Title, Key, Type, &Nrow, &Ncol, &Nnzero,
+    readHB_header(in_file, Title, Key, Type, &Nrow, &Ncol, &Nnzero, 
                   &Nrhs, &Nrhsix,
                   Ptrfmt, Indfmt, Valfmt, Rhsfmt,
                   &Ptrcrd, &Indcrd, &Valcrd, &Rhscrd, Rhstype);
@@ -578,7 +578,7 @@ int readHB_aux_double(const char* filename, const char AuxType, double b[])
       return 0;
     }
 
-    readHB_header(in_file, Title, Key, Type, &Nrow, &Ncol, &Nnzero,
+    readHB_header(in_file, Title, Key, Type, &Nrow, &Ncol, &Nnzero, 
                   &Nrhs, &Nrhsix,
                   Ptrfmt, Indfmt, Valfmt, Rhsfmt,
                   &Ptrcrd, &Indcrd, &Valcrd, &Rhscrd, Rhstype);
@@ -948,7 +948,7 @@ int readHB_mat_char(const char* filename, int colptr[], int rowind[],
        return 0;
     }
 
-    readHB_header(in_file, Title, Key, Type, &Nrow, &Ncol, &Nnzero,
+    readHB_header(in_file, Title, Key, Type, &Nrow, &Ncol, &Nnzero, 
                   &Nrhs, &Nrhsix,
                   Ptrfmt, Indfmt, Valfmt, Rhsfmt,
                   &Ptrcrd, &Indcrd, &Valcrd, &Rhscrd, Rhstype);
@@ -1075,7 +1075,7 @@ int readHB_newmat_char(const char* filename, int* M, int* N, int* nonzeros, int*
 
     *Valfmt = (char *)malloc(21*sizeof(char));
     if ( *Valfmt == NULL ) IOHBTerminate("Insufficient memory for Valfmt.");
-    readHB_header(in_file, Title, Key, Type, M, N, nonzeros,
+    readHB_header(in_file, Title, Key, Type, M, N, nonzeros, 
                   &Nrhs, &Nrhsix,
                   Ptrfmt, Indfmt, (*Valfmt), Rhsfmt,
                   &Ptrcrd, &Indcrd, &Valcrd, &Rhscrd, Rhstype);
@@ -1144,7 +1144,7 @@ int readHB_aux_char(const char* filename, const char AuxType, char b[])
       return 0;
      }
 
-    readHB_header(in_file, Title, Key, Type, &Nrow, &Ncol, &Nnzero,
+    readHB_header(in_file, Title, Key, Type, &Nrow, &Ncol, &Nnzero, 
                   &Nrhs, &Nrhsix,
                   Ptrfmt, Indfmt, Valfmt, Rhsfmt,
                   &Ptrcrd, &Indcrd, &Valcrd, &Rhscrd, Rhstype);
@@ -1291,7 +1291,7 @@ int readHB_newaux_char(const char* filename, const char AuxType, char** b, char*
 
     *Rhsfmt = (char *)malloc(21*sizeof(char));
     if ( *Rhsfmt == NULL ) IOHBTerminate("Insufficient memory for Rhsfmt.");
-    readHB_header(in_file, Title, Key, Type, &Nrow, &Ncol, &Nnzero,
+    readHB_header(in_file, Title, Key, Type, &Nrow, &Ncol, &Nnzero, 
                   &Nrhs, &Nrhsix,
                   Ptrfmt, Indfmt, Valfmt, (*Rhsfmt),
                   &Ptrcrd, &Indcrd, &Valcrd, &Rhscrd, Rhstype);
@@ -1605,3 +1605,4 @@ void IOHBTerminate(char* message)
    fprintf(stderr,message);
    exit(1);
 }
+

@@ -3817,3 +3817,4 @@ STATIC void bsolve_xA2(lprec *lp, int* coltarget,
                             ofscalar, roundmode);
   }
 }
+

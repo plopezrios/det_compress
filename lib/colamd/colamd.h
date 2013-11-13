@@ -260,11 +260,11 @@ int symamd				/* return (1) if OK, (0) otherwise */
     double knobs [COLAMD_KNOBS],	/* parameters (uses defaults if NULL) */
     int stats [COLAMD_STATS],		/* output statistics and error codes */
     void * (*allocate) (size_t, size_t),
-					/* pointer to calloc (ANSI C) or */
+    					/* pointer to calloc (ANSI C) or */
 					/* mxCalloc (for Matlab mexFunction) */
     void (*release) (void *)
-					/* pointer to free (ANSI C) or */
-					/* mxFree (for Matlab mexFunction) */
+    					/* pointer to free (ANSI C) or */
+    					/* mxFree (for Matlab mexFunction) */
 ) ;
 
 void colamd_report
@@ -283,3 +283,4 @@ void symamd_report
 #ifdef __cplusplus
 }
 #endif
+

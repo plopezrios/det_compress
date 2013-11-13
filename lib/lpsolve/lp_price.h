@@ -96,3 +96,4 @@ STATIC int multi_populateSet(multirec *multi, int **list, int excludenr);
 #endif
 
 #endif /* HEADER_lp_price */
+

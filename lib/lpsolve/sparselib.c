@@ -87,8 +87,8 @@ void freeMatrix(sparseMatrix *matrix)
 void printMatrix(int n, sparseMatrix *matrix, int modulo, MYBOOL showEmpty)
 {
    int i;
-   for(i = 1; i<=matrix->count; i++)
-     if(matrix->list[i-1] != NULL) {
+   for(i = 1; i<=matrix->count; i++) 
+     if(matrix->list[i-1] != NULL) { 
        if(showEmpty || matrix->list[i-1]->count>0)
          printVector(n, matrix->list[i-1], modulo);
    }
@@ -146,7 +146,7 @@ int resizeVector(sparseVector *sparse, int newSize)
 void moveVector(sparseVector *sparse, int destPos, int sourcePos, int itemCount)
 {
   int i;
-
+  
   if(itemCount <= 0 || sourcePos == destPos)
     return;
 
@@ -160,7 +160,7 @@ void moveVector(sparseVector *sparse, int destPos, int sourcePos, int itemCount)
     double *valPtr1, *valPtr2;
 
     for(i = 1, idxPtr1 = sparse->index+destPos, idxPtr2 = sparse->index+sourcePos,
-               valPtr1 = sparse->value+destPos, valPtr2 = sparse->value+sourcePos;
+               valPtr1 = sparse->value+destPos, valPtr2 = sparse->value+sourcePos; 
         i<=itemCount; i++, idxPtr1++, idxPtr2++, valPtr1++, valPtr2++) {
       *idxPtr1 = *idxPtr2;
       *valPtr1 = *valPtr2;
@@ -230,7 +230,7 @@ void freeVector(sparseVector *sparse)
 
 MYBOOL verifyVector(sparseVector *sparse)
 {
-  int i, n, k1, k2, kd;
+  int i, n, k1, k2, kd; 
   int  err = 0;
   double vd;
 
@@ -241,7 +241,7 @@ MYBOOL verifyVector(sparseVector *sparse)
     return(TRUE);
   k1 = 0;
   k2 = sparse->index[1];
-  if(k2 == kd && sparse->value[1] != vd)
+  if(k2 == kd && sparse->value[1] != vd) 
     err = 2;
 
   for(i = 2; i <= n && err == 0; i++) {
@@ -296,7 +296,7 @@ int putDiagonalIndex(sparseVector *sparse, int index)
 MYBOOL putDiagonal(sparseVector *sparse, REAL value)
 {
   if(sparse->index[0]>0) {
-    putItem(sparse, sparse->index[0], value);
+    putItem(sparse, sparse->index[0], value); 
     return(TRUE);
   }
   else
@@ -312,7 +312,7 @@ REAL getDiagonal(sparseVector *sparse)
 
 REAL getItem(sparseVector *sparse, int targetIndex)
 {
-  /* First check if we want the diagonal element */
+  /* First check if we want the diagonal element */ 
   if(targetIndex == sparse->index[0])
     return(sparse->value[0]);
 
@@ -329,7 +329,7 @@ REAL addtoItem(sparseVector *sparse, int targetIndex, REAL value)
 {
   int idx;
 
-  if(targetIndex > 0)
+  if(targetIndex > 0) 
     idx = findIndex(targetIndex, sparse->index, sparse->count, BLAS_BASE);
   else {
     idx = -targetIndex;
@@ -365,7 +365,7 @@ REAL putItem(sparseVector *sparse, int targetIndex, REAL value)
   if(fabs(value) < MACHINEPREC)
     value = 0;
 
-  if(targetIndex == sparse->index[0])
+  if(targetIndex == sparse->index[0]) 
     sparse->value[0] = value;
 
   if(posIndex < 0) {
@@ -374,7 +374,7 @@ REAL putItem(sparseVector *sparse, int targetIndex, REAL value)
         resizeVector(sparse, sparse->size + RESIZEDELTA);
       posIndex = -posIndex;
       sparse->count++;
-      if(posIndex < sparse->count)
+      if(posIndex < sparse->count) 
         moveVector(sparse, posIndex+1, posIndex, sparse->count-posIndex);
       sparse->value[posIndex] = value;
       sparse->index[posIndex] = targetIndex;
@@ -383,7 +383,7 @@ REAL putItem(sparseVector *sparse, int targetIndex, REAL value)
   else {
     if(value == 0) {
       last = sparse->value[posIndex];
-      if(sparse->count > posIndex)
+      if(sparse->count > posIndex) 
         moveVector(sparse, posIndex, posIndex+1, sparse->count-posIndex);
       sparse->count--;
     }
@@ -503,7 +503,7 @@ void clearVector(sparseVector *sparse, int indexStart, int indexEnd)
   if(sparse->index[0]>=indexStart && sparse->index[0]<=indexEnd) {
     sparse->value[0] = 0;
   }
-  if(indexStart<=sparse->index[1] && indexEnd>=sparse->index[i])
+  if(indexStart<=sparse->index[1] && indexEnd>=sparse->index[i]) 
     sparse->count = 0;
   else {
     while(i>0 && sparse->index[i]>indexEnd) i--;
@@ -575,7 +575,7 @@ void putVector(sparseVector *sparse, REAL *dense, int indexStart, int indexEnd)
       sparse->count++;
       sparse->value[sparse->count] = dense[i];
       sparse->index[sparse->count] = i;
-      if(i == sparse->index[0])
+      if(i == sparse->index[0]) 
         sparse->value[0] = dense[i];
     }
   }
@@ -597,7 +597,7 @@ void fillVector(sparseVector *sparse, int count, REAL value)
 {
   int i;
 
-  if(sparse->count > 0)
+  if(sparse->count > 0) 
     clearVector(sparse, 0, 0);
   for(i = 1; i<=count; i++)
     putItem(sparse, i, value);
@@ -608,7 +608,7 @@ REAL dotVector(sparseVector *sparse, REAL *dense, int indexStart, int indexEnd)
 {
   int  i, n;
   long REAL sum;
-
+  
   n = sparse->count;
   sum = 0;
 
@@ -622,7 +622,7 @@ REAL dotVector(sparseVector *sparse, REAL *dense, int indexStart, int indexEnd)
       i = findIndex(indexStart, sparse->index, sparse->count, BLAS_BASE);
       if(i < 0) {
         i = -i;
-        if(i > n)
+        if(i > n) 
           return(sum);
       }
     }
@@ -639,7 +639,7 @@ REAL dotVector(sparseVector *sparse, REAL *dense, int indexStart, int indexEnd)
           i <= n && (*indexptr) < indexStart; i++, indexptr++); */
       indexptr = sparse->index + i;
       for(valueptr = sparse->value + i;
-          i <= n && (*indexptr) <= indexEnd;  i++, indexptr++, valueptr++)
+          i <= n && (*indexptr) <= indexEnd;  i++, indexptr++, valueptr++) 
         sum += (*valueptr) * dense[(*indexptr)];
     }
 #else
@@ -653,7 +653,7 @@ REAL dotVector(sparseVector *sparse, REAL *dense, int indexStart, int indexEnd)
         i++;
       }
     }
-#endif
+#endif    
   }
 
   return(sum);
@@ -681,7 +681,7 @@ void daxpyVector1(sparseVector *sparse, REAL scalar, REAL *dense, int indexStart
     for(i = 1, indexptr = sparse->index + 1;
         i <= n && (*indexptr) < indexStart; i++, indexptr++);
     for(valueptr = sparse->value + i;
-        i <= n && (*indexptr) <= indexEnd;  i++, indexptr++, valueptr++)
+        i <= n && (*indexptr) <= indexEnd;  i++, indexptr++, valueptr++) 
       dense[(*indexptr)] += (*valueptr) * scalar;
   }
 #else
@@ -695,7 +695,7 @@ void daxpyVector1(sparseVector *sparse, REAL scalar, REAL *dense, int indexStart
       dense[k] += sparse->value[i] * scalar;
     }
   }
-#endif
+#endif  
 }
 void daxpyVector2(REAL *dense, REAL scalar, sparseVector *sparse, int indexStart, int indexEnd)
 {
@@ -741,7 +741,7 @@ void daxpyVector3(sparseVector *sparse1, REAL scalar, sparseVector *sparse2, int
     hold = sparse2;
 
  /* Loop over all items in both vectors */
-  while((i1 <= c1 && p1 <= indexEnd) ||
+  while((i1 <= c1 && p1 <= indexEnd) || 
         (i2 <= c2 && p2 <= indexEnd)) {
 
     k = 0;
@@ -811,7 +811,7 @@ void dswapVector1(sparseVector *sparse, REAL *dense, int indexStart, int indexEn
   if(indexStart <= 0)
     indexStart = 1;
   n = lastIndex(sparse);
-  if(indexEnd <= 0)
+  if(indexEnd <= 0) 
     indexEnd = n;
   CALLOC(x, (MAX(indexEnd,n)+1));
 
@@ -831,7 +831,7 @@ void dswapVector1(sparseVector *sparse, REAL *dense, int indexStart, int indexEn
 #ifdef DEBUG_SPARSELIB
   verifyVector(sparse);
 #endif
-
+  
   FREE(x);
 }
 void dswapVector2(REAL *dense, sparseVector *sparse, int indexStart, int indexEnd)
@@ -850,7 +850,7 @@ void dswapVector3(sparseVector *sparse1, sparseVector *sparse2, int indexStart, 
   if(indexEnd<=0)
     indexEnd = MAX(lastIndex(sparse1), lastIndex(sparse2));
 
-  if(indexStart <= firstIndex(sparse1) && indexStart <= firstIndex(sparse2) &&
+  if(indexStart <= firstIndex(sparse1) && indexStart <= firstIndex(sparse2) && 
      indexEnd >= lastIndex(sparse1) && indexEnd >= lastIndex(sparse2)) {
     swapVector(sparse1, sparse2);
   }
@@ -912,7 +912,7 @@ int idamaxVector(sparseVector *sparse, int is, REAL *maxValue)
         }
       }
     }
-#endif
+#endif    
   }
   if(maxValue != NULL)
     (*maxValue) = sparse->index[imax];
@@ -933,14 +933,14 @@ void printVector(int n, sparseVector *sparse, int modulo )
     else
       k = n+1;
     while (j < k) {
-      if(mod(j, modulo) == 1)
+      if(mod(j, modulo) == 1) 
         printf("\n%2d:%12g", j, 0.0);
       else
         printf(" %2d:%12g", j, 0.0);
       j++;
     }
     if(k<=n) {
-      if(mod(j, modulo) == 1)
+      if(mod(j, modulo) == 1) 
         printf("\n%2d:%12g", k, sparse->value[i]);
       else
         printf(" %2d:%12g", k, sparse->value[i]);
@@ -948,3 +948,5 @@ void printVector(int n, sparseVector *sparse, int modulo )
   }
   if(mod(j, modulo) != 0) printf("\n");
 }
+
+

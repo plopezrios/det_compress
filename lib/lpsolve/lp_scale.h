@@ -28,3 +28,4 @@ void undoscale(lprec *lp);
 #endif
 
 #endif /* HEADER_lp_scale */
+

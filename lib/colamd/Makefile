@@ -31,10 +31,6 @@ OBJ = \
 $(OBJDIR)/colamd.o
 # End object-file list
 
-# Handle native compilation
-BUNCH_OF_DEFINES = -DYY_NEVER_INTERACTIVE -DPARSER_LP\
- -DINVERSE_ACTIVE=INVERSE_LUSOL -DRoleIsExternalInvEngine
-
 # How to compile things
 $(COLAMD): $(OBJ)
 	@[ -d $(OBJDIR) ] || mkdir -p $(OBJDIR) ;\
@@ -48,4 +44,4 @@ $(OBJ):
         o=$(@F) ; b=$${o%.o} ; f=$$b.c ;\
         echo "CC $$f" ;\
         cd $(OBJDIR) ;\
-        $(CC) $(CFLAGS) -c -I$(SRCDIR) $(BUNCH_OF_DEFINES) $(SRCDIR)/$$f'
+        $(CC) $(CFLAGS) -c -I$(SRCDIR) $(SRCDIR)/$$f'

@@ -983,7 +983,7 @@ lp_yy_reduce_print (lp_yyvsp, lp_yyrule, parm, scanner)
       fprintf (stderr, "   $%d = ", lp_yyi + 1);
       lp_yy_symbol_print (stderr, lp_yyrhs[lp_yyprhs[lp_yyrule] + lp_yyi],
 		       &(lp_yyvsp[(lp_yyi + 1) - (lp_yynrhs)])
-				       , parm, scanner);
+		       		       , parm, scanner);
       fprintf (stderr, "\n");
     }
 }
@@ -2481,3 +2481,4 @@ MYBOOL __WINAPI LP_readhandle(lprec **lp, FILE *filename, int verbose, char *lp_
 
   return((lp != NULL) && (*lp != NULL));
 }
+

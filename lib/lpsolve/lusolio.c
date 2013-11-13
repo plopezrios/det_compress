@@ -116,7 +116,7 @@ MYBOOL mmf_read_A(char *filename, int maxM, int maxN, int maxnz,
   char   buf[mmf_recsize];
 
   f = fopen(filename, "r");
-  if(f == NULL)
+  if(f == NULL) 
     return( status );
 
   if(mm_read_banner(f, &matcode) != 0) {
@@ -124,7 +124,7 @@ MYBOOL mmf_read_A(char *filename, int maxM, int maxN, int maxnz,
     goto x900;
   }
 
-  /*  Screen matrix types since LUSOL only supports a
+  /*  Screen matrix types since LUSOL only supports a 
       subset of the Matrix Market data types. */
   if(mm_is_complex(matcode) || mm_is_pattern(matcode)) {
     printf("Sorry, this application does not support ");
