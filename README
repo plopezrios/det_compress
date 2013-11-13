@@ -23,7 +23,7 @@ Compilation
     make FC="ifort" FFLAGS="-O3" CC="icc" CFLAGS="-O3"
 
   Bear in mind that the Fortran compiler must support the Fortran 95
-  standard and the ETIME extension.
+  standard.
 
 * Some C compilers represent function names differently from others,
   and this affects how Fortran code should interface with C.  If you

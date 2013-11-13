@@ -10,10 +10,10 @@ PROGRAM det_compress
 
  ! Variable declarations
 
- ! Real types.
+ ! Data types.
  INTEGER,PARAMETER :: dp=kind(1.d0)
 
- ! System parameters (global variables)
+ ! System parameters (global variables).
  INTEGER nspin,nemax,netot
  INTEGER,ALLOCATABLE :: nele(:)
 
@@ -163,9 +163,6 @@ PROGRAM det_compress
 
  ! Main program
 
- ! Start the timer
- call timer_start
-
  ! Print title and license info
  call wout('Multi-determinant compressor')
  call wout('============================')
@@ -227,8 +224,6 @@ PROGRAM det_compress
   exit
  enddo
 
- call timer('COMPRESSION',.true.)
-
  ! De-duplication
  call wout('De-duplicating expansion:')
  call deduplication(orig,dedup,comp,orbpool)
@@ -283,10 +278,6 @@ PROGRAM det_compress
 
  call wout()
 
- call timer('COMPRESSION',.false.)
-
- call timer('TEST',.true.)
-
  ! Test that the compressed expansion expands to the original expansion.
  call wout('Testing compressed expansion:')
  select case(test_compression(orig,dedup,comp,orbpool))
@@ -324,13 +315,8 @@ PROGRAM det_compress
   call wout()
  endif
 
- call timer('TEST',.false.)
-
  ! Write compressed expansion
  call write_cmdet_casl(orig,dedup,comp,orbpool)
-
- ! Stop the timer and report timings
- call timer_end
 
 
 CONTAINS
@@ -346,8 +332,6 @@ CONTAINS
  LOGICAL exists,is_block
  INTEGER ierr,ialloc,ispin,idet,iorb
  CHARACTER(512) errmsg
-
- call timer('READ_MDET_CASL',.true.)
 
  ! Load file
  call read_casl('mdet.casl',errmsg)
@@ -437,8 +421,6 @@ CONTAINS
  ! Reclaim CASL memory and clean up.
  call delete_casl_item('mdet.casl')
 
- call timer('READ_MDET_CASL',.false.)
-
  END SUBROUTINE read_mdet_casl
 
 
@@ -467,8 +449,6 @@ CONTAINS
  INTEGER,POINTER :: dedup_orbmap_idet(:,:)=>null(),&
   &dedup_idetcoef_1_idet=>null(),dedup_idetcoef_ndet(:)=>null(),&
   &dedup_idetcoef_idet(:)=>null(),dedup_idetcoef_jdet(:)=>null()
-
- call timer('DEDUPLICATION',.true.)
 
  ! The following makes all of our examples do a single allocation without
  ! massively overestimating the size of the array.
@@ -654,8 +634,6 @@ CONTAINS
   orbpool%imix(1,iorb)=iorb
  enddo ! iorb
 
- call timer('DEDUPLICATION',.false.)
-
  END SUBROUTINE deduplication
 
 
@@ -712,7 +690,6 @@ CONTAINS
  END INTERFACE
 
  ! Form all possible sets of compressible terms
- call timer('PAIRWISE_ANALYSIS',.true.)
  dettag=0
  maxtag=0
  do idet=1,comp%ndet
@@ -773,10 +750,7 @@ CONTAINS
  nullify(comp_orbmap_idet,comp_orbmap_jdet)
 
  ! Return if no pairwise operations found.
- if(.not.associated(opset_pairwise))then
-  call timer('PAIRWISE_ANALYSIS',.false.)
-  return
- endif
+ if(.not.associated(opset_pairwise))return
 
  ! Construct map from tags to partitions
  tag2part=0
@@ -801,7 +775,6 @@ CONTAINS
    if(ipart>0)ndet_in_partition(ipart)=ndet_in_partition(ipart)+1
   endif
  enddo ! idet
- call timer('PAIRWISE_ANALYSIS',.false.)
 
  ! Report maximum partition size.
  call wout(' '//trim(i2s(npart))//' partitions of maximum size '//&
@@ -820,7 +793,6 @@ CONTAINS
   if(ndet_in_partition(ipart)<2)cycle
 
   ! Generate compression operations
-  call timer('LP_SET_GEN',.true.)
   do iop=1,opset_pairwise%nop
    if(opset_pairwise%ndet(iop)<2)cycle
    idet=opset_pairwise%idet(1,iop)
@@ -831,25 +803,19 @@ CONTAINS
    ispin=opset_pairwise%ispin(iop)
    call merge_op(opset_w0,idet,jdet,iorb,jorb,ispin)
   enddo ! iop
-  call timer('LP_SET_GEN',.false.)
   if(.not.associated(opset_w0))cycle
   if(opset_w0%nop<1)cycle
 
   ! Proceed through recursion levels for this partition.
   if(UNIFIED_ITERATION)then
-   call timer('LP_SET_GEN_RECURSE',.true.)
    ! Prepare for recursion level 0 -> 1
-   call timer('LP_SET_GEN_U0*',.true.)
    call construct_u0star(orig,dedup,comp,opset_w0,opset_u0star,comp_u0star,&
     &orbpool)
-   call timer('LP_SET_GEN_U0*',.false.)
    if(associated(opset_u0star))then
     if(opset_u0star%nop>0)then
      ! Recursion level 0 -> 1
-     call timer('LP_SET_GEN_U1',.true.)
      call construct_un(1,opset_u0star%nop,dedup,opset_u0star,comp_u0star,&
       &opset_un,comp_un,orbpool)
-     call timer('LP_SET_GEN_U1',.false.)
      if(associated(opset_un))then
       if(opset_un%nop>0)then
        nop0=0
@@ -857,24 +823,20 @@ CONTAINS
          ! Recursion level ILEVEL-1 -> ILEVEL
          nop0_prev=nop0
          nop0=opset_un%nop
-         call timer('LP_SET_GEN_U'//trim(i2s(ilevel)),.true.)
          call construct_un(nop0_prev+1,nop0,dedup,opset_un,comp_un,opset_un,&
           &comp_un,orbpool)
-         call timer('LP_SET_GEN_U'//trim(i2s(ilevel)),.false.)
          if(opset_un%nop==nop0)exit
         enddo ! ilevel
       endif ! recursion 1->2 possible (2)
      endif ! recursion 1->2 possible (1)
     endif ! recursion 0->1 possible (2)
    endif ! recursion 0->1 possible (1)
-   call timer('LP_SET_GEN_RECURSE',.false.)
   endif ! UNIFIED_ITERATION
 
   ! Solve linear program
   if(USE_LPSOLVE)then
 
    ! Generate system of equations
-   call timer('LP_POSE_PROBLEM',.true.)
    ieqn=0
    do idet=1,comp%ndet
     if(detpartition(idet)==ipart)then
@@ -929,17 +891,13 @@ CONTAINS
     enddo
    endif
    lp_target_opt_sign=-1 ! minimize
-   call timer('LP_POSE_PROBLEM',.false.)
 
    ! Solve the linear program by calling LPSOLVE.
-   call timer('LP_SOLVE',.true.)
    call resize_pointer((/lp_nvar/),varfail)
    itry=1
    do
-    call timer('LP_SOLVE_ITER'//trim(i2s(itry)),.true.)
     call lp_wrapper(lp_neqn,lp_nvar,lp_vartype,lp_array,lp_ineq_sign,lp_rhs,&
      &lp_targetcoeff,lp_target_opt_sign,lp_solution,lp_solution_status)
-    call timer('LP_SOLVE_ITER'//trim(i2s(itry)),.false.)
     if(lp_solution_status/=0)call errstop('COMPRESS_EXPANSION',&
      &'LP_SOLVE complains and don''t know what to do..')
     ! Check the real-valued problem gives a binary-valued solution.
@@ -967,11 +925,9 @@ CONTAINS
    enddo ! itry
    deallocate(varfail)
    nullify(varfail)
-   call timer('LP_SOLVE',.false.)
 
    ! Apply operations contained in solution
    if(lp_solution_status==0)then
-    call timer('LP_APPLY',.true.)
     if(UNIFIED_ITERATION.and.associated(opset_un))then
      ! Apply operations in U^(n) first.
      do iop=1,opset_un%nop
@@ -998,7 +954,6 @@ CONTAINS
       call update_opset(op_idet,opset_w0,detactive)
      endif
     enddo ! iop
-    call timer('LP_APPLY',.false.)
    endif
 
    ! Clean up pointers used for the LPSOLVE call for this partition
@@ -1013,7 +968,6 @@ CONTAINS
    ! NB, by construction this will not work with the unified iteration
    ! algorithm.  Besides using opset_un below, one would need the ability
    ! to invalidate operations in U^(n), which we don't have at present.
-   call timer('LP_GREEDY',.true.)
 
    ! Initialize pointers, and set operation index to 1..n
    do iop=1,opset_w0%nop
@@ -1040,7 +994,6 @@ CONTAINS
     op_idet=>opset_w0%idet(1:opset_w0%ndet(iop),iop)
     call update_opset(op_idet,opset_w0,detactive)
    enddo ! jop
-   call timer('LP_GREEDY',.false.)
 
   endif ! USE_LPSOLVE or not
 
@@ -2693,7 +2646,7 @@ CONTAINS
  allocate(xfactor(nlabel),stat=ialloc)
  call check_alloc(ialloc,'TEST_COEFF_PROPORTIONALITY','xfactor')
 
- ! Initialize random number generator by timer.
+ ! Initialize random number generator from timer.
  call random_seed(size=csize)
  allocate(cseed(csize),stat=ialloc)
  call check_alloc(ialloc,'TEST_COEFF_PROPORTIONALITY','cseed')
@@ -2792,8 +2745,6 @@ CONTAINS
  CHARACTER(512) errmsg
  INTEGER ispin,idet,iorb,i,j
  LOGICAL ignore_pop
-
- call timer('WRITE_CMDET_CASL',.true.)
 
  ! Create CASL structure.
  call wout('Writing cmdet.casl.')
@@ -2919,8 +2870,6 @@ CONTAINS
  ! Write the file to disk.
  call write_casl('cmdet.casl','cmdet.casl',errmsg)
  if(len_trim(errmsg)>0)call errstop('WRITE_CMDET_CASL',trim(errmsg))
-
- call timer('WRITE_CMDET_CASL',.false.)
 
  END SUBROUTINE write_cmdet_casl
 

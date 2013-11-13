@@ -64,7 +64,7 @@ BUNCH_OF_DEFINES = -DYY_NEVER_INTERACTIVE -DPARSER_LP\
 # How to compile things
 $(LPSOLVE): $(OBJ)
 	@[ -d $(OBJDIR) ] || mkdir -p $(OBJDIR) ;\
-        echo "AR lib LPSOLVE" ;\
+        echo "AR LPSOLVE" ;\
         rm -f $(LPSOLVE) ;\
         $(AR) $(LPSOLVE) $(OBJ)
 
