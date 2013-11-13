@@ -1,6 +1,5 @@
 bin
-src/obj
-lib/lpsolve/obj
+obj
 lib/*.a
 .*.swp
 *~

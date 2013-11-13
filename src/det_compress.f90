@@ -167,7 +167,7 @@ PROGRAM det_compress
  call wout('Multi-determinant compressor')
  call wout('============================')
  call wout()
- call wout('This program uses the lp_solve library, licensed under the LGPL.')
+ call wout('This program uses the LP_SOLVE library, licensed under the LGPL.')
  call wout('Refer to the README files that accompany the source for details.')
  call wout()
 
