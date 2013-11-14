@@ -40,3 +40,8 @@ Each directory contains an mdet.casl file and a cmdet.casl file:
 The cmdet.casl files were generated using the 'd' operational mode.
 Running DET_COMPRESS in any of the example directories will overwrite
 the existing cmdet.casl file.
+
+Additionally, the lithium and neon examples contain the CASINO
+awfn.data and correlation.data files from which the mdet.casl files
+were generated.  See the interface top-level directory for a
+demonstration tool that converts between these files.

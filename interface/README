@@ -1,4 +1,26 @@
-Interface
-=========
+Interfacing with DET_COMPRESS
+=============================
+This directory contains code demonstrating how to write the mdet.casl
+files required by DET_COMPRESS and how to read the cmdet.casl files
+it produces.
 
+WRITE_MDET
+==========
+The write_mdet/src directory contains a demonstration program that
+reads CASINO awfn.data and correlation.data files and produces an
+mdet.casl file.  The code can be compiled by changing into the
+write_mdet/src directory and typing 'make', and the binary will appear
+as write_mdet/bin/write_demo.
+
+To test the compiled binary, change into an example directory and run
+the binary, e.g.,
+
+  cd ../../../examples/li_50csf
+  ../../interface/write_mdet/bin/write_demo
+
+Note that this will overwrite the mdet.casl file already present in
+the example directory.
+
+READ_CMDET
+==========
 XXX - write

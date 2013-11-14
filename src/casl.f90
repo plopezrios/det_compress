@@ -1820,6 +1820,7 @@ CONTAINS
  TYPE(metachar) mlabel,mlabel2,ulabel,ulabel2
 
 ! Initialize.
+ call initialize_casl
  errmsg=''
  create_block=.false. ; if(present(as_block))create_block=as_block
  if_unset=.false. ; if(present(only_if_unset))if_unset=only_if_unset
