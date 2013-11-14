@@ -131,31 +131,48 @@ CONTAINS
   IMPLICIT NONE
   CHARACTER(512) errmsg
   INTEGER idet,ispin,iorb
+
+  ! Create a block item to hold the data.
   call set_casl_block('mdet.casl:MDET',errmsg)
   call push_casl_context('mdet.casl:MDET')
+
+  ! Add the (optional) title block.
   call set_casl_item('Title',trim(adjustl(mdet_title)),errmsg)
+
+  ! Create the main expansion block.
   call set_casl_block('Expansion',errmsg)
   call push_casl_context('Expansion')
+
+  ! Populate the expansion block with terms.  These take the form:
+  !   Term 1:
+  !     Coefficient: [ 1.0, Group: 1 ]
+  !     Spin 1: [ 1, 2, 3 ]
+  !     Spin 2: [ 4 ]
   do idet=1,ndet
-   call set_casl_block('Term '//trim(i2s(idet)),errmsg)
-   call push_casl_context('Term '//trim(i2s(idet)))
-   call set_casl_block('Coefficient',errmsg,prefer_inline=.true.)
-   call set_casl_item('Coefficient:%u1',detcoef(idet),errmsg)
-   call set_casl_item('Coefficient:Group',detcoef_label(idet),errmsg)
-   do ispin=1,nspin
-    if(nele(ispin)==0)cycle
-    call set_casl_block('Spin '//trim(i2s(ispin)),errmsg,prefer_inline=.true.)
-    call push_casl_context('Spin '//trim(i2s(ispin)))
-    do iorb=1,nele(ispin)
-     call set_casl_item('%u'//trim(i2s(iorb)),orbmap(iorb,ispin,idet),errmsg)
-    enddo ! iorb
-    call pop_casl_context() ! Spin <ispin>
-   enddo ! ispin
-   call pop_casl_context() ! Term <idet>
+    call set_casl_block('Term '//trim(i2s(idet)),errmsg)
+    call push_casl_context('Term '//trim(i2s(idet)))
+    call set_casl_block('Coefficient',errmsg,prefer_inline=.true.)
+    call set_casl_item('Coefficient:%u1',detcoef(idet),errmsg)
+    call set_casl_item('Coefficient:Group',detcoef_label(idet),errmsg)
+    do ispin=1,nspin
+      if(nele(ispin)==0)cycle
+      call set_casl_block('Spin '//trim(i2s(ispin)),errmsg,&
+         &prefer_inline=.true.)
+      call push_casl_context('Spin '//trim(i2s(ispin)))
+      do iorb=1,nele(ispin)
+        call set_casl_item('%u'//trim(i2s(iorb)),orbmap(iorb,ispin,idet),&
+           &errmsg)
+      enddo ! iorb
+      call pop_casl_context() ! Spin <ispin>
+    enddo ! ispin
+    call pop_casl_context() ! Term <idet>
   enddo ! idet
   call pop_casl_context() ! Expansion
   call pop_casl_context() ! mdet.casl:MDET
+
+  ! Write the file.
   call write_casl('mdet.casl','mdet.casl',errmsg)
+
   END SUBROUTINE write_mdet_casl
 
 

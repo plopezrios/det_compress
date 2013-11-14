@@ -4,13 +4,72 @@ This directory contains code demonstrating how to write the mdet.casl
 files required by DET_COMPRESS and how to read the cmdet.casl files
 it produces.
 
+These demos are intended to help users write interfaces so that the
+compressed expansions produced by DET_COMPRESS can be used in their
+own codes.
+
+Below is a brief description of the CASL library and file format,
+as well as descriptions of the two demos contained in this directory.
+
+
+The CASL library
+================
+The CASL library implements a serialization language to represent
+structured data in text files by means of keyword-value associations.
+The file format is inspired by YAML, and is reminiscent of Python
+code.
+
+A CASL file looks like this:
+
+  keyword1: value1
+  keyword2: value2
+  keyword3:
+    keyword4: value4
+    keyword5: [ keyword6: value6, value7 ]
+  value8
+
+Where:
+* "keyword1" is the label of a scalar item of value "value1"
+* "keyword3" is the label of a block item that contains the items
+  labeled keyword4 and keyword5,
+* "keyword5" is the label of another block item, represented in-line
+  using square brackets and commas, that contains the item labeled
+  "keyword6" and an unnamed item of value "value7".
+* "value7" and "value8" are the values of two unnamed items.  Unnamed
+  items are intended to be accessed by sequential order.  Unnamed
+  items cannot be block items.
+
+Once a CASL structure is loaded, the library can be queried about each
+item in the CASL structure.  Items are identified by a full label
+which concatenates the labels of the block items that contain it,
+separated by ':' (not unlike files in a directory hierarchy).
+
+For example, in the above structure, "keyword3:keyword5:keyword6" is
+a scalar item of value "value6".  The <i>-th unnamed items in a block
+is called "%u<i>", e.g. "keyword3:keyword5:%u1" has value "value7"
+and "%u1" has value "value8".
+
+When a CASL file is read, the library prepends the file name to the
+path, so if the above was read from "file.casl", the full path to
+"keyword1" would be "file.casl:keyword1".
+
+CASL keywords are case- and whitespace- insensitive.  The ':' and ','
+characters must have a whitespace or newline immediately after them
+to be considered syntactically active.
+
+For information on using the library, and for the structure of the
+mdet.casl and cmdet.casl file, see the source of the demos described
+below.
+
+
 WRITE_MDET
 ==========
 The write_mdet/src directory contains a demonstration program that
 reads CASINO awfn.data and correlation.data files and produces an
-mdet.casl file.  The code can be compiled by changing into the
-write_mdet/src directory and typing 'make', and the binary will appear
-as write_mdet/bin/write_demo.
+mdet.casl file.
+
+Once compiled by typing 'make' at the top-level directory, the binary
+will be available as write_mdet/bin/write_demo.
 
 To test the compiled binary, change into an example directory and run
 the binary, e.g.,
@@ -23,4 +82,17 @@ the example directory.
 
 READ_CMDET
 ==========
-XXX - write
+The read_cmdet/src directory contains a demonstration program that
+reads a cmdet.casl file produced by DET_COMPRESS, computes the Slater
+matrices (with fake orbitals in a fake geometry) for a random
+configuration and prints out the first ten matrices.
+
+Once compiled by typing 'make' at the top-level directory, the binary
+will be available as read_cmdet/bin/read_demo.
+
+To test the compiled binary, change into an example directory and run
+the binary, e.g.,
+
+  cd ../../../examples/li_50csf
+  ../../interface/read_cmdet/bin/read_demo
+

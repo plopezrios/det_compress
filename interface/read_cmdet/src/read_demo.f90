@@ -195,20 +195,23 @@ CONTAINS
   ! Return to previous context.
   call pop_casl_context() ! out of "Original expansion"
 
-  ! Load deduplication data.
+  ! Load deduplication data.  This block contains blocks of the form:
+  !  c_1: [ 1, 5, -7 ]
+  ! meaning c_1 = k_1 + k_5 - k_7  (c = dedup. coeff., k = orig. coeff.)
   call query_casl_item('Deduplicated coefficients',nchildren=dedup_ndet)
   call push_casl_context('Deduplicated coefficients')
-  ! First pass to gather array sizes.
+  ! Do a first pass to gather the maximum number of original coefficients
+  ! to be combined.
   allocate(dedup_ndetcoef(dedup_ndet))
   dedup_ndetcoef=0
   do idet=1,dedup_ndet
    call query_casl_item('c_'//trim(i2s(idet)),nchildren=dedup_ndetcoef(idet))
   enddo ! idet
-  ! Allocate data arrays once total size is known.
+  ! Allocate data arrays once maximum size is known.
   dedup_max_ndetcoef=maxval(dedup_ndetcoef)
   allocate(dedup_idetcoef(dedup_max_ndetcoef,dedup_ndet))
   dedup_idetcoef=0
-  ! Second pass to read all data.
+  ! Do a second pass to read the data.
   do idet=1,dedup_ndet
     call push_casl_context('c_'//trim(i2s(idet)))
     do i=1,dedup_ndetcoef(idet)
@@ -222,10 +225,15 @@ CONTAINS
   ! Move into Compressed expansion block.
   call push_casl_context('Compressed expansion')
 
-  ! Load compressed orbital pool.
+  ! Load compressed orbital pool.  This block contains blocks of the form:
+  !   Orbital 1:
+  !     Component 1: [ 5, Num: [ 7, -10 ], Den: [ 8, 6 ] ]
+  !     Component 2: [ 9 ]
+  ! meaning Phi_1 = c_7*(-c_10) / (c_8*c_6) * phi_5 + phi_9
+  ! (where Phi = comp. orb., phi = orig. orb., c = dedup. coeff.)
   call query_casl_item('Orbital pool',nchildren=comp_norb)
   call push_casl_context('Orbital pool')
-  ! First pass to gather array sizes.
+  ! Do a first pass to gather maxiumum array sizes.
   allocate(comp_nmix(comp_norb))
   comp_nmix=0
   comp_max_nmixcoeff=0
@@ -239,14 +247,17 @@ CONTAINS
     enddo ! i
     call pop_casl_context() ! out of "Orbital <iorb>"
   enddo ! iorb
-  ! Allocate data arrays.
+  ! Allocate data arrays once maximum size is known.
   comp_max_nmix=maxval(comp_nmix)
   allocate(comp_imix(comp_max_nmix,comp_norb),&
      &comp_nmixcoeff(comp_max_nmix,comp_norb),&
      &comp_imixcoeff_num(comp_max_nmixcoeff,comp_max_nmix,comp_norb),&
      &comp_imixcoeff_den(comp_max_nmixcoeff,comp_max_nmix,comp_norb))
-  comp_imix=0 ; comp_nmixcoeff=0 ; comp_imixcoeff_num=0 ; comp_imixcoeff_den=0
-  ! Second pass to read all data.
+  comp_imix=0
+  comp_nmixcoeff=0
+  comp_imixcoeff_num=0
+  comp_imixcoeff_den=0
+  ! Do a second pass to read the data.
   do iorb=1,comp_norb
     call push_casl_context('Orbital '//trim(i2s(iorb)))
     do i=1,comp_nmix(iorb)
@@ -269,10 +280,22 @@ CONTAINS
   ! Take a moment to infer the number of orbitals in the original orbital pool.
   orig_norb=maxval(comp_imix)
 
-  ! Load compressed determinant data.
+  ! Load compressed determinant data.  This block contains blocks of the form:
+  !   Term 1:
+  !     Coefficient:
+  !       Num: [ 2, 6, 8 ]
+  !       Den: [ -1, 3, 5 ]
+  !     Spin 1: [ 4, 7, 8 ]
+  !     Spin 2: [ 3 ]
+  ! meaning:
+  ! * C_1 = c_2*c_6*c_8 / ((-c_1)*c_3*c_5)
+  ! * det_1_up = [ Phi_4, Phi_7, Phi_8 ]
+  ! * det_1_down = [ Phi_3 ]
+  ! (where C = comp. det. coeff., c = dedup. det. coeff., det_1_x = comp. det.
+  ! of spin x, Phi = comp. orb.)
   call query_casl_item('Expansion',nchildren=comp_ndet)
   call push_casl_context('Expansion')
-  ! First pass to gather array sizes.
+  ! Do a first pass to gather maximum array sizes.
   allocate(comp_ndetcoef(comp_ndet))
   comp_ndetcoef=0
   do idet=1,comp_ndet
@@ -280,14 +303,15 @@ CONTAINS
        &exists=exists,is_block=is_block,nchildren=it1)
     if(exists.and.is_block)comp_ndetcoef(idet)=it1
   enddo ! idet
-  ! Allocate data arrays.
+  ! Allocate data arrays once maximum size is known.
   comp_max_ndetcoef=maxval(comp_ndetcoef)
   allocate(comp_idetcoef_num(comp_max_ndetcoef,comp_ndet),&
      &comp_idetcoef_den(comp_max_ndetcoef,comp_ndet))
-  comp_idetcoef_num=0 ; comp_idetcoef_den=0
+  comp_idetcoef_num=0
+  comp_idetcoef_den=0
   allocate(comp_orbmap(nemax,nspin,comp_ndet))
   comp_orbmap=0
-  ! Second pass to read all data.
+  ! Do a second pass to read the data.
   do idet=1,comp_ndet
     call push_casl_context('Term '//trim(i2s(idet)))
     call push_casl_context('Coefficient')
@@ -311,10 +335,8 @@ CONTAINS
   enddo ! idet
   call pop_casl_context() ! out of "Expansion"
 
-  ! Return to previous context.
+  ! Exit remaining contexts.
   call pop_casl_context() ! out of "Compressed expansion"
-
-  ! Finish.
   call pop_casl_context() ! out of "cmdet.casl:CMDET"
 
   ! Free up memory used by CASL structure.
