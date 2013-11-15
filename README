@@ -6,6 +6,12 @@ properties of determinants to combine them and produce a shorter
 expansion.  The resulting expansion contains orbitals which are
 linear combinations of orbitals as matrix elements.
 
+The methodology used by DET_COMPRESS was developed by
+Gihan L. Weerasinghe, Pablo Lopez Rios, and Richard J. Needs, and
+is described in a paper available at arXiv.org (submitted 14-Nov-2013,
+to be announced 18-Nov-2013; this README will be updated with a
+direct link to the article).
+
 Note on licensing: different parts of this distribution are covered
 by different licenses.  See the bottom of this README file for
 licensing information.
@@ -18,16 +24,16 @@ Compilation
 * By default the utility is configured to work with gcc and gfortran.
   If you have gcc, gfortran and GNU make installed you simply need to
   type 'make' under the root directory.  The utility binary will
-  appear as bin/det_compress .
-
+  appear as bin/det_compress.  This will also compile the interface
+  demo programs under the interface/ directory and place them in
+  their respective interface/*/bin directories.
 
 * To use other compilers and/or compiler options, override the FC,
   FFLAGS, CC, and CFLAGS variables when running make with, e.g.,
 
     make FC="ifort" FFLAGS="-O3" CC="icc" CFLAGS="-O3"
 
-  Bear in mind that the Fortran compiler must support the Fortran 95
-  standard.
+  The Fortran compiler must support the Fortran 95 standard.
 
 * Some C compilers represent function names differently from others,
   and this affects how Fortran code should interface with C.  If you
@@ -116,11 +122,42 @@ Usage
   recommend that the 'd' mode be used, resorting to cheaper modes only
   if the compression takes too long.
 
+* Multi-determinant expansions are usually arranged in groups of
+  determinants (Configuration State Functions, CSFs).  During wave
+  function optimization in QMC it is common practice to keep the
+  ratios between the determinant coefficients in each CSFs fixed,
+  so that there is effectively one optimizable parameter per CSF.
+
+  DET_COMPRESS produces compressed expansions in a form that exposes
+  the same set of optimizable parameters as the uncompressed expansion
+  does.  For this to be possible it is necessary to prevent
+  compression operations that require determinant coefficients in
+  different CSFs to be fixed at their initial ratio.
+
+  This restriction can in principle worsen the compression ratio.
+  The main src/det_compress.f90 code contains an internal flag,
+  IGNORE_COEFF_LABELS, which allows the code to ignore this
+  restriction if set to .true. (the code then effectively treats all
+  the determinants as if they were part of the same CSF).
+
+  With this modification the code may produce somewhat shorter
+  expansions, at the expense of modifying their variational freedom
+  if optimized within QMC.  While it is not advisable to optimize
+  such compressed expansions, one might want to use them for DMC
+  calculations, for example.
+
+  However in our testing we have not encountered any cases where the
+  code with IGNORE_COEFF_LABELS=.false. yields larger compressed
+  expansions than with IGNORE_COEFF_LABELS=.true..  It remains
+  possible in principle, but the gains are likely to be very small,
+  and the safest option is to stick to the default.
+
 
 ====================
 DET_COMPRESS license
 ====================
-This version of DET_COMPRESS is dual-licensed:
+This version of DET_COMPRESS (except the contents of the lib/lpsolve
+and lib/colamd directories, see below) is dual-licensed:
 
 * DET_COMPRESSED is licensed under the proprietary CASINO license when
   distributed as part of the CASINO quantum Monte Carlo package.  See
@@ -140,9 +177,10 @@ case remain licensed as stated above.
 LP_SOLVE license
 ================
 We use and distribute the unmodified upstream source code of the
-LP_SOLVE library with DET_COMPRESS.  LP_SOLVE as distributed with
-DET_COMPRESS is licensed under the LGPLv2.1.  See
-http://www.gnu.org/licenses/lgpl-2.1.html for the license terms.
+LP_SOLVE library with DET_COMPRESS under lib/lpsolve and lib/colamd.
+LP_SOLVE as distributed with DET_COMPRESS is licensed under the
+LGPLv2.1.  See http://www.gnu.org/licenses/lgpl-2.1.html for the
+license terms.
 
 The stand-alone GPLv3 distribution of DET_COMPRESS complies with the
 licensing terms for using and distributing LP_SOLVE.
