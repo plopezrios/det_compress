@@ -8,9 +8,8 @@ linear combinations of orbitals as matrix elements.
 
 The methodology used by DET_COMPRESS was developed by
 Gihan L. Weerasinghe, Pablo Lopez Rios, and Richard J. Needs, and
-is described in a paper available at arXiv.org (submitted 14-Nov-2013,
-to be announced 18-Nov-2013; this README will be updated with a
-direct link to the article).
+is described in a paper available at arXiv.org at
+http://arxiv.org/abs/1311.3697 .
 
 Note on licensing: different parts of this distribution are covered
 by different licenses.  See the bottom of this README file for
