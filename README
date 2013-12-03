@@ -1,6 +1,7 @@
 ============
 DET_COMPRESS
 ============
+
 This utility compresses multideterminant expansions using algebraic
 properties of determinants to combine them and produce a shorter
 expansion.  The resulting expansion contains orbitals which are
@@ -11,21 +12,53 @@ Gihan L. Weerasinghe, Pablo Lopez Rios, and Richard J. Needs, and
 is described in a paper available at arXiv.org at
 http://arxiv.org/abs/1311.3697 .
 
+DET_COMPRESS is distributed both alongside CASINO and separately,
+under a different license in each case.  For CASINO see
+
+  http://www.tcm.phy.cam.ac.uk/~mdt26/casino2.html
+
+and for the independent DET_COMPRESS distribution see
+
+  http://www.tcm.phy.cam.ac.uk/~pl275/DetCompress/
+
+In what follows, "SRC", "LIB", "EXAMPLES" and "INTERFACE" refer to
+the following directories in the CASINO distribution:
+  SRC       = utils/det_compress/
+  LIB       = lib/
+  EXAMPLES  = examples/det_compress/
+  INTERFACE = utils/det_compress/interface/
+and to the following directories in the stand-alone DET_COMPRESS
+distribution:
+  SRC       = src/
+  LIB       = lib/
+  EXAMPLES  = examples/
+  INTERFACE = interface/
+
 Note on licensing: different parts of this distribution are covered
 by different licenses.  See the bottom of this README file for
 licensing information.
+
+PLR 11.2013
 
 
 ===========
 Compilation
 ===========
 
+* The version of DET_COMPRESS distributed with CASINO is integrated
+  into the CASINO build system and requires no indepedent set-up.
+  This section applies mostly to the stand-alone DET_COMPRESS
+  distribution.  Note that the interface demo programs in the
+  INTERFACE directory are not compiled by default in the CASINO
+  version of DET_COMPRESS.
+
 * By default the utility is configured to work with gcc and gfortran.
   If you have gcc, gfortran and GNU make installed you simply need to
-  type 'make' under the root directory.  The utility binary will
-  appear as bin/det_compress.  This will also compile the interface
-  demo programs under the interface/ directory and place them in
-  their respective interface/*/bin directories.
+  type 'make' under the root directory of the DET_COMPRESS
+  distribution.  The utility binary will appear as bin/det_compress.
+  This will also compile the interface demo programs under the
+  INTERFACE directory and place them in their respective
+  INTERFACE/*/bin directories.
 
 * To use other compilers and/or compiler options, override the FC,
   FFLAGS, CC, and CFLAGS variables when running make with, e.g.,
@@ -73,12 +106,17 @@ Compilation
       LPSOLVE_INCDIR=/usr/include/lpsolve
       LDLPSOLVE_DEPS="-lcolamd -ldl"
 
-* Test the compilation by running an example, e.g.,
+* Test the compilation by running an example, e.g., change into one of
+  the subdirectories of the EXAMPLES directory and in the case of the
+  stand-alone destribution run
 
-    cd examples/li_50csf
     ../../bin/det_compress
 
-  and press 'd' followed by [Enter] to compress the expansion.
+  or in the CASINO version, simply run
+
+    det_compress
+
+  Then press 'd' followed by [Enter] to compress the expansion.
 
 
 =====
@@ -90,9 +128,15 @@ Usage
   cmdet.casl file describing the compressed multi-determinant
   expansion.
 
+* An mdet.casl file can be produced by CASINO by setting 'runtype' to
+  'gen_mdet_casl' in the input file.  The cmdet.casl file is
+  automatically picked up by CASINO on subsequent runs in the same
+  directory.
+
 * The CASL file format is used by DET_COMPRESS for data exchange.  See
-  the interface/ directory for sample code that uses the casl.f90
-  module to write/read the input/output files of DET_COMPRESS.
+  the INTERFACE directory for sample code that uses the casl.f90
+  module to write/read the input/output files of DET_COMPRESS, for use
+  with codes other than CASINO.
 
 * DET_COMPRESS requires an option to be passed on the standard input
   to determine the operational level of the compression:
@@ -114,7 +158,7 @@ Usage
   Levels 'a' and 'b' scale quadratically with initial expansion size.
   Levels 'c' and 'd' use LP_SOLVE, which is in principle non-
   polynomial.  Level 'd' uses the unified iteration algorithm, which
-  involves non-polynomial operations.
+  involves more non-polynomial operations.
 
   In practice neither LP_SOLVE nor the unified iteration algorithm
   seem to make the computation intractable, even on modest CPUs.  We
@@ -130,11 +174,11 @@ Usage
   DET_COMPRESS produces compressed expansions in a form that exposes
   the same set of optimizable parameters as the uncompressed expansion
   does.  For this to be possible it is necessary to prevent
-  compression operations that require determinant coefficients in
-  different CSFs to be fixed at their initial ratio.
+  "accidental" compression operations that require determinant
+  coefficients in different CSFs to be fixed at their initial ratio.
 
   This restriction can in principle worsen the compression ratio.
-  The main src/det_compress.f90 code contains an internal flag,
+  The main SRC/det_compress.f90 code contains an internal flag,
   IGNORE_COEFF_LABELS, which allows the code to ignore this
   restriction if set to .true. (the code then effectively treats all
   the determinants as if they were part of the same CSF).
@@ -142,8 +186,8 @@ Usage
   With this modification the code may produce somewhat shorter
   expansions, at the expense of modifying their variational freedom
   if optimized within QMC.  While it is not advisable to optimize
-  such compressed expansions, one might want to use them for DMC
-  calculations, for example.
+  the coefficients in such compressed expansions, one might want to
+  use them for DMC calculations, for example.
 
   However in our testing we have not encountered any cases where the
   code with IGNORE_COEFF_LABELS=.false. yields larger compressed
@@ -155,8 +199,9 @@ Usage
 ====================
 DET_COMPRESS license
 ====================
-This version of DET_COMPRESS (except the contents of the lib/lpsolve
-and lib/colamd directories, see below) is dual-licensed:
+
+This version of DET_COMPRESS (except the contents of the LIB/lpsolve
+and LIB/colamd directories, see below) is dual-licensed:
 
 * DET_COMPRESSED is licensed under the proprietary CASINO license when
   distributed as part of the CASINO quantum Monte Carlo package.  See
@@ -175,8 +220,9 @@ case remain licensed as stated above.
 ================
 LP_SOLVE license
 ================
+
 We use and distribute the unmodified upstream source code of the
-LP_SOLVE library with DET_COMPRESS under lib/lpsolve and lib/colamd.
+LP_SOLVE library with DET_COMPRESS under LIB/lpsolve and LIB/colamd.
 LP_SOLVE as distributed with DET_COMPRESS is licensed under the
 LGPLv2.1.  See http://www.gnu.org/licenses/lgpl-2.1.html for the
 license terms.

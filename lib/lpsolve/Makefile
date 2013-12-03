@@ -12,7 +12,7 @@ LPSOLVE_AR     = liblpsolve55.a
 LPSOLVE        = $(LIBDIR)/$(LPSOLVE_AR)
 COLAMD_SRCDIR  = $(LIBDIR)/colamd
 COLAMD         = $(LIBDIR)/libcolamd.a
-INCLUDE_COLAMD = -I$(LIBDIR)/colamd
+INCLUDE_COLAMD = -I$(COLAMD_SRCDIR)
 .SILENT:
 
 # Defaults for system-dependent variables

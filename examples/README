@@ -1,17 +1,6 @@
-Examples
-========
+DET_COMPRESS examples
+=====================
 This directory contains examples to test DET_COMPRESS on.
-
-
-Running an example
-------------------
-* Compile the code as indicated in the main README file.
-* Change into the example directory, e.g.,
-    cd li_50csf
-* Run the DET_COMPRESS binary,
-    ../../bin/det_compress
-* Select the operational mode by typing 'a', 'b', 'c', or 'd' and
-  pressing [Enter].
 
 
 List of examples
@@ -43,5 +32,5 @@ the existing cmdet.casl file.
 
 Additionally, the lithium and neon examples contain the CASINO
 awfn.data and correlation.data files from which the mdet.casl files
-were generated.  See the interface top-level directory for a
-demonstration tool that converts between these files.
+were generated.  See the det_compress/interface directory for a
+demonstration tool that performs this conversion.
