@@ -30,7 +30,7 @@ MODULE casl
   LOGICAL :: is_block=.false.,is_implicit=.false.,is_inline=.false.,&
    &been_read=.false.
   INTEGER :: ilevel=0,indent=-1,nimplicit=0
-  TYPE(metachar) :: name,value,unique_name,full_unique_name
+  TYPE(metachar) name,value,unique_name,full_unique_name
 ! AVL binary search tree data
   TYPE(casl_item),POINTER :: avl_left=>null(),avl_right=>null(),&
    &avl_parent=>null()
@@ -137,7 +137,7 @@ CONTAINS
    return
   endif
  enddo
- open(unit=io,file=trim(filename),status='old',iostat=ierr)
+ open(unit=io,file=trim(filename),status='old',action='read',iostat=ierr)
  if(ierr/=0)then
   errmsg='Problem opening '//trim(filename)//'.'
   return
@@ -186,6 +186,7 @@ CONTAINS
       current_vline%cont_indent=indent
       call append_char_to_metachar(current_vline%line,' ')
       call append_metachar_to_metachar(current_vline%line,string)
+      call unset_metachar(string)
       cycle
      else ! error
       errmsg='Parse pass 1 problem: continuation line at line '//&
@@ -202,6 +203,7 @@ CONTAINS
 ! Store the contents of the new line.
   allocate(vline)
   call copy_metachar(string,vline%line)
+  call unset_metachar(string)
   vline%iline=iline
   vline%indent=indent
 ! Link into list.
@@ -353,29 +355,40 @@ CONTAINS
 
 ! Deal with CASL directives.
    if(current_item%name%chars(1)=='%')then
-    if(current_item%name%chars(2)=='!')then
+    if(len_metachar(current_item%name)>1)then
+     if(current_item%name%chars(2)=='!')then
 ! Syntactic comment: re-write name, flag for deletion.
-     call cut_metachar(current_item%name,3)
-     call unpad_metachar(current_item%name)
-     call prepend_char_to_metachar(current_item%name,&
-      &'%delete'//trim(i2s(nkill))//'-')
-     if(.not.associated(kill_list))then
-      allocate(kill_list)
-     else
-      allocate(kill_list%next)
-      kill_list%next%prev=>kill_list
-      kill_list=>kill_list%next
-     endif
-     kill_list%item=>current_item
-     nkill=nkill+1
-    else
-     errmsg='Illegal item name "'//&
-      &char_metachar(current_item%name,len_metachar(current_item%name))//&
+      call cut_metachar(current_item%name,3)
+      call unpad_metachar(current_item%name)
+      call prepend_char_to_metachar(current_item%name,&
+       &'%delete'//trim(i2s(nkill))//'-')
+      if(.not.associated(kill_list))then
+       allocate(kill_list)
+      else
+       allocate(kill_list%next)
+       kill_list%next%prev=>kill_list
+       kill_list=>kill_list%next
+      endif
+      kill_list%item=>current_item
+      nkill=nkill+1
+     else ! unrecognized type
+      call label_casl_item(current_item,label)
+      errmsg='Illegal item name "'//char_metachar(label,len_metachar(label))//&
+       &'": character "%" at the beginning of the name is reserved for &
+       &directives, and this name does not match any known directive.'
+      call unset_metachar(label)
+      call clean_for_abort
+      return
+     endif ! type of CASL directive
+    else ! just '%'
+     call label_casl_item(current_item,label)
+     errmsg='Illegal item name "'//char_metachar(label,len_metachar(label))//&
       &'": character "%" at the beginning of the name is reserved for &
       &directives, and this name does not match any known directive.'
+     call unset_metachar(label)
      call clean_for_abort
      return
-    endif ! type of CASL directive
+    endif
    endif
 
 ! Compute unique name and full unique name
@@ -443,13 +456,15 @@ CONTAINS
 
 ! Detect inline blocks (so far flagged as scalar).
   if(.not.(current_item%is_block.or.current_item%is_implicit))then
-   if(current_item%value%chars(1)=='[')then
-    current_item%is_block=.true.
-    current_item%is_inline=.true.
-    call parse_inline_block(current_item,errmsg)
-    if(len_trim(errmsg)>0)then
-     call clean_for_abort
-     return
+   if(len_metachar(current_item%value)>0)then
+    if(current_item%value%chars(1)=='[')then
+     current_item%is_block=.true.
+     current_item%is_inline=.true.
+     call parse_inline_block(current_item,errmsg)
+     if(len_trim(errmsg)>0)then
+      call clean_for_abort
+      return
+     endif
     endif
    endif
   endif
@@ -603,36 +618,45 @@ CONTAINS
     endif
     if(current_child%name%chars(1)=='%')then
 ! CASL directive
-     if(current_child%name%chars(2)=='!')then
+     if(len_metachar(current_child%name)>1)then
+      if(current_child%name%chars(2)=='!')then
 ! Syntactic comment: re-write name, flag for deletion.
-      call cut_metachar(current_child%name,3)
-      call unpad_metachar(current_child%name)
-      call prepend_char_to_metachar(current_child%name,&
-       &'%delete'//trim(i2s(nkill))//'-')
-      if(.not.associated(kill_list))then
-       allocate(kill_list)
+       call cut_metachar(current_child%name,3)
+       call unpad_metachar(current_child%name)
+       call prepend_char_to_metachar(current_child%name,&
+        &'%delete'//trim(i2s(nkill))//'-')
+       if(.not.associated(kill_list))then
+        allocate(kill_list)
+       else
+        allocate(kill_list%next)
+        kill_list%next%prev=>kill_list
+        kill_list=>kill_list%next
+       endif
+       kill_list%item=>current_child
+       nkill=nkill+1
       else
-       allocate(kill_list%next)
-       kill_list%next%prev=>kill_list
-       kill_list=>kill_list%next
-      endif
-      kill_list%item=>current_child
-      nkill=nkill+1
-     else
+       call label_casl_item(current_child,label)
+       errmsg='Illegal item name "'//char_metachar(label,len_metachar(label))//&
+        &'": character "%" at the beginning of the name is reserved for &
+        &directives, and this name does not match any known directive.'
+       call unset_metachar(label)
+       return
+      endif ! type of CASL directive
+     else ! just '%'
       call label_casl_item(current_child,label)
       errmsg='Illegal item name "'//char_metachar(label,len_metachar(label))//&
        &'": character "%" at the beginning of the name is reserved for &
        &directives, and this name does not match any known directive.'
       call unset_metachar(label)
       return
-     endif ! type of CASL directive
+     endif
     endif
     call copy_char_to_metachar(trim(unique_casl_string(char_metachar&
      &(current_child%name,len_metachar(current_child%name)))),&
      &current_child%unique_name)
     call copy_metachar(current_child%unique_name,&
      &current_child%full_unique_name)
-     call prepend_char_to_metachar(current_child%full_unique_name,':')
+    call prepend_char_to_metachar(current_child%full_unique_name,':')
     call prepend_metachar_to_metachar(current_child%full_unique_name,&
      &current_child%parent%full_unique_name)
     call cut_metachar(current_child%value,ipos+1)
@@ -647,7 +671,7 @@ CONTAINS
      &current_child%unique_name)
     call copy_metachar(current_child%unique_name,&
      &current_child%full_unique_name)
-     call prepend_char_to_metachar(current_child%full_unique_name,':')
+    call prepend_char_to_metachar(current_child%full_unique_name,':')
     call prepend_metachar_to_metachar(current_child%full_unique_name,&
      &current_child%parent%full_unique_name)
     call unpad_metachar(current_child%value)
@@ -663,27 +687,29 @@ CONTAINS
    endif
 
 ! Insert in AVL tree.
-  call insert_avltree_item(current_child,item_present)
-  if(item_present)then
-   call label_casl_item(current_child,label)
-   if(.not.current_child%is_implicit)then
-    errmsg='Item '//char_metachar(label,len_metachar(label))//' found twice.'
-   else
-    errmsg='Problem with generation of internal names for implicitly named &
-     &items: label "'//char_metachar(label,len_metachar(label))//'" generated &
-     &twice. This is a bug.'
+   call insert_avltree_item(current_child,item_present)
+   if(item_present)then
+    call label_casl_item(current_child,label)
+    if(.not.current_child%is_implicit)then
+     errmsg='Item '//char_metachar(label,len_metachar(label))//' found twice.'
+    else
+     errmsg='Problem with generation of internal names for implicitly named &
+      &items: label "'//char_metachar(label,len_metachar(label))//'" generated &
+      &twice. This is a bug.'
+    endif
+    call unset_metachar(label)
+    return
    endif
-   call unset_metachar(label)
-   return
-  endif
 
 ! Deal with deeper levels of inline blocks.
    if(.not.current_child%is_implicit)then
-    if(current_child%value%chars(1)=='[')then
-     current_child%is_block=.true.
-     current_child%is_inline=.true.
-     call parse_inline_block(current_child,errmsg)
-     if(len_trim(errmsg)>0)return
+    if(len_metachar(current_child%value)>0)then
+     if(current_child%value%chars(1)=='[')then
+      current_child%is_block=.true.
+      current_child%is_inline=.true.
+      call parse_inline_block(current_child,errmsg)
+      if(len_trim(errmsg)>0)return
+     endif
     endif
    endif
 
@@ -735,7 +761,7 @@ CONTAINS
     case('(')    ; right_delim=')'
     case('{')    ; right_delim='}'
     case('"')    ; right_delim='"'
-    case default ; syn_parse=-3 ; return
+   case default ; syn_parse=-3 ; return
    end select
   else
    right_delim=look_for
@@ -860,7 +886,7 @@ CONTAINS
    return
   endif
  enddo
- open(io,file=trim(file),status='replace',iostat=ierr)
+ open(io,file=trim(file),status='replace',action='write',iostat=ierr)
  if(ierr/=0)then
   errmsg='Problem opening '//trim(file)//'.'
   return
@@ -1358,7 +1384,7 @@ CONTAINS
 
  SUBROUTINE read_from_char_Z(string,value,ierr)
 !------------------------------------------!
-! Read sp complex from a character string. !
+! Read dp complex from a character string. !
 !------------------------------------------!
  IMPLICIT NONE
  INTEGER,INTENT(out) :: ierr
@@ -2034,7 +2060,7 @@ CONTAINS
  TYPE(metachar),INTENT(inout) :: path
  TYPE(metachar) tstring,tstring2
 
- ! Concatenate path-to-context and LABEL into PATH.
+! Concatenate path-to-context and LABEL into PATH.
  call copy_char_to_metachar(label,path)
  if(len_metachar(path)>0)then
   if(path%chars(1)/=':')then
@@ -2043,7 +2069,7 @@ CONTAINS
   endif
  endif
 
- ! Remove any ':' at beginning
+! Remove any ':' at beginning
  if(len_metachar(path)>0)then
   do while(path%chars(1)==':')
    call cut_metachar(path,2)
@@ -2053,10 +2079,10 @@ CONTAINS
 
  if(len_metachar(path)>0)then
 
-  ! Extract first crumb.
+! Extract first crumb.
   call split_first_crumb_metachar(path,tstring)
 
-  ! Reduce everything but first crumb and reconstruct path.
+! Reduce everything but first crumb and reconstruct path.
   if(len_metachar(tstring)>0.and.len_metachar(path)>0)then
    call copy_char_to_metachar(&
     &trim(unique_casl_string(char_metachar(path,len_metachar(path)))),tstring2)
@@ -2719,16 +2745,19 @@ CONTAINS
  do
   select case(compare_metachar(mlabel,item%full_unique_name))
   case('=')
+   call unset_metachar(mlabel)
    return
   case('>')
    if(.not.associated(item%avl_right))then
     nullify(item)
+    call unset_metachar(mlabel)
     return
    endif
    item=>item%avl_right
   case('<')
    if(.not.associated(item%avl_left))then
     nullify(item)
+    call unset_metachar(mlabel)
     return
    endif
    item=>item%avl_left
@@ -2840,23 +2869,23 @@ CONTAINS
  END FUNCTION len_trim_metachar
 
 
- LOGICAL FUNCTION metachar_equals_char(string,chars)
-!------------------------------------------------------------!
-! Return whether STRING represents the same string as CHARS. !
-!------------------------------------------------------------!
- IMPLICIT NONE
- TYPE(metachar),INTENT(in) :: string
- CHARACTER(*),INTENT(in) :: chars
- INTEGER ipos,len_string,len_chars
- metachar_equals_char=.false.
- len_chars=len(chars)
- len_string=len_metachar(string)
- if(len_chars/=len_string)return
- do ipos=1,len_chars
-  if(string%chars(ipos)/=chars(ipos:ipos))return
- enddo ! ipos
- metachar_equals_char=.true.
- END FUNCTION metachar_equals_char
+!!$ LOGICAL FUNCTION metachar_equals_char(string,chars)
+!!$!------------------------------------------------------------!
+!!$! Return whether STRING represents the same string as CHARS. !
+!!$!------------------------------------------------------------!
+!!$ IMPLICIT NONE
+!!$ TYPE(metachar),INTENT(in) :: string
+!!$ CHARACTER(*),INTENT(in) :: chars
+!!$ INTEGER ipos,len_string,len_chars
+!!$ metachar_equals_char=.false.
+!!$ len_chars=len(chars)
+!!$ len_string=len_metachar(string)
+!!$ if(len_chars/=len_string)return
+!!$ do ipos=1,len_chars
+!!$  if(string%chars(ipos)/=chars(ipos:ipos))return
+!!$ enddo ! ipos
+!!$ metachar_equals_char=.true.
+!!$ END FUNCTION metachar_equals_char
 
 
  CHARACTER FUNCTION compare_metachar(string1,string2)
