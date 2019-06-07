@@ -226,8 +226,7 @@ PROGRAM det_compress
  ! De-duplication
  write(6,*)'De-duplicating expansion:'
  call deduplication(orig,dedup,comp,orbpool)
- write(6,*)' After de-duplication: '//trim(i2s(comp%ndet))//&
-  &' determinants'
+ write(6,*)' After de-duplication: '//trim(i2s(comp%ndet))//' determinants'
  write(6,*)
 
  ! Compression
@@ -241,9 +240,8 @@ PROGRAM det_compress
    ! Compress
    call compress(orig,dedup,comp,orbpool)
    ! Report successful iteration
-   if(comp%ndet<prev_ndet)write(6,*)' After compression: '//&
-    &trim(i2s(comp%ndet))//' determinants, '//trim(i2s(orbpool%norb))//&
-    &' orbitals'
+   write(6,*)' After compression: '//trim(i2s(comp%ndet))//' determinants, '//&
+    &trim(i2s(orbpool%norb))//' orbitals'
 
   else ! .not.UNIFIED_ITERATION -> need to loop
 
