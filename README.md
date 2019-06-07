@@ -1,4 +1,3 @@
-============
 DET_COMPRESS
 ============
 
@@ -14,25 +13,25 @@ http://arxiv.org/abs/1311.3697 .
 
 DET_COMPRESS is distributed both alongside CASINO and separately,
 under a different license in each case.  For CASINO see
-
-  http://vallico.net/casinoqmc/
-
-and for the independent DET_COMPRESS distribution see
-
-  http://github.com/plopezrios/det_compress
+http://vallico.net/casinoqmc/ and for the independent DET_COMPRESS
+distribution see http://github.com/plopezrios/det_compress .
 
 In what follows, "SRC", "LIB", "EXAMPLES" and "INTERFACE" refer to
 the following directories in the CASINO distribution:
+```
   SRC       = utils/det_compress/
   LIB       = lib/
   EXAMPLES  = examples/det_compress/
   INTERFACE = utils/det_compress/interface/
+```
 and to the following directories in the stand-alone DET_COMPRESS
 distribution:
+```
   SRC       = src/
   LIB       = lib/
   EXAMPLES  = examples/
   INTERFACE = interface/
+```
 
 Note on licensing: different parts of this distribution are covered
 by different licenses.  See the bottom of this README file for
@@ -41,7 +40,6 @@ licensing information.
 PLR 11.2013
 
 
-===========
 Compilation
 ===========
 
@@ -63,7 +61,9 @@ Compilation
 * To use other compilers and/or compiler options, override the FC,
   FFLAGS, CC, and CFLAGS variables when running make with, e.g.,
 
+  ```
     make FC="ifort" FFLAGS="-O3" CC="icc" CFLAGS="-O3"
+  ```
 
   The Fortran compiler must support the Fortran 95 standard.
 
@@ -72,6 +72,7 @@ Compilation
   get compilation errors, you may want to try passing one of these to
   'make':
 
+  ```
     # IBM compilers typically need:
     CFLAGS_FC_INTERFACE="-DF90_NO_UNDERSCORE"
 
@@ -80,12 +81,14 @@ Compilation
 
     # Some old, rare compilers have been known to need:
     CFLAGS_FC_INTERFACE="-DF90_NO_UNDERSCORE -DF90_CAPITALS"
+  ```
 
 * We distribute the source of the LP_SOLVE library along with
   DET_COMPRESS to simplify the compilation process.  However if you
   wish to use a system-wide installation of LP_SOLVE you can do so by
   passing the following variables to 'make':
 
+  ```
     # Location of liblpsolve*.a:
     LPSOLVE_LIBDIR="/usr/lib"
 
@@ -98,28 +101,34 @@ Compilation
 
     # Linker flags required to link dependencies of LPSOLVE:
     LDLPSOLVE_DEPS="-lcolamd -ldl"
+  ```
 
   For example, the following works under Ubuntu 13.10, having
   installed the package liblpsolve55-dev:
 
+  ```
     make LPSOLVE_LIBNAME=lpsolve55 LPSOLVE_LIBDIR=/usr/lib
       LPSOLVE_INCDIR=/usr/include/lpsolve
       LDLPSOLVE_DEPS="-lcolamd -ldl"
+  ```
 
 * Test the compilation by running an example, e.g., change into one of
   the subdirectories of the EXAMPLES directory and in the case of the
   stand-alone destribution run
 
+  ```
     ../../bin/det_compress
+  ```
 
   or in the CASINO version, simply run
 
+  ```
     det_compress
+  ```
 
   Then press 'd' followed by [Enter] to compress the expansion.
 
 
-=====
 Usage
 =====
 
@@ -196,7 +205,6 @@ Usage
   and the safest option is to stick to the default.
 
 
-====================
 DET_COMPRESS license
 ====================
 
@@ -216,7 +224,6 @@ at the authors' discretion.  This version of DET_COMPRESS will in any
 case remain licensed as stated above.
 
 
-================
 LP_SOLVE license
 ================
 
