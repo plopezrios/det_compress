@@ -1164,14 +1164,13 @@ CONTAINS
  INTEGER &
   &temp_idet_iop(opset_w0%max_ndet),temp_idet_jop(opset_w0%max_ndet),&
   &temp_iorb_iop(opset_w0%max_ndet),temp_iorb_jop(opset_w0%max_ndet),&
-  &temp_iorb_common(opset_w0%max_ndet),&
   &nmixcoeff1(opset_w0%max_ndet),&
   &imixcoeff_num1(2*opset_w0%max_ndet,opset_w0%max_ndet),&
   &imixcoeff_den1(2*opset_w0%max_ndet,opset_w0%max_ndet),&
   &mixlabel1(opset_w0%max_ndet),&
   &temp_num(opset_w0%max_ndet),temp_den(opset_w0%max_ndet),&
   &temp_num_label(opset_w0%max_ndet),temp_den_label(opset_w0%max_ndet),&
-  &label_orb_indx(opset_w0%max_ndet),label_iorb(opset_w0%max_ndet),&
+  &label_orb_indx(opset_w0%max_ndet),&
   &order(opset_w0%max_ndet),indices(opset_w0%max_ndet),&
   &list_idet_iop(opset_w0%max_ndet),list_iorb_iop(opset_w0%max_ndet),&
   &list_idet_jop(opset_w0%max_ndet),list_iorb_jop(opset_w0%max_ndet)
@@ -1232,7 +1231,6 @@ CONTAINS
      jorb=comp%orbmap(abs(je),ispin,jd)
      if(iorb==jorb)then
       n=n+1
-      temp_iorb_common(n)=iorb
       temp_idet_iop(n)=id
       temp_idet_jop(n)=jd
       temp_iorb_iop(n)=ie
@@ -1345,7 +1343,6 @@ CONTAINS
      if(mixlabel1(j)==i)then
       k=k+1
       label_orb_indx(k)=j
-      label_iorb(k)=temp_iorb_common(j)
      endif
     enddo ! j
 
@@ -1447,7 +1444,7 @@ CONTAINS
   &combine_jorb(iop2-iop1+1),order(iop2-iop1+1),indices(iop2-iop1+1),&
   &iop_vector(iop2-iop1+1),iorb_vector(iop2-iop1+1),&
   &idet_vector(dedup%ndet)
- LOGICAL is_first,mask(dedup%ndet),aliased_opsets
+ LOGICAL is_first,mask(dedup%ndet)
  ! Sections of components of OPSET_IN for faster access.
  INTEGER,POINTER :: &
   &opset_in_ndet_iop=>null(),opset_in_idet_iop(:)=>null(),&
@@ -1455,9 +1452,6 @@ CONTAINS
  ! Sections of components of COMP_IN for faster access.
  INTEGER,POINTER :: &
   &comp_in_orbmap_iop(:,:)=>null(),comp_in_orbmap_jop(:,:)=>null()
-
- ! Deal with different pointers to the same targets in the arguments.
- aliased_opsets=associated(opset_in,opset_out)
 
  ! Initialize mask and pointers to components of TYPEd pointers.
  mask(1:dedup%ndet)=.false.
@@ -2415,7 +2409,7 @@ CONTAINS
  CHARACTER(80) tmpr1,tmpr2
  INTEGER ii,iorb,jorb,ispin,idet,jdet,indices(netot),order(netot),im,nm,i,&
   &iswp,n_NaN
- LOGICAL be_quiet,is_first,found(dedup%ndet),same,any_bad
+ LOGICAL be_quiet,is_first,found(dedup%ndet),same
  REAL(dp) t1,t2,xcoef_num,xcoef_den,dcoef_num,dcoef_den,dcoef
 
  test_compression=0
@@ -2518,7 +2512,6 @@ CONTAINS
  endif
 
  ! Compare expansions
- any_bad=.false.
  found=.false.
  do idet=1,dedup%ndet
   dcoef=eval_dedup_detcoef(orig,dedup,idet)
@@ -2535,7 +2528,6 @@ CONTAINS
      test_compression=max(test_compression,4)
      if(.not.be_quiet)write(6,*)' Warning: reconstruction of coeff #'//&
       &trim(i2s(idet))//' diverges.'
-     any_bad=.true.
     elseif(.not.same)then
      write(tmpr1,*)t1
      if(compare_numbers(t1,-t2))then
@@ -2548,7 +2540,6 @@ CONTAINS
       if(.not.be_quiet)write(6,*)' Coeff #'//trim(i2s(idet))//' is '//&
        &trim(adjustl(tmpr1))//' but we get '//trim(adjustl(tmpr2))
      endif
-     any_bad=.true.
     endif
     exit
    endif
@@ -2737,7 +2728,6 @@ CONTAINS
  TYPE(orbital_pool),POINTER :: orbpool
  CHARACTER(512) errmsg
  INTEGER ispin,idet,iorb,i,j
- LOGICAL ignore_pop
 
  ! Create CASL structure.
  write(6,*)'Writing cmdet.casl.'
