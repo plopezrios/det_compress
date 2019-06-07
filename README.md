@@ -15,11 +15,11 @@ http://arxiv.org/abs/1311.3697 .
 DET_COMPRESS is distributed both alongside CASINO and separately,
 under a different license in each case.  For CASINO see
 
-  http://www.tcm.phy.cam.ac.uk/~mdt26/casino2.html
+  http://vallico.net/casinoqmc/
 
 and for the independent DET_COMPRESS distribution see
 
-  http://www.tcm.phy.cam.ac.uk/~pl275/DetCompress/
+  http://github.com/plopezrios/det_compress
 
 In what follows, "SRC", "LIB", "EXAMPLES" and "INTERFACE" refer to
 the following directories in the CASINO distribution:
@@ -205,8 +205,7 @@ and LIB/colamd directories, see below) is dual-licensed:
 
 * DET_COMPRESSED is licensed under the proprietary CASINO license when
   distributed as part of the CASINO quantum Monte Carlo package.  See
-  http://www.tcm.phy.cam.ac.uk/~mdt26/academic_consent_form.pdf
-  for the license terms.
+  CASINO/doc/academic_consent_form.pdf for the license terms.
 
 * DET_COMPRESSED is licensed under the GPLv3 when distributed
   directly on its own.  See http://www.gnu.org/licenses/gpl-3.0.html
