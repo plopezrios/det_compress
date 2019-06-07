@@ -317,6 +317,13 @@ PROGRAM det_compress
  ! Write compressed expansion
  call write_cmdet_casl(orig,dedup,comp,orbpool)
 
+  ! Clean up.
+  call deallocate_orig(orig)
+  call deallocate_dedup(dedup)
+  call deallocate_parexp(comp)
+  call deallocate_orbpool(orbpool)
+  deallocate(nele)
+
 
 CONTAINS
 
@@ -2854,10 +2861,44 @@ CONTAINS
  call write_casl('cmdet.casl','cmdet.casl',errmsg)
  if(len_trim(errmsg)>0)call errstop('WRITE_CMDET_CASL',trim(errmsg))
 
+  ! Clean up.
+  call delete_casl_item('cmdet.casl')
+
  END SUBROUTINE write_cmdet_casl
 
 
 ! Allocators and deallocators
+
+
+  SUBROUTINE deallocate_orig(orig)
+  !-----------------------------------!
+  ! Deallocate ORIG of type ORIGINAL. !
+  !-----------------------------------!
+  IMPLICIT NONE
+  TYPE(original),POINTER :: orig
+  if(.not.associated(orig))return
+  if(associated(orig%orbmap))deallocate(orig%orbmap)
+  if(associated(orig%detcoef))deallocate(orig%detcoef)
+  if(associated(orig%detcoef_label))deallocate(orig%detcoef_label)
+  deallocate(orig)
+  nullify(orig)
+  END SUBROUTINE deallocate_orig
+
+
+  SUBROUTINE deallocate_dedup(dedup)
+  !----------------------------------------!
+  ! Deallocate DEDUP of type DEDUPLICATED. !
+  !----------------------------------------!
+  IMPLICIT NONE
+  TYPE(deduplicated),POINTER :: dedup
+  if(.not.associated(dedup))return
+  if(associated(dedup%orbmap))deallocate(dedup%orbmap)
+  if(associated(dedup%ndetcoef))deallocate(dedup%ndetcoef)
+  if(associated(dedup%idetcoef))deallocate(dedup%idetcoef)
+  if(associated(dedup%idetlabel_eff))deallocate(dedup%idetlabel_eff)
+  deallocate(dedup)
+  nullify(dedup)
+  END SUBROUTINE deallocate_dedup
 
 
  SUBROUTINE parexp_make_room(parexp)
