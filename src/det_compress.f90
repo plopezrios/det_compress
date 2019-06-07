@@ -553,6 +553,7 @@ CONTAINS
 
  if(.not.IGNORE_COEFF_LABELS)then
 
+  nullify(tmp_idet_eff)
   call resize_pointer((/dedup%ndet/),tmp_idet_eff)
   jeff0=maxval(orig%detcoef_label)
   jeff=jeff0
@@ -1178,6 +1179,7 @@ CONTAINS
  REAL(dp) rquot_num,rquot_den
 
  ! Allocate work pointers.
+ nullify(temp_orbmap_iop,temp_orbmap_jop)
  call resize_pointer((/nemax,nspin/),temp_orbmap_iop)
  call resize_pointer((/nemax,nspin/),temp_orbmap_jop)
 
