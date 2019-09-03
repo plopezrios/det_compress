@@ -434,7 +434,7 @@ CONTAINS
  INTEGER idet,jdet,ispin,iorb,jorb,i,j,k,iswp,jeff,jeff0,nm,&
   &max_ndetcoef,ndetcoef_alloc,ndetcoef_alloc_delta
  LOGICAL det_active(orig%ndet)
- REAL(dp) t1,t2
+ REAL(dp) ci1,cj1,cs1,cik,cjk,csk
  ! Work pointers.
  INTEGER,POINTER :: tmp_idet_eff(:)=>null(),dedup_idetlabel(:,:)=>null()
  ! Sections of DEDUP_IDETLABEL for faster access.
@@ -573,14 +573,16 @@ CONTAINS
     if(dedup%ndetcoef(idet)/=nm)cycle
     if(any(dedup_idetlabel_idet(1:nm)/=dedup_idetlabel_jdet(1:nm)))cycle
     ! Check proportionality
-    t1=orig%detcoef(abs(dedup_idetcoef_idet(1)))/&
-     &orig%detcoef(abs(dedup_idetcoef_jdet(1)))
-    if(dedup_idetcoef_idet(1)<0.neqv.dedup_idetcoef_jdet(1)<0)t1=-t1
+    ci1=orig%detcoef(abs(dedup_idetcoef_idet(1)))
+    cj1=orig%detcoef(abs(dedup_idetcoef_jdet(1)))
+    cs1=1.d0
+    if(dedup_idetcoef_idet(1)<0.neqv.dedup_idetcoef_jdet(1)<0)cs1=-cs1
     do k=2,nm
-     t2=orig%detcoef(abs(dedup_idetcoef_idet(k)))/&
-      &orig%detcoef(abs(dedup_idetcoef_jdet(k)))
-     if(dedup_idetcoef_idet(k)<0.neqv.dedup_idetcoef_jdet(k)<0)t2=-t2
-     if(.not.compare_numbers(t1,t2))exit
+     cik=orig%detcoef(abs(dedup_idetcoef_idet(k)))
+     cjk=orig%detcoef(abs(dedup_idetcoef_jdet(k)))
+     csk=1.d0
+     if(dedup_idetcoef_idet(k)<0.neqv.dedup_idetcoef_jdet(k)<0)csk=-csk
+     if(.not.compare_numbers(cs1*ci1*cjk,csk*cik*cj1))exit
     enddo ! k
     if(k<=nm)cycle
     exit
