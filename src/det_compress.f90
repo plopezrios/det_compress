@@ -2507,7 +2507,7 @@ CONTAINS
  if(jdet<dedup%ndet)then
   test_compression=6
   if(.not.be_quiet)write(6,*)'Reconstruction has '//trim(i2s(jdet))//' terms, &
-   &deduplicated has '//trim(i2s(dedup%ndet))//'terms.'
+   &deduplicated has '//trim(i2s(dedup%ndet))//' terms.'
   return
  endif
 
