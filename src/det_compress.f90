@@ -60,6 +60,7 @@ PROGRAM det_compress
   INTEGER :: max_nmix=0,max_nmixcoeff=0
   INTEGER :: nmix_alloc=0,nmixcoeff_alloc=0 ! allocation sizes
  END TYPE orbital_pool
+
  ! Block allocation deltas: we reallocate the arrays in the ORBITAL_POOL
  ! type by increasing their dimensions by the following amounts:
  INTEGER,PARAMETER :: orbpool_realloc_norb=200,orbpool_realloc_nmix=10,&
@@ -87,16 +88,11 @@ PROGRAM det_compress
   INTEGER :: max_ndetcoef=1
   INTEGER :: ndetcoef_alloc=1 ! allocation size
  END TYPE parametrized_expansion
+
  ! Block allocation deltas: we reallocate the arrays in the
  ! PARAMETRIZED_EXPANSION type by increasing their dimensions by the
  ! following amounts:
  INTEGER,PARAMETER :: parexp_realloc_ndet=200,parexp_realloc_ndetcoef=5
-
- ! Expansion instances
- TYPE(original),POINTER :: orig=>null()
- TYPE(deduplicated),POINTER :: dedup=>null()
- TYPE(parametrized_expansion),POINTER :: comp=>null()
- TYPE(orbital_pool),POINTER :: orbpool=>null()
 
  ! List of operations.  This type describes the elements of W^(0) and
  ! U^(n) [n>0], in the notation of the paper, as well as the elements of
@@ -123,16 +119,13 @@ PROGRAM det_compress
   ! - unused in U^(0)* and U^(n).
   INTEGER,POINTER :: iorb(:,:)=>null()
  END TYPE
+
  ! Block allocation deltas: we reallocate the arrays in the OPERATION_SET
  ! type by increasing their dimensions by the following amounts:
  INTEGER,PARAMETER :: opset_realloc_nop=10000,opset_realloc_ndet=50
 
  ! Title read in from mdet.casl.
  CHARACTER(256) title
-
- ! String to read user input.
- CHARACTER(80) char_80
- INTEGER ierr
 
  ! Numerical tolerances to catch various types of zero:
  ! Numbers smaller than this in absolute value are zero:
@@ -145,175 +138,191 @@ PROGRAM det_compress
  ! Maximum number of quick real-valued LPSOLVE iterations.
  INTEGER,PARAMETER :: LP_SOLVE_REAL_MAX_NTRY=10
 
- ! Input variables:
+ ! Input variables.  NB, modes in terms of DO_COMPRESS / USE_LPSOLVE /
+ ! UNIFIED_ITERATION:
+ !   (a) De-duplicate: F F F
+ !   (b) Quick:        T F F
+ !   (c) Good:         T T F
+ !   (d) Best:         T T T
+ ! Note that USE_LPSOLVE=F and UNIFIED_ITERATION=T are incompatible in
+ ! the present implementation.
  LOGICAL :: DO_COMPRESS=.true.
  LOGICAL :: USE_LPSOLVE=.true.
  LOGICAL :: UNIFIED_ITERATION=.true.
  LOGICAL :: IGNORE_COEFF_LABELS=.false.
- ! NB, modes in terms of DO_COMPRESS / USE_LPSOLVE / UNIFIED_ITERATION:
- ! (a) De-duplicate: F F F
- ! (b) Quick:        T F F
- ! (c) Good:         T T F
- ! (d) Best:         T T T
- ! Note that USE_LPSOLVE=F and UNIFIED_ITERATION=T are incompatible in
- ! the present implementation.
 
- ! Local variables
- INTEGER iter,prev_ndet
+ call main()
 
- ! Main program
 
- ! Print title and license info
- write(6,*)'Multi-determinant compressor'
- write(6,*)'============================'
- write(6,*)
- write(6,*)'This program uses the LP_SOLVE library, licensed under the LGPL.'
- write(6,*)'Refer to the README files that accompany the source for details.'
- write(6,*)
+CONTAINS
 
- ! Load data and report
- call read_mdet_casl(orig)
- write(6,*)'System:'
- write(6,*)' Title: '//trim(adjustl(title))
- if(nspin==1)then
-  write(6,*)' Number of electrons   : '//trim(i2s(netot))//' (same-spin)'
- elseif(nspin==2)then
-  write(6,*)' Number of electrons   : '//trim(i2s(netot))//' ('//&
-   &trim(i2s(nele(1)))//' up, '//trim(i2s(nele(2)))//' down)'
- else
-  write(6,*)' Number of electrons   : '//trim(i2s(netot))//' (of '//&
-   &trim(i2s(nspin))//' different spins)'
- endif
- write(6,*)' Number of determinants: '//trim(i2s(orig%ndet))
- write(6,*)' Number of CSFs        : '//trim(i2s(maxval(orig%detcoef_label)))
- write(6,*)' Number of orbitals    : '//trim(i2s(orig%norb))
 
- ! User interaction: pick operational level.
- write(6,*)'Select operational level:'
- write(6,*)'(a) de-duplicate'
- write(6,*)'(b) quick (de-duplicate + greedy + simple iterative method)'
- write(6,*)'(c) good (de-duplicate + LPSOLVE + simple iterative method)'
- write(6,*)'(d) best (de-duplicate + LPSOLVE + unified iteration method)'
- write(6,*)
- write(6,*)'** TYPE A, B, C, OR D, THEN PRESS ENTER **'
- do
-  read(5,*,iostat=ierr)char_80
+ SUBROUTINE main()
+  !--------------!
+  ! Main driver. !
+  !--------------!
+  IMPLICIT NONE
+  ! Expansion instances
+  TYPE(original),POINTER :: orig=>null()
+  TYPE(deduplicated),POINTER :: dedup=>null()
+  TYPE(parametrized_expansion),POINTER :: comp=>null()
+  TYPE(orbital_pool),POINTER :: orbpool=>null()
+  ! Other local variables
+  CHARACTER(80) char_80
+  INTEGER ierr
+  INTEGER iter,prev_ndet
+
+  ! Print title and license info
+  write(6,*)'Multi-determinant compressor'
+  write(6,*)'============================'
   write(6,*)
-  if(ierr/=0)then
-   write(6,*)'Quitting.'
-   stop
+  write(6,*)'This program uses the LP_SOLVE library, licensed under the LGPL.'
+  write(6,*)'Refer to the README files that accompany the source for details.'
+  write(6,*)
+
+  ! Load data and report
+  call read_mdet_casl(orig)
+  write(6,*)'System:'
+  write(6,*)' Title: '//trim(adjustl(title))
+  if(nspin==1)then
+   write(6,*)' Number of electrons   : '//trim(i2s(netot))//' (same-spin)'
+  elseif(nspin==2)then
+   write(6,*)' Number of electrons   : '//trim(i2s(netot))//' ('//&
+    &trim(i2s(nele(1)))//' up, '//trim(i2s(nele(2)))//' down)'
+  else
+   write(6,*)' Number of electrons   : '//trim(i2s(netot))//' (of '//&
+    &trim(i2s(nspin))//' different spins)'
   endif
-  select case(trim(adjustl(char_80)))
-  case('a','A')
-   DO_COMPRESS=.false. ; USE_LPSOLVE=.false. ; UNIFIED_ITERATION=.false.
-   write(6,*)'Using (a) de-duplication'
-  case('b','B')
-   USE_LPSOLVE=.false. ; UNIFIED_ITERATION=.false.
-   write(6,*)'Using (b) quick'
-  case('c','C')
-   UNIFIED_ITERATION=.false.
-   write(6,*)'Using (c) good'
-  case('d','D')
-   write(6,*)'Using (d) best'
-  case default
-   write(6,*)'Wrong option, try again.'
-   cycle
-  end select
+  write(6,*)' Number of determinants: '//trim(i2s(orig%ndet))
+  write(6,*)' Number of CSFs        : '//trim(i2s(maxval(orig%detcoef_label)))
+  write(6,*)' Number of orbitals    : '//trim(i2s(orig%norb))
+
+  ! User interaction: pick operational level.
+  write(6,*)'Select operational level:'
+  write(6,*)'(a) de-duplicate'
+  write(6,*)'(b) quick (de-duplicate + greedy + simple iterative method)'
+  write(6,*)'(c) good (de-duplicate + LPSOLVE + simple iterative method)'
+  write(6,*)'(d) best (de-duplicate + LPSOLVE + unified iteration method)'
   write(6,*)
-  exit
- enddo
+  write(6,*)'** TYPE A, B, C, OR D, THEN PRESS ENTER **'
+  do
+   read(5,*,iostat=ierr)char_80
+   write(6,*)
+   if(ierr/=0)then
+    write(6,*)'Quitting.'
+    stop
+   endif
+   select case(trim(adjustl(char_80)))
+   case('a','A')
+    DO_COMPRESS=.false. ; USE_LPSOLVE=.false. ; UNIFIED_ITERATION=.false.
+    write(6,*)'Using (a) de-duplication'
+   case('b','B')
+    USE_LPSOLVE=.false. ; UNIFIED_ITERATION=.false.
+    write(6,*)'Using (b) quick'
+   case('c','C')
+    UNIFIED_ITERATION=.false.
+    write(6,*)'Using (c) good'
+   case('d','D')
+    write(6,*)'Using (d) best'
+   case default
+    write(6,*)'Wrong option, try again.'
+    cycle
+   end select
+   write(6,*)
+   exit
+  enddo
 
- ! De-duplication
- write(6,*)'De-duplicating expansion:'
- call deduplication(orig,dedup,comp,orbpool)
- write(6,*)' After de-duplication: '//trim(i2s(comp%ndet))//' determinants'
- write(6,*)
+  ! De-duplication
+  write(6,*)'De-duplicating expansion:'
+  call deduplication(orig,dedup,comp,orbpool)
+  write(6,*)' After de-duplication: '//trim(i2s(comp%ndet))//' determinants'
+  write(6,*)
 
- ! Compression
- if(DO_COMPRESS)then
+  ! Compression
+  if(DO_COMPRESS)then
 
-  write(6,*)'Compressing expansion:'
+   write(6,*)'Compressing expansion:'
 
-  if(UNIFIED_ITERATION)then ! no need to loop
+   if(UNIFIED_ITERATION)then ! no need to loop
 
-   prev_ndet=comp%ndet
-   ! Compress
-   call compress(orig,dedup,comp,orbpool)
-   ! Report successful iteration
-   write(6,*)' After compression: '//trim(i2s(comp%ndet))//' determinants, '//&
-    &trim(i2s(orbpool%norb))//' orbitals'
-
-  else ! .not.UNIFIED_ITERATION -> need to loop
-
-   ! Loop over iterations
-   iter=0
-   do
-    iter=iter+1
     prev_ndet=comp%ndet
     ! Compress
     call compress(orig,dedup,comp,orbpool)
-    ! Exit if compression did not yield any (further) gains
-    if(comp%ndet==prev_ndet)exit
     ! Report successful iteration
-    if(iter==1)then
-     write(6,*)' After 1 compression iteration: '//trim(i2s(comp%ndet))//&
-      &' determinants, '//trim(i2s(orbpool%norb))//' orbitals'
-    else ! iter>1
-     write(6,*)' After '//trim(i2s(iter))//' compression iterations: '//&
-      &trim(i2s(comp%ndet))//' determinants, '//trim(i2s(orbpool%norb))//&
-      &' orbitals'
-    endif ! iter==1 or not
-   enddo ! iter
+    write(6,*)' After compression: '//trim(i2s(comp%ndet))//' determinants, '//&
+     &trim(i2s(orbpool%norb))//' orbitals'
 
-  endif ! UNIFIED_ITERATION or not
+   else ! .not.UNIFIED_ITERATION -> need to loop
 
- else ! .not.DO_COMPRESS
+    ! Loop over iterations
+    iter=0
+    do
+     iter=iter+1
+     prev_ndet=comp%ndet
+     ! Compress
+     call compress(orig,dedup,comp,orbpool)
+     ! Exit if compression did not yield any (further) gains
+     if(comp%ndet==prev_ndet)exit
+     ! Report successful iteration
+     if(iter==1)then
+      write(6,*)' After 1 compression iteration: '//trim(i2s(comp%ndet))//&
+       &' determinants, '//trim(i2s(orbpool%norb))//' orbitals'
+     else ! iter>1
+      write(6,*)' After '//trim(i2s(iter))//' compression iterations: '//&
+       &trim(i2s(comp%ndet))//' determinants, '//trim(i2s(orbpool%norb))//&
+       &' orbitals'
+     endif ! iter==1 or not
+    enddo ! iter
 
-  write(6,*)'Skipping compression.'
+   endif ! UNIFIED_ITERATION or not
 
- endif ! DO_COMPRESS or not
+  else ! .not.DO_COMPRESS
 
- write(6,*)
+   write(6,*)'Skipping compression.'
 
- ! Test that the compressed expansion expands to the original expansion.
- write(6,*)'Testing compressed expansion:'
- select case(test_compression(orig,dedup,comp,orbpool))
- case(0,1)
-  write(6,*)' Success: compressed expansion expands back to de-duplicated &
-   &expansion.'
- case(2)
-  call errstop('DET_COMPRESS','Compression failed: coefficient value &
-   &mismatch.')
- case(3)
-  call errstop('DET_COMPRESS','Compression failed: coefficient sign &
-   &mismatch.')
- case(4)
-  call errstop('DET_COMPRESS','Compression failed: coefficients diverge.')
- case(5)
-  call errstop('DET_COMPRESS','Compression failed: reconstruction is &
-   &larger than original.')
- case(6)
-  call errstop('DET_COMPRESS','Compression failed: reconstruction is &
-   &shorter than original.')
- case(7)
-  call errstop('DET_COMPRESS','Compression failed: reconstruction and &
-   &original have different terms.')
- case default
-  call errstop('DET_COMPRESS','Compression failed: unknown error code')
- end select
- write(6,*)
+  endif ! DO_COMPRESS or not
 
- ! Test that proportionality constraints are obeyed.
- if(.not.IGNORE_COEFF_LABELS.and.maxval(orig%detcoef_label)>1)then
-  write(6,*)'Testing coefficient proportionality:'
-  call test_coeff_proportionality(orig,dedup,comp,orbpool)
-  write(6,*)' Success: compressed expansion respects coefficient &
-   &proportionality.'
   write(6,*)
- endif
 
- ! Write compressed expansion
- call write_cmdet_casl(orig,dedup,comp,orbpool)
+  ! Test that the compressed expansion expands to the original expansion.
+  write(6,*)'Testing compressed expansion:'
+  select case(test_compression(orig,dedup,comp,orbpool))
+  case(0,1)
+   write(6,*)' Success: compressed expansion expands back to de-duplicated &
+    &expansion.'
+  case(2)
+   call errstop('DET_COMPRESS','Compression failed: coefficient value &
+    &mismatch.')
+  case(3)
+   call errstop('DET_COMPRESS','Compression failed: coefficient sign &
+    &mismatch.')
+  case(4)
+   call errstop('DET_COMPRESS','Compression failed: coefficients diverge.')
+  case(5)
+   call errstop('DET_COMPRESS','Compression failed: reconstruction is &
+    &larger than original.')
+  case(6)
+   call errstop('DET_COMPRESS','Compression failed: reconstruction is &
+    &shorter than original.')
+  case(7)
+   call errstop('DET_COMPRESS','Compression failed: reconstruction and &
+    &original have different terms.')
+  case default
+   call errstop('DET_COMPRESS','Compression failed: unknown error code')
+  end select
+  write(6,*)
+
+  ! Test that proportionality constraints are obeyed.
+  if(.not.IGNORE_COEFF_LABELS.and.maxval(orig%detcoef_label)>1)then
+   write(6,*)'Testing coefficient proportionality:'
+   call test_coeff_proportionality(orig,dedup,comp,orbpool)
+   write(6,*)' Success: compressed expansion respects coefficient &
+    &proportionality.'
+   write(6,*)
+  endif
+
+  ! Write compressed expansion
+  call write_cmdet_casl(orig,dedup,comp,orbpool)
 
   ! Clean up.
   call deallocate_orig(orig)
@@ -322,8 +331,7 @@ PROGRAM det_compress
   call deallocate_orbpool(orbpool)
   deallocate(nele)
 
-
-CONTAINS
+ END SUBROUTINE main
 
 
  SUBROUTINE read_mdet_casl(orig)
@@ -808,7 +816,7 @@ CONTAINS
    if(associated(opset_u0star))then
     if(opset_u0star%nop>0)then
      ! Recursion level 0 -> 1
-     call construct_un(1,opset_u0star%nop,dedup,opset_u0star,comp_u0star,&
+     call construct_un(1,opset_u0star%nop,orig,dedup,opset_u0star,comp_u0star,&
       &opset_un,comp_un,orbpool)
      if(associated(opset_un))then
       if(opset_un%nop>0)then
@@ -817,8 +825,8 @@ CONTAINS
          ! Recursion level ILEVEL-1 -> ILEVEL
          nop0_prev=nop0
          nop0=opset_un%nop
-         call construct_un(nop0_prev+1,nop0,dedup,opset_un,comp_un,opset_un,&
-          &comp_un,orbpool)
+         call construct_un(nop0_prev+1,nop0,orig,dedup,opset_un,comp_un,&
+          &opset_un,comp_un,orbpool)
          if(opset_un%nop==nop0)exit
         enddo ! ilevel
       endif ! recursion 1->2 possible (2)
@@ -1426,8 +1434,8 @@ CONTAINS
  END SUBROUTINE construct_u0star
 
 
- SUBROUTINE construct_un(iop1,iop2,dedup,opset_in,comp_in,opset_out,comp_out,&
-  &orbpool)
+ SUBROUTINE construct_un(iop1,iop2,orig,dedup,opset_in,comp_in,opset_out,&
+  &comp_out,orbpool)
  !--------------------------------------------------------!
  ! Construct U^(n) in OPSET_OUT from U^(n-1) in OPSET_IN, !
  ! using the orbmaps in COMP_IN and adding new orbmaps to !
@@ -1435,6 +1443,7 @@ CONTAINS
  !--------------------------------------------------------!
  IMPLICIT NONE
  INTEGER,INTENT(in) :: iop1,iop2
+ TYPE(original),POINTER :: orig
  TYPE(deduplicated),POINTER :: dedup
  TYPE(operation_set),POINTER :: opset_in,opset_out
  TYPE(parametrized_expansion),POINTER :: comp_in,comp_out

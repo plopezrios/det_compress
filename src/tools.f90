@@ -10,11 +10,6 @@ MODULE tools
  ! Data types.
  INTEGER,PARAMETER :: dp=kind(1.d0)
 
- ! Dummy type for safe overloading of WOUT routines.
- TYPE arg_separator
-  LOGICAL,POINTER :: dummy=>null()
- END TYPE arg_separator
-
  ! Interface for RESIZE_POINTER routine.
  INTERFACE resize_pointer
   MODULE PROCEDURE &
